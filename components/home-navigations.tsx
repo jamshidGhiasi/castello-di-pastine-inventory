@@ -13,8 +13,11 @@ const HomeNavigation =  () => {
             <Button className=" bg-emerald-300 text-md mb-6 rounded-3xl p-6 w-64" onClick={() => router.push('/areas')} >
                 <Blocks className="mr-2 h-4 w-4" /> Browse Areas
             </Button>
-            <Button className=" bg-emerald-300 text-md  rounded-3xl p-6 w-64" onClick={() => router.push('/categories')} >
+            <Button className=" bg-emerald-300 text-md mb-6 rounded-3xl p-6 w-64" onClick={() => router.push('/categories')} >
                 <LayoutList className="mr-2 h-4 w-4" /> Browse Categories
+            </Button>
+            <Button className=" bg-emerald-300 text-md  rounded-3xl p-6 w-64" onClick={() => router.push('/admin')} >
+                <LayoutList className="mr-2 h-4 w-4" /> Admin
             </Button>
      
         </div>
