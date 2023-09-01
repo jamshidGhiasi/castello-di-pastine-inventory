@@ -1,9 +1,10 @@
+import Layout from "@/components/layout.tsx/layout";
 
 const Category = async ({ params }: { params : { categoryId: string}}) => {
     const { categoryId } = params;
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <Layout>
+
                 <div>
                     <h1 className=" mb-4">
                         This is the <code className=" bg-slate-400 p-1 rounded-sm">/categories/[{categoryId}]</code> and is public and shows all available items for the category
@@ -21,9 +22,10 @@ const Category = async ({ params }: { params : { categoryId: string}}) => {
                         
                     </p>
                 </div>
+        </Layout>
+        
 
-            </div>
-        </main>
+      
     )
 }
 

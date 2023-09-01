@@ -1,9 +1,11 @@
+import Layout from "@/components/layout.tsx/layout";
 
 const Room = async ({ params }: { params : { areaId: string, roomId: string}}) => {
     const { areaId, roomId } = params;
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <Layout>
+
+          
                 <div>
                     <h1 className=" mb-4">
                         This is the <code className=" bg-slate-400 p-1 rounded-sm">/areas/[{areaId}]/[{roomId}]</code> and is public and shows all available areas
@@ -22,8 +24,10 @@ const Room = async ({ params }: { params : { areaId: string, roomId: string}}) =
                     </p>
                 </div>
 
-            </div>
-        </main>
+            
+        </Layout>
+      
+        
     )
 }
 

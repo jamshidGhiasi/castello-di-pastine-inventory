@@ -1,7 +1,10 @@
+import Layout from "@/components/layout.tsx/layout";
+
 const FloorPlans = async () => {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <Layout>
+
+
                 <div>
                     <h1 className=" mb-4">
                         This is the <code className=" bg-slate-400 p-1 rounded-sm">/floor-plans</code> and is public and shows images of floor plans
@@ -16,9 +19,9 @@ const FloorPlans = async () => {
                        
                     </p>
                 </div>
+        </Layout>
 
-            </div>
-        </main>
+
     )
 }
 
