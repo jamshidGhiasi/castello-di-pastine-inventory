@@ -3,7 +3,6 @@ const Admin = async () => {
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
                 <div>
-
                     <h1 className=" mb-4">
                         This is the <code className=" bg-slate-400 p-1 rounded-sm">/admin</code> page and only accessible to Admin
                     </h1>
