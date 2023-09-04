@@ -2,6 +2,9 @@ import Layout from '@/components/layout.tsx/layout'
 
 const Area = async ({ params }: { params : { areaId: string}}) => {
     const { areaId } = params;
+    const res = await fetch(`http://localhost:3000/api/areas/${areaId}`);
+    const area = await res.json()
+
     return (
         <Layout>
 
@@ -21,6 +24,7 @@ const Area = async ({ params }: { params : { areaId: string}}) => {
                         
                     </p>
                 </div>
+                {JSON.stringify(area, undefined, 4)}
 
        
         </Layout>
