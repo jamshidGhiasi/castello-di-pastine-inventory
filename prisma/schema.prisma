@@ -42,7 +42,7 @@ model Room {
   slug       String     @unique
   roomNo     String?
   area       Area?      @relation(fields: [areaId], references: [slug])
-  areaId     String?    @unique
+  areaId     String?    
   antiques   Antique[]
   categories Category[]
 }
