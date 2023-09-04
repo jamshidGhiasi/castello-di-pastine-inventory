@@ -1,4 +1,5 @@
 import { NextAuthOptions } from "next-auth";
+import { getToken } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
 const SCOPES = [
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -13,7 +14,6 @@ const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
             authorization: {
                 params: {
-                    accessTokenUrl: 'https://oauth2.googleapis.com/token',
                     prompt: 'consent',
                     access_type: 'offline',
                     response_type: "code",
@@ -27,9 +27,18 @@ const authOptions: NextAuthOptions = {
     },
     callbacks: {
         async jwt({ token, user, account, profile, session}) {
+
+          
+            
+            if (account) {
+                token.access_token = account?.access_token
+              }
             return token
         },
         async session({ session, token }) {
+            if (token) {
+                session.user.access_token = token.access_token as string
+              }
             return session
         }
     }

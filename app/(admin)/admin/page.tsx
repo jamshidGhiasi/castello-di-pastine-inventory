@@ -1,18 +1,72 @@
-
-
+"use client"
 import AdminLayout from "@/components/admin/layout";
+import AdminSessionProvider from "@/components/admin/session-provider";
+import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from "@/components/ui/avatar"
+import { useEffect, useState } from "react";
+const Admin = () => {
+    const { data: session, status } = useSession()
+    console.log("SESSION", status)
+    const [data, setData] = useState(null)
+    const [isLoading, setLoading] = useState(true)
 
-const Admin =  () => {
+    useEffect(() => {
+        fetch('/api/test')
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.antiques) {
+                    setData(data)
+                    setLoading(false)    
+                } else {
+                    setData(data.error.errors)
+                    setLoading(false)
+                }
+            })
+    }, [])
+
+    if (isLoading) return <p>Loading...</p>
+    if (!data) return <p>No antiques data</p>
     return (
         <AdminLayout>
+            <div className=" w-full">
 
-            <div>
-                <Link href={'/'} className="flex items-center ">
-                    <ChevronLeft />
-                    Home
-                </Link>
+                <div className="flex items-center justify-between">
+                    <Link href={'/'} className="flex items-center ">
+                        <ChevronLeft />
+                        Home
+                    </Link>
+                    {session &&
+                        <div className="flex justify-between ">
+                            <Avatar className="mr-2">
+                                <AvatarImage src={session?.user?.image!} alt="@shadcn" />
+                                <AvatarFallback>{session?.user?.name?.match(/\b\w/g)}</AvatarFallback>
+                            </Avatar>
+                            <div className="flex flex-col items-start">
+
+                                <span>{session?.user?.name}</span>
+                                <Button className="text-xs h-5" onClick={() => { signOut({ callbackUrl: '/admin' }) }}>Sign Out</Button>
+                            </div>
+
+                        </div>
+                    }
+                    {!session &&
+                        <div className="flex justify-between ">
+                            <div className="flex flex-col items-start">
+
+
+                                <Button className="text-xs h-5" onClick={() => { signIn('google', { callbackUrl: '/admin' }) }}>Sign In</Button>
+                            </div>
+
+                        </div>
+                    }
+                </div>
                 <h1 className=" mb-4">
                     This is the <code className=" bg-slate-400 p-1 rounded-sm">/admin</code> page and only accessible to Admin
                 </h1>
@@ -28,10 +82,17 @@ const Admin =  () => {
                     <span>- Print</span>
                     <span>- Accessible via Google Auth - next-auth.js / maybe user Admin</span>
                 </p>
+
+                <div>
+                    {(!isLoading && data) &&
+                        (<div>
+                            {JSON.stringify(data, undefined, 4)}
+                        </div>)
+                    }
+                </div>
             </div>
+
         </AdminLayout>
-
-
     )
 }
 export default Admin;

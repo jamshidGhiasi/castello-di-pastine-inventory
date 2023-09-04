@@ -1,11 +1,15 @@
 
+
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
 import BottomNavigation from '@/components/bottom-navigation'
 import Background from '@/components/background-effect'
+import AdminSessionProvider from '@/components/admin/session-provider'
 
+import  { Session } from 'next-auth'
+import AuthProvider from '@/components/admin/session-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,16 +20,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  session: Session
 }) {
+ 
+  
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          {children}
-          <Background />
-        </ThemeProvider>
+        <AuthProvider session={session}>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            {children}
+            <Background />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

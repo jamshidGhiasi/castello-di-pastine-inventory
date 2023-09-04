@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Antique {
+  id         Int       @id @default(autoincrement())
+  itemNo     String    @unique
+  lot        String?
+  height     String?
+  width      String?
+  depth      String?
+  area       Area?     @relation(fields: [areaId], references: [slug])
+  room       Room?     @relation(fields: [roomId], references: [slug])
+  category   Category? @relation(fields: [categoryId], references: [slug])
+  areaId     String?  
+  roomId     String?   
+  categoryId String?  
+
+  @@index([itemNo])
+}
+
+model Area {
+  id         Int        @id @default(autoincrement())
+  title      String     @unique
+  slug       String     @unique
+  antiques   Antique[]
+  rooms      Room[]
+  categories Category[]
+}
+
+model Room {
+  id         Int        @id @default(autoincrement())
+  title      String     @unique
+  slug       String     @unique
+  roomNo     String?
+  area       Area?      @relation(fields: [areaId], references: [slug])
+  areaId     String?    @unique
+  antiques   Antique[]
+  categories Category[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  title    String    @unique
+  slug     String    @unique
+  antiques Antique[]
+  rooms    Room[]
+  areas    Area[]
+}
