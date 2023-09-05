@@ -316,7 +316,7 @@ export const rooms = [
     },
     {
       "title": "36 - Bathroom 4/5 Media Room",
-      "slug": "36-bathroom-4/5-media-room",
+      "slug": "36-bathroom-4-5-media-room",
       "roomNo": "36",
       "area": "villa 2nd floor",
       "areaId": "villa-2nd-floor"
@@ -435,7 +435,7 @@ export const rooms = [
     },
     {
       "title": "51 - Guest 3 Sitting Room/Kitchen",
-      "slug": "51-guest-3-sitting-room/kitchen",
+      "slug": "51-guest-3-sitting-room-kitchen",
       "roomNo": "51",
       "area": "colonica",
       "areaId": "colonica"
@@ -463,7 +463,7 @@ export const rooms = [
     },
     {
       "title": "55 - Guest 1 Sitting Room/Kitchen",
-      "slug": "55-guest-1-sitting-room/kitchen",
+      "slug": "55-guest-1-sitting-room-kitchen",
       "roomNo": "55",
       "area": "colonica",
       "areaId": "colonica"
@@ -736,9 +736,16 @@ export const rooms = [
     },
     {
       "title": "General Reupholstery & Renewing",
-      "slug": "general-reupholstery-&-renewing",
+      "slug": "general-reupholstery-and-renewing",
       "roomNo": "",
       "area": "other rooms",
       "areaId": "other-rooms"
-    }
+    },
+    {
+      "title": "Unassigned",
+      "slug": "unassigned",
+      "roomNo": "",
+      "area": "other rooms",
+      "areaId": "other-rooms"
+    },
    ]

@@ -9,8 +9,12 @@ export const GET = async (request: NextRequest, { params }: { params: { areaId: 
                 slug: params.areaId
             },
             include: {
-                rooms: true
-            }
+                rooms: true,
+                _count: {
+                    select: { antiques: true },
+                  },
+            },
+            
         })
         if (!area) {
             return NextResponse.json({ message: "No area found in DB" }, { status: 404 })    

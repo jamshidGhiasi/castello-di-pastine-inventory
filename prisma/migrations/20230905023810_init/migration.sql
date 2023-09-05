@@ -58,15 +58,6 @@ CREATE TABLE "_CategoryToRoom" (
 CREATE UNIQUE INDEX "Antique_itemNo_key" ON "Antique"("itemNo");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Antique_areaId_key" ON "Antique"("areaId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Antique_roomId_key" ON "Antique"("roomId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Antique_categoryId_key" ON "Antique"("categoryId");
-
--- CreateIndex
 CREATE INDEX "Antique_itemNo_idx" ON "Antique"("itemNo");
 
 -- CreateIndex
@@ -80,9 +71,6 @@ CREATE UNIQUE INDEX "Room_title_key" ON "Room"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Room_slug_key" ON "Room"("slug");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Room_areaId_key" ON "Room"("areaId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_title_key" ON "Category"("title");

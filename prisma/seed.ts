@@ -6,23 +6,33 @@ const antiques = data.antiques;
 const areas = [
     {
         title: 'Villa Ground',
-        slug: 'villa-ground'
+        slug: 'villa-ground',
+        order: 1
     },
     {
         title: 'Villa 1st Floor',
-        slug: 'villa-1st-floor'
+        slug: 'villa-1st-floor',
+        order: 2
     },
     {
         title: 'Villa 2nd Floor',
-        slug: 'villa-2nd-floor'
+        slug: 'villa-2nd-floor',
+        order: 3
     },
     {
         title: 'Colonica',
-        slug: 'colonica'
+        slug: 'colonica',
+        order: 4
     },
     {
         title: 'Other Rooms',
-        slug: 'other-rooms'
+        slug: 'other-rooms',
+        order: 5
+    },
+    {
+        title: 'Unassigned',
+        slug: 'unassigned',
+        order: 6
     },
 ]
 
@@ -40,7 +50,7 @@ const categories = [
         slug: 'paintings'
     },
     {
-        title: 'rugs-and-tapestries',
+        title: 'Rugs and Tapestries',
         slug: 'rugs-and-tapestries'
     },
     {
@@ -51,29 +61,38 @@ const categories = [
         title: 'Garden',
         slug: 'garden'
     },
+
 ]
 async function main() {
-    // await Promise.all(
-    //     areas.map(async (area) => {
-    //         await prisma.area.upsert({
-    //             where: {
-    //                 slug: area.slug
-    //             },
-    //             update: {},
-    //             create: {
-    //                 title: area.title,
-    //                 slug: area.slug,
-    //             },
-    //         })
-    //     })
-    // )
+    await Promise.all(
+        areas.map(async (area) => {
+            await prisma.area.upsert({
+                where: {
+                    slug: area.slug
+                },
+                update: {
+                    title: area.title,
+                    slug: area.slug,
+                    order: area.order
+                },
+                create: {
+                    title: area.title,
+                    slug: area.slug,
+                    order: area.order
+                },
+            })
+        })
+    )
     // await Promise.all(
     //     categories.map(async (category) => {
     //         await prisma.category.upsert({
     //             where: {
     //                 slug: category.slug
     //             },
-    //             update: {},
+    //             update: {
+    //                 title: category.title,
+    //                 slug: category.slug,
+    //             },
     //             create: {
     //                 title: category.title,
     //                 slug: category.slug,
@@ -85,10 +104,17 @@ async function main() {
     //     rooms.map(async (room) => {
     //         await prisma.room.upsert({
     //             where: {
-    //                 slug: room.slug
+    //                 title: room.title
     //             },
     //             update: {
+    //                 title: room.title,
+    //                 slug: room.slug,
     //                 roomNo: room.roomNo,
+    //                 area: {
+    //                     connect: {
+    //                         slug: room.areaId
+    //                     }
+    //                 }
     //             },
     //             create: {
     //                 title: room.title,
@@ -104,38 +130,68 @@ async function main() {
     //     })
     // )
 
-    await Promise.all(
-        antiques.map(async (antique) => {
-            await prisma.antique.upsert({
-                where: {
-                    itemNo: antique.itemNo
-                },
-                update: {},
-                create: {
-                    itemNo: antique.itemNo,
-                    lot: antique.lot,
-                    height: antique.height,
-                    width: antique.width,
-                    depth: antique.depth,
-                    area: {
-                        connect: {
-                            slug: antique.areaId || ""
-                        }
-                    },
-                    room: {
-                        connect: {
-                            slug: antique.roomId || ""
-                        }
-                    },
-                    category: {
-                        connect: {
-                            slug: antique.categoryId || ""
-                        }
-                    },
-                }
-            })
-        })
-    )
+    // await Promise.all(
+    //     antiques.map(async (antique) => {
+
+    //         try {
+
+    //             await prisma.antique.upsert({
+    //                 where: {
+    //                     itemNo: antique.itemNo
+    //                 },
+    //                 update: {
+    //                     itemNo: antique.itemNo,
+    //                     lot: antique.lot,
+    //                     height: antique.height,
+    //                     width: antique.width,
+    //                     depth: antique.depth,
+    //                     area: {
+    //                         connect: {
+    //                             slug: antique.areaId || ""
+    //                         }
+    //                     },
+    //                     room: {
+    //                         connect: {
+    //                             slug: antique.roomId || ""
+    //                         }
+    //                     },
+    //                     category: {
+    //                         connect: {
+    //                             slug: antique.categoryId || ""
+    //                         }
+    //                     },
+    //                 },
+    //                 create: {
+    //                     itemNo: antique.itemNo,
+    //                     lot: antique.lot,
+    //                     height: antique.height,
+    //                     width: antique.width,
+    //                     depth: antique.depth,
+    //                     area: {
+    //                         connect: {
+    //                             slug: antique.areaId || ""
+    //                         }
+    //                     },
+    //                     room: {
+    //                         connect: {
+    //                             slug: antique.roomId || ""
+    //                         }
+    //                     },
+    //                     category: {
+    //                         connect: {
+    //                             slug: antique.categoryId || ""
+    //                         }
+    //                     },
+    //                 }
+    //             })
+                
+    //         }catch(e) {
+    //             console.log(e)
+    //             console.log(antique.roomId)
+    //         }
+          
+    //     })
+    // )
     // const itemPromises = [];
     // for (const antique of data.antiques) {
     //     itemPromises.push(
