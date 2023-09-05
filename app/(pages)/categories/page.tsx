@@ -1,26 +1,16 @@
+import CategoryItem from "@/components/category-item";
 import Layout from "@/components/layout.tsx/layout";
-
 const Categories = async () => {
+    const res = await fetch('http://localhost:3000/api/categories');
+    const categories = await res.json()
     return (
         <Layout>
-
-                <div>
-                    <h1 className=" mb-4">
-                        This is the <code className=" bg-slate-400 p-1 rounded-sm">/categories</code> and is public and shows all available categories
-                    </h1>
-
-                    <h2 className="mb-2 text-cyan-500">Components</h2>
-                    <p className=" left-0 top-0 flex flex-col w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-                        <span>- Logo</span>
-                        <span>- Global site search</span>
-                        <span>- Bottom Navigation</span>
-                        <span>- List of all Categories</span>
-                    </p>
-                </div>
+            <div>
+                {categories.map((area: any) => (
+                    <CategoryItem key={area.id} title={area.title} slug={area.slug} count={area._count.antiques} />
+                ))}
+            </div>
         </Layout>
-        
     )
-      
 }
-
 export default Categories;

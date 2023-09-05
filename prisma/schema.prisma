@@ -17,6 +17,7 @@ model Antique {
   height     String?
   width      String?
   depth      String?
+  description String?
   area       Area?     @relation(fields: [areaId], references: [slug])
   room       Room?     @relation(fields: [roomId], references: [slug])
   category   Category? @relation(fields: [categoryId], references: [slug])

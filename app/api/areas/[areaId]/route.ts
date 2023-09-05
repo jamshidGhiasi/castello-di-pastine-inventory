@@ -9,11 +9,21 @@ export const GET = async (request: NextRequest, { params }: { params: { areaId: 
                 slug: params.areaId
             },
             include: {
-                rooms: true,
+                rooms: {
+                    include: {
+                        antiques: true,
+                        _count: {
+                            select: { antiques: true },
+                          },
+                    },
+                    
+                },
+                
                 _count: {
                     select: { antiques: true },
                   },
-            },
+            }
+         
             
         })
         if (!area) {

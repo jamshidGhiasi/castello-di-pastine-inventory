@@ -73,3 +73,7 @@
   background-color: rgba(0, 0, 0, .75);
   backdrop-filter: grayscale(100%) blur(8px);
 }
+.jamshid {
+  max-height: 80vh;
+  padding-bottom: 20vh;
+}

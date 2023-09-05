@@ -1,30 +1,30 @@
+'use client'
 import BottomNavigation from "@/components/bottom-navigation";
 import Layout from "@/components/layout.tsx/layout";
+import { useRef } from "react";
+import Page from "./_component-to-print";
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
 
-const Print = async () => {
+const Print = () => {
+    const componentRef = useRef(null);
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
+
     return (
         <Layout>
 
-                <div>
-                    <h1 className=" mb-4">
-                        This is the <code className=" bg-slate-400 p-1 rounded-sm">/print</code> and is public and enables the user to print
-                    </h1>
 
-                    <h2 className="mb-2 text-cyan-500">Components</h2>
-                    <p className=" left-0 top-0 flex flex-col w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-                        <span>- Logo</span>
-                        <span>- Global site search</span>
-                        <span>- Print by room</span>
-                        <span>- Print by item</span>
-                        <span>- Print label</span>
-                        <span>- VIEW as PDF | PRINT</span>
-                        <span>- Bottom Navigation</span>
-                    </p>
-                </div>
 
+            <div>
+                <Page ref={componentRef} />
+                <button onClick={handlePrint}>Print this out!</button>
+            </div>
+            
         </Layout>
 
     )
 }
 
 export default Print;
+
