@@ -1,21 +1,22 @@
-// This is an example of how to read a JSON Web Token from an API route
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
 import { google } from "googleapis"
 
 const sheets = google.sheets('v4');
- 
-interface DataRow {
+
+export interface DataRow {
     [key: string]: string;
 }
 
+// TODO@Joel: Replace the route name
 export const GET = async(req : NextRequest) => {
     const token = await getToken({ req })
-    if (token) {
-      // Signed in
-      console.log("FROM API" , token)
+    if (!token) return NextResponse.json({ message: ' Token Not Present. Please Login again'}, { status: 401})
 
-      try {
+    // Signed in
+    console.log("FROM API" , token)
+
+    try {
         const sheet = await sheets.spreadsheets.values.get({
             spreadsheetId: '1zNyWS5goKLzE__HugrFspa4pm3f77WsKpvsvdxr0wsc',
             range: 'INVENTORY',
@@ -33,14 +34,8 @@ export const GET = async(req : NextRequest) => {
             });
             return rowData;
         });
-
-        return NextResponse.json({ antiques: dataWithHeaders}, { status: 200})
-      }catch(error) {
-        
-        return NextResponse.json({ message: 'Error Getting Values from Google Sheet' , error}, { status: 400})
-      }
-      
-    } else {
-        return NextResponse.json({ message: ' Token Not Present. Please Login again'}, { status: 401})
+        return NextResponse.json({ antiques: dataWithHeaders }, { status: 200})
+    } catch(error) {
+      return NextResponse.json({ message: 'Error Getting Values from Google Sheet' , error}, { status: 400})
     }
 }
