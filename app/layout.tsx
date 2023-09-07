@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import BottomNavigation from '@/components/bottom-navigation'
 import Background from '@/components/background-effect'
 import AdminSessionProvider from '@/components/admin/session-provider'
+import { Toaster } from 'react-hot-toast'
 
 import  { Session } from 'next-auth'
 import AuthProvider from '@/components/admin/session-provider'
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className=" max-h-screen overflow-hidden">
         <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <Toaster />
             {children}
             <Background />
           </ThemeProvider>

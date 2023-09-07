@@ -1,45 +1,19 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AdminDataTable from "@/components/admin/admin-data-table";
 import { ColumnDef } from "@tanstack/react-table"
+import AdminAntiquesDataTableExtraActions, {
+  AdminAntiquesDataTableExtraActionsProps
+} from "@/components/admin/antiques/admin-antiques-data-table-extra-actions";
+import { AntiqueFromGoogleSheets } from "@/types/antique";
+import toast from 'react-hot-toast'
 
-// TODO@Joel: Export to common types
-export interface Antique {
-  itemNo?: string;
-  lot?: string;
-  category?: string;
-  description?: string;
-  image?: string;
-  height?: string;
-  width?: string;
-  depth?: string;
-  warehouseLocation?: string;
-  room?: string;
-  area?: string;
-  areaId?: string;
-  categoryId?: string;
-  roomId?: string;
-  floor?: string;
-  building?: string;
-  qrCodeUrl?: string;
-  roomLocation?: string;
-  otherNotes?: string;
-  vladamirNotes?: string;
-  wipeFrame?: string;
-  wipePicture?: string;
-  cleanPicture?: string;
-  varnishPicture?: string;
-  varnishFrame?: string;
-  restoreFrame?: string;
-  restorePicture?: string;
+export interface AdminAntiquesDataTableProps extends AdminAntiquesDataTableExtraActionsProps {
+  data: AntiqueFromGoogleSheets[]
 }
 
-export interface AdminAntiquesDataTableProps {
-  data: Antique[]
-}
-
-export const antiquesAdminDataTableColumns: ColumnDef<Antique>[] = [
+export const antiquesAdminDataTableColumns: ColumnDef<AntiqueFromGoogleSheets>[] = [
   // Attributes
   { accessorKey: 'itemNo', header: 'Item No' },
   { accessorKey: 'description', header: 'Description' },
@@ -54,8 +28,51 @@ export const antiquesAdminDataTableColumns: ColumnDef<Antique>[] = [
 const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) => {
   const { data } = props
 
+  const [shouldSyncDatabase, setShouldSyncDatabase] = useState(false)
+  const [isSyncDatabaseLoading, setIsSyncDatabaseLoading] = useState(false)
+
+  // Sync antiques table from prisma
+  useEffect(() => {
+    const syncDatabase = async () => {
+      try {
+        // Run sync
+        const fetchResults = await fetch('/api/sync/antiques')
+        const syncedItems = await fetchResults.json()
+
+        if (!syncedItems?.length) throw new Error('No items synced to database!')
+
+        // Set success state
+        toast.success(`Successfully synced ${syncedItems.length} records to database!`);
+      } catch (err) {
+        // Set error state
+      	console.error('Error caught at syncDatabase()', err)
+        toast.error('Something went wrong while syncing database, please try again.');
+      } finally {
+        setShouldSyncDatabase(false)
+        setIsSyncDatabaseLoading(false)
+      }
+    }
+    if (shouldSyncDatabase) syncDatabase()
+  }, [shouldSyncDatabase])
+
+  // Methods
+  const handleSyncDatabase = () => {
+    setShouldSyncDatabase(true)
+    setIsSyncDatabaseLoading(true)
+  }
+
   return (
-    <AdminDataTable columns={antiquesAdminDataTableColumns} data={data} searchColumnAccessorKey="description" />
+    <AdminDataTable
+      columns={antiquesAdminDataTableColumns}
+      data={data}
+      searchColumnAccessorKey="description"
+      extraActions={
+        <AdminAntiquesDataTableExtraActions
+          isSyncDatabaseLoading={isSyncDatabaseLoading}
+          handleSyncDatabase={handleSyncDatabase}
+        />
+      }
+    />
   )
 }
 

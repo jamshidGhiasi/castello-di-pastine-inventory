@@ -8,7 +8,6 @@ export interface DataRow {
     [key: string]: string;
 }
 
-// TODO@Joel: Replace the route name
 export const GET = async(req : NextRequest) => {
     const token = await getToken({ req })
     if (!token) return NextResponse.json({ message: ' Token Not Present. Please Login again'}, { status: 401})
