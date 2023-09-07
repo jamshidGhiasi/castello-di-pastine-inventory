@@ -1,8 +1,8 @@
 "use client"
+
 import AdminLayout from "@/components/admin/layout";
-import AdminSessionProvider from "@/components/admin/session-provider";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import {
@@ -10,20 +10,23 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
-import { useEffect, useState } from "react";
-const Admin = () => {
-    const { data: session, status } = useSession()
-    console.log("SESSION", status)
+import { useEffect, useState } from "react"
+
+const AdminHome = () => {
+    const { data: session } = useSession()
+
+    // States
     const [data, setData] = useState(null)
     const [isLoading, setLoading] = useState(true)
 
+    // Fetch data from Google sheets
     useEffect(() => {
         fetch('/api/test')
             .then((res) => res.json())
             .then((data) => {
                 if (data.antiques) {
                     setData(data)
-                    setLoading(false)    
+                    setLoading(false)
                 } else {
                     setData(data.error.errors)
                     setLoading(false)
@@ -33,10 +36,10 @@ const Admin = () => {
 
     if (isLoading) return <p>Loading...</p>
     if (!data) return <p>No antiques data</p>
+
     return (
         <AdminLayout>
             <div className=" w-full">
-
                 <div className="flex items-center justify-between">
                     <Link href={'/'} className="flex items-center ">
                         <ChevronLeft />
@@ -71,6 +74,15 @@ const Admin = () => {
                     This is the <code className=" bg-slate-400 p-1 rounded-sm">/admin</code> page and only accessible to Admin
                 </h1>
 
+                {/* Navigation */}
+                <div className="mb-4">
+                  <h2 className="mb-2 text-cyan-500">Navigation</h2>
+                  <Link href={'/admin/antiques'} className="flex items-center ">
+                    Antiques
+                    <ChevronRight />
+                  </Link>
+                </div>
+
                 <h2 className="mb-2 text-cyan-500">Components</h2>
                 <p className=" left-0 top-0 flex flex-col w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
                     <span>- Dynamic Data Table</span>
@@ -91,8 +103,8 @@ const Admin = () => {
                     }
                 </div>
             </div>
-
         </AdminLayout>
     )
 }
-export default Admin;
+
+export default AdminHome
