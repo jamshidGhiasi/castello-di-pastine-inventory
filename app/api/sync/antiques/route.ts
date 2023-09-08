@@ -23,7 +23,43 @@ export const GET = async (request: NextRequest) => {
 
     // Seed all antiques and relations from Google Sheets
     const onSeed = await mapSeries(antiquesFromGoogleSheets, async (antique: AntiqueFromGoogleSheets) => {
+      /**
+       * Ensure the Area Exists: Before creating the Room, make sure that the Area with the slug antique.areaId exists.
+       * Given the nature of connectOrCreate, you might assume that the Area should have been created when the
+       * Antique was being created, but race conditions can occur.
+       */
       try {
+        // 1. Ensure the Area exists or create it if not
+        // Try to connect to the Area, or create it if it doesn't exist
+        try {
+          const onFindUnique = await prisma.area.findUnique({
+            where: {
+              slug: antique.areaId
+            }
+          });
+
+          // Create if it doesn't exist
+          if (!onFindUnique) {
+            await prisma.area.create({
+              data: {
+                title: antique.area,
+                slug: antique.areaId
+              }
+            } as any)
+          }
+        } catch (error) {
+          if (!antique.areaId) return
+
+          // Create if we crash
+          await prisma.area.create({
+            data: {
+              title: antique.area,
+              slug: antique.areaId
+            } as any
+          });
+        }
+
+        // 2. Now create the Antique with assurance that the Area exists
         const onCreate = await prisma.antique.create({
           data: {
             // Properties
@@ -35,14 +71,8 @@ export const GET = async (request: NextRequest) => {
             depth: antique.depth,
             // Relations
             area: {
-              connectOrCreate: {
-                where: {
-                  slug: antique.areaId
-                },
-                create: {
-                  title: antique.area,
-                  slug: antique.areaId
-                }
+              connect: {
+                slug: antique.areaId
               }
             },
             // Connect or create relation for category
@@ -67,6 +97,7 @@ export const GET = async (request: NextRequest) => {
                   title: antique.room,
                   slug: antique.roomId,
                   roomNo: antique.room,
+                  areaId: antique.areaId,
                 }
               }
             }
