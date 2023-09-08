@@ -590,7 +590,7 @@
 
 "@types/bluebird@^3.5.38":
   version "3.5.38"
-  resolved "https://registry.npmjs.org/@types/bluebird/-/bluebird-3.5.38.tgz"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.38.tgz#7a671e66750ccd21c9fc9d264d0e1e5330bc9908"
   integrity sha512-yR/Kxc0dd4FfwtEoLZMoqJbM/VE/W7hXn/MIjb+axcwag0iFmSPK7OBUZq1YWLynJUoWQkfUrI7T0HDqGApNSg==
 
 "@types/json5@^0.0.29":

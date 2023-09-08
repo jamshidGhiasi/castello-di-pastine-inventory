@@ -3,13 +3,11 @@
 import React, { useState, useEffect } from 'react'
 import AdminDataTable from "@/components/admin/admin-data-table";
 import { ColumnDef } from "@tanstack/react-table"
-import AdminAntiquesDataTableExtraActions, {
-  AdminAntiquesDataTableExtraActionsProps
-} from "@/components/admin/antiques/admin-antiques-data-table-extra-actions";
-import { AntiqueFromGoogleSheets } from "@/types/antique";
+import AdminAntiquesDataTableExtraActions from "@/components/admin/antiques/admin-antiques-data-table-extra-actions";
+import { AntiqueFromGoogleSheets } from "@/types/Antique";
 import toast from 'react-hot-toast'
 
-export interface AdminAntiquesDataTableProps extends AdminAntiquesDataTableExtraActionsProps {
+export interface AdminAntiquesDataTableProps {
   data: AntiqueFromGoogleSheets[]
 }
 
