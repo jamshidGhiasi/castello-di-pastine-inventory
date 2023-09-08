@@ -12,7 +12,7 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
 
         <Layout>
             <h2 className='mb-2'>Change area</h2>
-            <SelectDemo />
+            <SelectDemo  value={areaId}/>
             <h2 className=' my-4'>Select a room</h2>
             <ScrollArea className='h-[60vh] w-[90vw]'>
 

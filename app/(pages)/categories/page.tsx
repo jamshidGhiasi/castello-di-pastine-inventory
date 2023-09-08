@@ -1,7 +1,7 @@
 import CategoryItem from "@/components/category-item";
 import Layout from "@/components/layout.tsx/layout";
 const Categories = async () => {
-    const res = await fetch('http://localhost:3000/api/categories');
+    const res = await fetch('http://localhost:3000/api/categories', { cache: 'no-store' });
     const categories = await res.json()
     return (
         <Layout>

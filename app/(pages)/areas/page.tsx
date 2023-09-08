@@ -3,7 +3,7 @@ import Layout from '@/components/layout.tsx/layout'
 import Link from 'next/link';
 
 const Areas = async () => {
-    const res = await fetch('http://localhost:3000/api/areas');
+    const res = await fetch('http://localhost:3000/api/areas', { cache: 'no-store' });
     const areas = await res.json()
 
 
