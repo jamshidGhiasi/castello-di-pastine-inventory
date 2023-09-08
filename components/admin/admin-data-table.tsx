@@ -121,9 +121,9 @@ export default function AdminDataTable<TData, TValue>({
       </div>
 
       {/* Table */}
-      <div className="rounded-md border max-h-[520px] overflow-y-scroll">
+      <div className="rounded-md border max-h-[80vh] overflow-y-scroll">
         <Table>
-          <TableHeader>
+          <TableHeader className=" sticky top-0 bg-neutral-900">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -141,7 +141,7 @@ export default function AdminDataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className=" bg-stone-900">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
