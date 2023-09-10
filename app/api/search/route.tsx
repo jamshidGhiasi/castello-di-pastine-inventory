@@ -4,7 +4,8 @@ import prisma from "@/lib/prisma";
 
 export const GET = async (req: NextApiRequest) => {
     const url = new URL(req.url as string)
-    console.log(url.searchParams.get('q'))
+    const searchParams = url.searchParams;
+    console.log(typeof searchParams)
     try {
         const antiques = await prisma.antique.findMany({
             where: {
@@ -26,11 +27,11 @@ export const GET = async (req: NextApiRequest) => {
                 ]
             }
         })
-        console.log(antiques)
+       
         return NextResponse.json(antiques)
     } catch (error) {
-        console.log(error)
-        return NextResponse.error()
+       
+        return NextResponse.json( error , { status: 500})
     }
     
      
