@@ -7,28 +7,42 @@ export const GET = async (req: NextApiRequest) => {
     const searchParams = url.searchParams;
     console.log(typeof searchParams)
     try {
-        const antiques = await prisma.antique.findMany({
-            where: {
-                OR: [
-                    {
-                        description: {
-                            contains: url.searchParams.get('q') as string,
-                            mode: 'insensitive'
+        if (searchParams.get('p')) {
+            console.log(searchParams.get('p')?.split(',') as string[])
+            const antiques = await prisma.antique.findMany({
+                where: {
+                    itemNo: {
+                        in: searchParams.get('p')?.split(',') as string[]
+                    }
+                }
+            })
+            return NextResponse.json(antiques)
+        } else {
+            const antiques = await prisma.antique.findMany({
+                where: {
+                    OR: [
+                        {
+                            description: {
+                                contains: url.searchParams.get('q') as string,
+                                mode: 'insensitive'
+                            },
+    
                         },
-
-                    },
-                    {
-                        itemNo: {
-                            contains: url.searchParams.get('q') as string,
-                            mode: 'insensitive'
+                        {
+                            itemNo: {
+                                contains: url.searchParams.get('q') as string,
+                                mode: 'insensitive'
+                            },
+    
                         },
+                    ]
+                }
+            })
+            return NextResponse.json(antiques)
+        }
 
-                    },
-                ]
-            }
-        })
        
-        return NextResponse.json(antiques)
+       
     } catch (error) {
        
         return NextResponse.json( error , { status: 500})
