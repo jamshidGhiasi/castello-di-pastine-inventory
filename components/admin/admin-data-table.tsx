@@ -71,7 +71,7 @@ export default function AdminDataTable<TData, TValue>({
   const searchColumnAccessorKey = injectedSearchColumnAccessorKey || (columns?.[0] as any)?.accessorKey
 
   return (
-    <div className="w-full">
+    <div className="w-full max-h-[50vh]">
       {/* Header */}
       <div className="w-full flex justify-between items-center py-4">
         {/* Left */}
@@ -121,7 +121,7 @@ export default function AdminDataTable<TData, TValue>({
       </div>
 
       {/* Table */}
-      <div className="rounded-md border max-h-[80vh] overflow-y-scroll">
+      <div className="rounded-md border max-h-[50vh] overflow-y-scroll">
         <Table>
           <TableHeader className=" sticky top-0 bg-neutral-900">
             {table.getHeaderGroups().map((headerGroup) => (

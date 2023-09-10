@@ -8,10 +8,22 @@ export const GET = async (req: NextApiRequest) => {
     try {
         const antiques = await prisma.antique.findMany({
             where: {
-                description: {
-                    contains: url.searchParams.get('q') as string,
-                    mode: 'insensitive'
-                }
+                OR: [
+                    {
+                        description: {
+                            contains: url.searchParams.get('q') as string,
+                            mode: 'insensitive'
+                        },
+
+                    },
+                    {
+                        itemNo: {
+                            contains: url.searchParams.get('q') as string,
+                            mode: 'insensitive'
+                        },
+
+                    },
+                ]
             }
         })
         console.log(antiques)

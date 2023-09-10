@@ -10,10 +10,10 @@ import {
 } from "@/components/ui/select"
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-export function SelectDemo() {
+export function SelectDemo({areaId}: {areaId: string}) {
   const [value, setValue] = useState("")
   const router = useRouter()
-  const areaId = usePathname().replace('/areas/', '')
+
   const handleAreaChange = (value: any) => {
     router.push(`/areas/${value}`)
     setValue(value)
