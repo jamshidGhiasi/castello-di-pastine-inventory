@@ -14,9 +14,44 @@ export const GET = async (req: NextApiRequest) => {
                     itemNo: {
                         in: searchParams.get('p')?.split(',') as string[]
                     }
+                },
+                include: {
+                    room: {
+                        select: {
+                            title: true
+                        }
+                    },
+                    area: {
+                        select: {
+                            title: true
+                        }
+                    },
+                    category: {
+                        select: {
+                            title: true
+                        }
+                    },
                 }
+                
+                
             })
             return NextResponse.json(antiques)
+        }
+            else if (searchParams.get('r')) {
+                console.log(searchParams.get('p')?.split(',') as string[])
+                const antiques = await prisma.antique.findMany({
+                    where: {
+                        roomId: {
+                            equals: searchParams.get('r') as string
+                        }
+                    },
+                    
+                    
+                    
+                })
+                return NextResponse.json(antiques)
+
+
         } else {
             const antiques = await prisma.antique.findMany({
                 where: {
