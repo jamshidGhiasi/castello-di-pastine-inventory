@@ -10,7 +10,7 @@ const fetchAntiquesFromGoogleSheets = async () => {
     spreadsheetId: '1uFMtKL9_qbB80G3_Poq22ybtpVHbT94gOpHlhhxHlrg',
     range: 'INVENTORY',
   })
-  return JSON.parse(JSON.stringify(antiques))?.data
+  return antiques ? JSON.parse(JSON.stringify(antiques))?.data : []
 }
 
 export default fetchAntiquesFromGoogleSheets

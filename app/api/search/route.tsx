@@ -1,8 +1,7 @@
-import { NextApiRequest } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export const GET = async (req: NextApiRequest) => {
+export const GET = async (req: NextRequest) => {
     const url = new URL(req.url as string)
     const searchParams = url.searchParams;
     console.log(typeof searchParams)
@@ -32,8 +31,8 @@ export const GET = async (req: NextApiRequest) => {
                         }
                     },
                 }
-                
-                
+
+
             })
             return NextResponse.json(antiques)
         }
@@ -45,9 +44,9 @@ export const GET = async (req: NextApiRequest) => {
                             equals: searchParams.get('r') as string
                         }
                     },
-                    
-                    
-                    
+
+
+
                 })
                 return NextResponse.json(antiques)
 
@@ -61,14 +60,14 @@ export const GET = async (req: NextApiRequest) => {
                                 contains: url.searchParams.get('q') as string,
                                 mode: 'insensitive'
                             },
-    
+
                         },
                         {
                             itemNo: {
                                 contains: url.searchParams.get('q') as string,
                                 mode: 'insensitive'
                             },
-    
+
                         },
                     ]
                 }
@@ -76,12 +75,12 @@ export const GET = async (req: NextApiRequest) => {
             return NextResponse.json(antiques)
         }
 
-       
-       
+
+
     } catch (error) {
-       
+
         return NextResponse.json( error , { status: 500})
     }
-    
-     
+
+
 }

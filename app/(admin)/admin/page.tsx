@@ -13,7 +13,8 @@ import {
 import { useEffect, useState } from "react"
 
 const AdminHome = () => {
-    const { data: session } = useSession()
+    const onUseSession = useSession()
+    const { data: session } = onUseSession
 
     // States
     const [data, setData] = useState(null)
