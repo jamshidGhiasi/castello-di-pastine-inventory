@@ -14,7 +14,7 @@ const fetchAntiques = async (url: string) => {
 const Search = () => {
     const searchParams = useSearchParams()
     const searchQuery = searchParams ? searchParams.get('q') : null;
-    const { data, error, isLoading } = userSWR('http://localhost:3000/api/search?q=' + searchQuery, fetchAntiques)
+    const { data, error, isLoading } = userSWR(`${process.env.API_BASE_URL}/search?q=` + searchQuery, fetchAntiques)
     console.log(searchQuery)
     return (
         <Layout>

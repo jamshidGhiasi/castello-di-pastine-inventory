@@ -4,7 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Category = async ({ params }: { params: { categoryId: string } }) => {
     const { categoryId } = params;
-    const res = await fetch(`http://localhost:3000/api/categories/${categoryId}`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.API_BASE_URL}/categories/${categoryId}`, { cache: 'no-store' });
     const antiques = await res.json()
     return (
         <Layout>

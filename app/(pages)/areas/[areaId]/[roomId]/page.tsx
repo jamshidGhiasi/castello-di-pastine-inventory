@@ -4,7 +4,7 @@ import Layout from "@/components/layout.tsx/layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 const Room = async ({ params }: { params: { areaId: string, roomId: string } }) => {
     const { areaId, roomId } = params;
-    const res = await fetch(`http://localhost:3000/api/areas/${areaId}/${roomId}`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.API_BASE_URL}/areas/${areaId}/${roomId}`, { cache: 'no-store' });
     const antiques = await res.json()
    
 

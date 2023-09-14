@@ -6,24 +6,25 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Antique {
-  id         Int       @id @default(autoincrement())
-  itemNo     String    @unique
-  lot        String?
-  height     String?
-  width      String?
-  depth      String?
+  id          Int       @id @default(autoincrement())
+  itemNo      String    @unique
+  lot         String?
+  height      String?
+  width       String?
+  depth       String?
   description String?
-  area       Area?     @relation(fields: [areaId], references: [slug])
-  room       Room?     @relation(fields: [roomId], references: [slug])
-  category   Category? @relation(fields: [categoryId], references: [slug])
-  areaId     String?  
-  roomId     String?   
-  categoryId String?  
+  area        Area?     @relation(fields: [areaId], references: [slug])
+  room        Room?     @relation(fields: [roomId], references: [slug])
+  category    Category? @relation(fields: [categoryId], references: [slug])
+  areaId      String?
+  roomId      String?
+  categoryId  String?
 
   @@index([itemNo])
 }
@@ -44,7 +45,7 @@ model Room {
   slug       String     @unique
   roomNo     String?
   area       Area?      @relation(fields: [areaId], references: [slug])
-  areaId     String?    
+  areaId     String?
   antiques   Antique[]
   categories Category[]
 }
