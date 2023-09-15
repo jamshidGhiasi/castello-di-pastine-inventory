@@ -14,12 +14,10 @@ export const GET = async (request: NextRequest) => {
     const antiquesFromGoogleSheets = await fetchAntiquesFromGoogleSheets()
 
     // Delete all antiques from prisma then insert all antiques from Google Sheets
-    const onDelete = await Promise.all([
-      prisma.antique.deleteMany(),
-      prisma.area.deleteMany(),
-      prisma.category.deleteMany(),
-      prisma.room.deleteMany(),
-    ])
+    await prisma.antique.deleteMany()
+    await prisma.area.deleteMany()
+    await prisma.category.deleteMany()
+    await prisma.room.deleteMany()
 
     // Seed all antiques and relations from Google Sheets
     const onSeed = await mapSeries(antiquesFromGoogleSheets, async (antique: AntiqueFromGoogleSheets) => {

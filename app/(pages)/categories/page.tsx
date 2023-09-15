@@ -1,8 +1,11 @@
 import CategoryItem from "@/components/category-item";
 import Layout from "@/components/layout.tsx/layout";
+
+export const dynamic = 'force-dynamic'
+
 const Categories = async () => {
-    const res = await fetch('http://localhost:3000/api/categories', { cache: 'no-store' });
-    const categories = await res.json()
+    const res = await fetch(`${process.env.API_BASE_URL}/categories`, { cache: 'no-store' });
+    const categories = res.status === 200 ? await res.json() : []
     return (
         <Layout>
             <div>

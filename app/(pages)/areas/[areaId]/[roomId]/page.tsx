@@ -4,14 +4,14 @@ import Layout from "@/components/layout.tsx/layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 const Room = async ({ params }: { params: { areaId: string, roomId: string } }) => {
     const { areaId, roomId } = params;
-    const res = await fetch(`http://localhost:3000/api/areas/${areaId}/${roomId}`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.API_BASE_URL}/areas/${areaId}/${roomId}`, { cache: 'no-store' });
     const antiques = await res.json()
-   
+
 
     return (
         <Layout>
             <h2 className='mb-2'>Change room</h2>
-           
+
             <h2 className=' my-4'>Select an item</h2>
             <ScrollArea className='h-[60vh] w-[90vw]'>
                 <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 content-stretch">

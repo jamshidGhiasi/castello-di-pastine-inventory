@@ -14,7 +14,7 @@ const fetchAntiques = async (url: string) => {
 const Search = () => {
     const searchParams = useSearchParams()
     const searchQuery = searchParams ? searchParams.get('q') : null;
-    const { data, error, isLoading } = userSWR('http://localhost:3000/api/search?q=' + searchQuery, fetchAntiques)
+    const { data, error, isLoading } = userSWR(`${process.env.API_BASE_URL}/search?q=` + searchQuery, fetchAntiques)
     console.log(searchQuery)
     return (
         <Layout>
@@ -22,8 +22,8 @@ const Search = () => {
             {error && <p>Something went wrong!</p>}
             {!isLoading && !data && <p>No data yet!</p>}
             {!isLoading && data && data.length === 0 && <p>No data found!</p>}
-            {!isLoading && data && data.length > 0 && 
-            
+            {!isLoading && data && data.length > 0 &&
+
             <ScrollArea className='h-[60vh] w-[90vw]'>
             <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 content-stretch">
                 {data &&

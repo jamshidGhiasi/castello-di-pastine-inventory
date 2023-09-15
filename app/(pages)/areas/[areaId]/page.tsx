@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 const Area = async ({ params }: { params: { areaId: string } }) => {
     const { areaId } = params;
-    const res = await fetch(`http://localhost:3000/api/areas/${areaId}`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.API_BASE_URL}/areas/${areaId}`, { cache: 'no-store' });
     const { rooms } = await res.json()
     return (
 

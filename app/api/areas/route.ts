@@ -11,12 +11,12 @@ export const GET = async (request: NextRequest) => {
                 _count: {
                     select: { antiques: true },
                 },
-             
+
 
                 categories: true
 
             },
-            
+
         })
         if (!areas.length) {
             return NextResponse.json({ message: "No areas found in DB" }, { status: 404 })
