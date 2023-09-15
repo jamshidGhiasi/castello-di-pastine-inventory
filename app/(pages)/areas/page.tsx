@@ -7,12 +7,15 @@ async function getData() {
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/areas`, { cache: 'no-store' });
 
+    console.log('jjj: res', res)
+    console.log('jjj: res in string', JSON.stringify(res))
+
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error('Failed to fetch data')
     }
 
-    return res.json()
+    return JSON.parse(JSON.stringify(res))
   } catch (err) {
   	console.error('Error caught at getData():', err)
     return []
