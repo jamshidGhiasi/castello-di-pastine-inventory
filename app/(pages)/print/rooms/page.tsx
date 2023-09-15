@@ -21,7 +21,7 @@ const PrintAntiques = () => {
         setLoading(true)
         setError(null)
 
-        fetch(`${process.env.API_BASE_URL}/search?r=${room}`)
+        fetch(`${process.env.VERCEL_URL}/api/search?r=${room}`)
             .then(res => res.json())
             .then(data => {
                 setAntiques(data)
