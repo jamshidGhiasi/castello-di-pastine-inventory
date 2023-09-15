@@ -7,6 +7,7 @@ async function getData() {
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/areas`, { cache: 'no-store' });
 
+    console.log('jjj: API_BASE_URL', process.env.API_BASE_URL)
     console.log('jjj: res', res)
     console.log('jjj: res in string', JSON.stringify(res))
 
@@ -15,7 +16,8 @@ async function getData() {
       throw new Error('Failed to fetch data')
     }
 
-    return JSON.parse(JSON.stringify(res))
+    const result = await res.json()
+    return result
   } catch (err) {
   	console.error('Error caught at getData():', err)
     return []
