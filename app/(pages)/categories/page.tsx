@@ -4,7 +4,7 @@ import Layout from "@/components/layout.tsx/layout";
 export const dynamic = 'force-dynamic'
 
 const Categories = async () => {
-    const res = await fetch(`${process.env.VERCEL_URL}/api/categories`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.API_BASE_URL}/categories`, { cache: 'no-store' });
     const categories = res.status === 200 ? await res.json() : []
     return (
         <Layout>

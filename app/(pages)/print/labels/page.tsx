@@ -26,7 +26,7 @@ const PrintAntiques = () => {
         setLoading(true)
         setError(null)
 
-        fetch(`${process.env.VERCEL_URL}/api/search?p=${convertInputToAntiqueRange(range).join(',')}`)
+        fetch(`${process.env.API_BASE_URL}/search?p=${convertInputToAntiqueRange(range).join(',')}`)
             .then(res => res.json())
             .then(data => {
                 setAntiques(data)
