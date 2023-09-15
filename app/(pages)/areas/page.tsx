@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 
 const Areas = async () => {
     const res = await fetch(`${process.env.API_BASE_URL}/areas`, { cache: 'no-store' });
-    const areas = await res.json()
+    const areas = res.status === 200 ? await res.json() : []
 
     return (
         <Layout>
