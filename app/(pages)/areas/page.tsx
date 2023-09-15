@@ -3,10 +3,24 @@ import Layout from '@/components/layout.tsx/layout'
 
 export const dynamic = 'force-dynamic'
 
-const Areas = async () => {
+async function getData() {
+  try {
     const res = await fetch(`${process.env.API_BASE_URL}/areas`, { cache: 'no-store' });
-    console.log('[DEBUG on Prod]: res', res)
-    const areas = res.status === 200 ? await res.json() : []
+
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+  } catch (err) {
+  	console.error('Error caught at getData():', err)
+    return []
+  }
+}
+
+const Areas = async () => {
+    const areas = await getData()
 
     return (
         <Layout>
