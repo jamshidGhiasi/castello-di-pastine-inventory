@@ -12,9 +12,8 @@ export const GET = async(req : NextRequest) => {
     const token = await getToken({ req })
 
     if (!token) return NextResponse.json({ message: 'Token Not Present. Please Login again'}, { status: 401 })
-
-    // Signed in
-    console.log("FROM API" , token)
+    if (token.error && token.error === 'RefreshAccessTokenError') return NextResponse.json({ message: 'Error Refreshing Access Token' }, { status: 401 })
+   
 
     try {
         const sheet = await sheets.spreadsheets.values.get({

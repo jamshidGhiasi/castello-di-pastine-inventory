@@ -37,7 +37,7 @@ const AntiqueItem = ({ image, qr, itemNo, description, width, height, depth, are
                     />
                 </div>
                 <SheetHeader>
-                    Jamshid and Dan
+                   
                     <SheetTitle className=' text-white p-2 bg-gray-800 w-2/5 m-auto mt-4 rounded-full'> {itemNo} </SheetTitle>
                     <SheetDescription>
                         <div className='mb-4'>

@@ -17,7 +17,7 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
             <ScrollArea className='h-[60vh] w-[90vw]'>
 
             {rooms.map((room: any) => (
-                <RoomItem key={room.id} title={room.title} slug={room.slug} count={room._count.antiques} areaId={areaId} roomNumber={room.roomNo} />
+                <RoomItem key={room.id} title={room.title} slug={room.slug} count={room._count.antiques} areaId={areaId} roomNumber={room.title.match(/^(\d+).*/)[1]} />
             ))}
             </ScrollArea>
 
