@@ -66,7 +66,7 @@ const PrintAntiques = () => {
                 />
             <div className="print-room-container"  ref={componentRef}>
 
-                
+                {room}
                 {!loading && antiques && antiques.length && antiques.map((antique, index) => (
                     <div key={index} className="page-room">                                                
                     

@@ -92,7 +92,7 @@
   .page-a4 {
     margin: 5mm;
     height: 280mm !important; 
-    outline: 5mm solid #000;
+    /* outline: 5mm solid #000; */
     display: flex;
     flex-direction: column;
     justify-content: center;
