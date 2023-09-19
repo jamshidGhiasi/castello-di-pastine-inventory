@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const TopLogo = () => {
     return (
-        <div className="mb-4 text-center">
+        <div className="my-4 text-center">
             <Image
                 className="relative z-10 m-auto"
                 src='/castello-di-pastine-typography.svg'

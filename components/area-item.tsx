@@ -10,7 +10,7 @@ export const AreaItem = ({ title, slug, count }: { title: string, slug: string, 
 
     }
     return (
-        <Button className="group w-full sm:w-96 py-2 sm:py-4 flex justify-between  items-center rounded-full [&:not(:last-child)]:mb-4 h-auto bg-white/40 " onClick={handleAreaItemClick}>
+        <Button className="group w-full py-2 sm:py-4 flex justify-between  items-center rounded-full  h-auto bg-white/40 border  " onClick={handleAreaItemClick}>
             <div className="h-8 w-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full mr-4 bg-white group-hover:bg-lime-500">
                 <Castle className="h-4 w-4 sm:h-auto sm:w-auto" />
             </div>

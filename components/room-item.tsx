@@ -8,9 +8,9 @@ export const RoomItem = ({ title, areaId, slug, count, roomNumber }: { title: st
         router.push(`/areas/${areaId}/${slug}`)
     }
     return (
-        <Button className="group w-full py-8 flex justify-between  items-center rounded-full [&:not(:last-child)]:mb-4  bg-black/60 " onClick={handleAreaItemClick}>
+        <Button className="group w-full py-8 flex justify-between  items-center rounded-full mb-4 bg-neutral-700 " onClick={handleAreaItemClick}>
             {roomNumber &&
-                <div className=" w-8 h-8 flex items-center justify-center rounded-full mr-4 bg-white group-hover:bg-lime-500">
+                <div className=" w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0 mr-4 bg-white group-hover:bg-lime-500">
                     {roomNumber}
                 </div>
             }
@@ -25,7 +25,7 @@ export const RoomItem = ({ title, areaId, slug, count, roomNumber }: { title: st
                 </span>
            
             </div>
-            <div className="w-8 h-8 flex items-center justify-center rounded-full  bg-black text-yellow-50 ml-auto group-hover:text-lime-500">
+            <div className="w-8 h-8 flex items-center justify-center rounded-full flex-shrink-0  bg-black text-yellow-50 ml-auto group-hover:text-lime-500">
                 <ChevronRight />
             </div>
         </Button>

@@ -20,12 +20,12 @@ export function SelectDemo({areaId}: {areaId: string}) {
   }
   return (
     <Select value={areaId} onValueChange={handleAreaChange}>
-      <SelectTrigger className="w-full rounded-full">
+      <SelectTrigger className=" w-full lg:w-4/12 p-6 mb-6 mr-auto rounded-full">
         <SelectValue placeholder="Select an area" />
       </SelectTrigger>
       <SelectContent  >
         <SelectGroup>
-          <SelectLabel>Area</SelectLabel>
+          <SelectLabel>Select area</SelectLabel>
           <SelectItem value="villa-ground">Villa Ground</SelectItem>
           <SelectItem value="villa-1st-floor">Villa 1st Floor</SelectItem>
           <SelectItem value="villa-2nd-floor">Villa 2nd Floor</SelectItem>

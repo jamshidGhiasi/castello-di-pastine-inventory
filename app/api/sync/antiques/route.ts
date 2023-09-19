@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { mapSeries } from 'bluebird'
 import prisma from "@/lib/prisma";
 import fetchAntiquesFromGoogleSheets from "@/utils/fetchAntiquesFromGoogleSheets";
-import type { AntiqueFromGoogleSheets } from "@/types/Antique"
+import type { AntiqueFromGoogleSheets } from "@/types/antique"
 
 /**
  * Blackbox function to sync antiques from Google Sheets to Prisma
@@ -40,19 +40,19 @@ export const GET = async (request: NextRequest) => {
           if (!onFindUnique) {
             await prisma.area.create({
               data: {
-                title: antique.area,
-                slug: antique.areaId
+                title: (antique.area == "NULL" || antique.area == "") ? "Unassigned" : antique.area,
+                slug: (antique.areaId == "NULL" || antique.areaId == "") ? "unassigned" : antique.areaId,
               }
             } as any)
           }
         } catch (error) {
-          if (!antique.areaId) return
+         // if (!antique.areaId) return
 
           // Create if we crash
           await prisma.area.create({
             data: {
-              title: antique.area,
-              slug: antique.areaId
+              title: (antique.area == "NULL" || antique.area == "") ? "Unassigned" : antique.area,
+              slug: (antique.areaId == "NULL" || antique.areaId == "") ? "unassigned" : antique.areaId,
             } as any
           });
         }
@@ -89,13 +89,12 @@ export const GET = async (request: NextRequest) => {
             room: {
               connectOrCreate: {
                 where: {
-                  slug: antique.roomId
+                  slug: (antique.roomId == "NULL" || antique.roomId == "" || !antique.roomId) ? "unassigned" : antique.roomId
                 },
                 create: {
-                  title: antique.room,
-                  slug: antique.roomId,
-                  roomNo: antique.room,
-                  areaId: antique.areaId,
+                  title: (antique.room == "NULL" || antique.room == "" || !antique.room) ? "Unassigned" : antique.room,
+                  slug: (antique.roomId == "NULL" || antique.roomId == "" || !antique.roomId) ? "unassigned" : antique.roomId,
+                  areaId: (antique.areaId == "NULL" || antique.areaId == "") ? "unassigned" : antique.areaId,
                 }
               }
             }

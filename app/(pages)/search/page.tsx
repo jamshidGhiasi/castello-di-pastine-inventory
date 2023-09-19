@@ -24,13 +24,15 @@ const Search = () => {
             {!isLoading && data && data.length === 0 && <p>No data found!</p>}
             {!isLoading && data && data.length > 0 &&
 
-            <ScrollArea className='h-[60vh] w-[90vw]'>
-            <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 content-stretch">
+          <ScrollArea className=" h-[80vh] lg:h-[70vh]">
+            <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 mb-[300px] lg:mb-[150px]  ">
+          
                 {data &&
                     data.map((antique: any) =>
                     (
-                        <div key={antique.id} className="bg-white flex flex-col  items-center justify-center rounded-md overflow-hidden h-[150px]">
+                       
                             <AntiqueItem
+                            key={antique.id}
                                 description={antique.description}
                                 image={
                                     [
@@ -47,12 +49,12 @@ const Search = () => {
                                 area={antique.areaId}
                                 room={antique.roomId}
                             />
-                        </div>
+                        
                     )
                     )
                 }
             </div>
-        </ScrollArea>
+            </ScrollArea>
             }
 
         </Layout>
