@@ -1,5 +1,5 @@
 import AreaItem from '@/components/area-item';
-import Layout from '@/components/layout.tsx/layout'
+import Layout from '@/components/layout/layout'
 
 export const dynamic = 'force-dynamic'
 

@@ -1,5 +1,5 @@
 'use client';
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 import { use, useEffect, useRef, useState } from "react";
 import { convertInputToAntiqueRange } from "@/lib/utils"
 import { Input } from "@/components/ui/input";
@@ -73,7 +73,7 @@ const PrintAntiques = () => {
 
 
                 {!loading && antiques && antiques.length && antiques.map((antique, index) => (
-                    <div key={index} className="page-label">                                                
+                    <div key={index} className="page-label">
                         <QRCode className="print-label-qr" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
                         <div className="print-label-desc">
 

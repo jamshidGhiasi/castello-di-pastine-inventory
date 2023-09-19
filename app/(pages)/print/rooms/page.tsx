@@ -1,5 +1,5 @@
 'use client';
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 import { use, useEffect, useRef, useState } from "react";
 import { convertInputToAntiqueRange } from "@/lib/utils"
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,7 @@ const PrintAntiques = () => {
 
     function getAntiques() {
 
-       
+
 
         setLoading(true)
         setError(null)
@@ -68,8 +68,8 @@ const PrintAntiques = () => {
 
                 {room}
                 {!loading && antiques && antiques.length && antiques.map((antique, index) => (
-                    <div key={index} className="page-room">                                                
-                    
+                    <div key={index} className="page-room">
+
                         <div className="print-room-desc">
 
                         <Img className="print-room-image" src={`/antiques/image${antique?.itemNo.replace('0', '')}.png`} />

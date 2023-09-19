@@ -1,4 +1,4 @@
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 import AntiqueItem from "@/components/antique-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 

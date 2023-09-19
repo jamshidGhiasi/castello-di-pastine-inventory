@@ -10,9 +10,28 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { Button } from './ui/button'
-import Link from 'next/link'
-const AntiqueItem = ({ image, qr, itemNo, description, width, height, depth, area, room }: { image: string[], qr: string, itemNo: string, description: string, width: string, height: string, depth: string, area: string, room: string }) => {
+import { Antique } from "@prisma/client"
+
+export interface AntiqueItemProps extends Partial<Antique> {
+  image: string[]
+  qr: string
+  itemNo: string
+  area?: string | null
+  room?: string | null
+  item?: Antique
+}
+
+const AntiqueItem = ({
+  image,
+  qr,
+  itemNo,
+  description,
+  width,
+  height,
+  depth,
+  area,
+  room,
+}: AntiqueItemProps) => {
     return (
         <Sheet>
             <SheetTrigger asChild >
@@ -37,15 +56,15 @@ const AntiqueItem = ({ image, qr, itemNo, description, width, height, depth, are
                     />
                 </div>
                 <SheetHeader>
-                   
+
                     <SheetTitle className=' text-white p-2 bg-gray-800 w-2/5 m-auto mt-4 rounded-full'> {itemNo} </SheetTitle>
                     <SheetDescription>
                         <div className='mb-4'>
                         {description}
                         </div>
                         <br />
-                        width: { width} | 
-                        height: { height} | 
+                        width: { width} |
+                        height: { height} |
                         depth:{ depth}
                         <br />
                         Area: { area}

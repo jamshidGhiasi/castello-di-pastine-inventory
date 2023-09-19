@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import BottomNavigation from "../bottom-navigation"
 import TopLogo from "./top-logo"
 import SearchBar from "../search-bar"
+
 const Layout = ({
     children
 }: {
@@ -17,5 +18,6 @@ const Layout = ({
             </div>
         </main>
     )
+
 }
 export default Layout
