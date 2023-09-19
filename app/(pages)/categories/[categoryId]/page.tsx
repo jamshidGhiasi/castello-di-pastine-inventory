@@ -27,7 +27,6 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                                             `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
                                         ]
                                     }
-                                    qr=""
                                     itemNo={antique.itemNo}
                                     height={antique.height}
                                     width={antique.white}

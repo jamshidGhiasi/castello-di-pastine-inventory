@@ -68,7 +68,6 @@ export const GET = async (request: NextRequest) => {
       try {
         // 1. Ensure the Area exists or create it if not
         // Try to connect to the Area, or create it if it doesn't exist
-        // Define create defaults
         await createAreaFromAntique(antique)
 
         // 2. Now create the Antique with assurance that the Area exists

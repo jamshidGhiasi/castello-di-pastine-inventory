@@ -10,16 +10,15 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
 
     return (
         <Layout>
-            <h2 className='mb-2'>Change room</h2>
 
-            <h2 className=' my-4'>Select an item</h2>
-            <ScrollArea className='h-[60vh] w-[90vw]'>
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 content-stretch">
+
+                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                     {antiques &&
                         antiques.map((antique: any) =>
                         (
-                            <div key={antique.id} className="bg-white flex flex-col  items-center justify-center rounded-md overflow-hidden h-[150px]">
+
                                 <AntiqueItem
+                                    key={antique.id}
                                     description={antique.description}
                                     image={
                                         [
@@ -28,7 +27,6 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                                             `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
                                         ]
                                     }
-                                    qr=""
                                     itemNo={antique.itemNo}
                                     height={antique.height}
                                     width={antique.white}
@@ -36,12 +34,12 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                                     area={areaId}
                                     room={roomId}
                                 />
-                            </div>
+
                         )
                         )
                     }
                 </div>
-            </ScrollArea>
+
         </Layout>
     )
 }

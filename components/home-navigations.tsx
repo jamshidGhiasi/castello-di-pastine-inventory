@@ -9,15 +9,15 @@ const HomeNavigation =  () => {
     const router = useRouter();
     
     return(
-        <div className="bottom-navigation flex flex-col items-center justify-between">
-            <Button className=" bg-emerald-300 text-md mb-6 rounded-3xl p-6 w-64" onClick={() => router.push('/areas')} >
-                <Blocks className="mr-2 h-4 w-4" /> Browse Areas
+        <div className="bottom-navigation flex flex-col">
+            <Button className=" bg-emerald-300 text-lg mb-6 rounded-3xl p-6 w-64" onClick={() => router.push('/areas')} >
+                Rooms and Areas
             </Button>
-            <Button className=" bg-emerald-300 text-md mb-6 rounded-3xl p-6 w-64" onClick={() => router.push('/categories')} >
-                <LayoutList className="mr-2 h-4 w-4" /> Browse Categories
+            <Button className=" bg-emerald-300 text-lg mb-6 rounded-3xl p-6 w-64" onClick={() => router.push('/categories')} >
+                Categories
             </Button>
-            <Button className=" bg-emerald-300 text-md  rounded-3xl p-6 w-64" onClick={() => router.push('/admin')} >
-                <LayoutList className="mr-2 h-4 w-4" /> Admin
+            <Button variant={'link'} className="text-lg underline"  onClick={() => router.push('/admin')} >
+                 Admin
             </Button>
      
         </div>

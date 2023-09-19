@@ -11,15 +11,14 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
 
 
         <Layout>
-            <h2 className='mb-2'>Change area</h2>
             <SelectDemo  areaId={areaId as string}/>
-            <h2 className=' my-4'>Select a room</h2>
-            <ScrollArea className='h-[60vh] w-[90vw]'>
+
+            <div className=' grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full'>
 
             {rooms.map((room: any) => (
                 <RoomItem key={room.id} title={room.title} slug={room.slug} count={room._count.antiques} areaId={areaId} roomNumber={room.title.match(/^(\d+).*/)[1]} />
             ))}
-            </ScrollArea>
+            </div>
 
         </Layout>
 

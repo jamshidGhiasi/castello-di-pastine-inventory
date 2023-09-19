@@ -14,16 +14,13 @@ import { Antique } from "@prisma/client"
 
 export interface AntiqueItemProps extends Partial<Antique> {
   image: string[]
-  qr: string
   itemNo: string
   area?: string | null
   room?: string | null
-  item?: Antique
 }
 
 const AntiqueItem = ({
   image,
-  qr,
   itemNo,
   description,
   width,
@@ -31,18 +28,17 @@ const AntiqueItem = ({
   depth,
   area,
   room,
-  item,
 }: AntiqueItemProps) => {
     return (
         <Sheet>
             <SheetTrigger asChild >
-                <button className='relative overflow-hidden h-[100%] w-[100%] m-auto' >
+                <button className='relative border  h-[150px] bg-white rounded-sm overflow-hidden' >
                     <Img
                         src={image}
                         alt={itemNo}
-                        className='m-auto'
+                        className='m-auto w-auto h-full'
                     />
-                    <span className='text-white text-xs bg-gray-500 absolute left-0 bottom-0 w-5/12 py-2 rounded-tr-md'>{itemNo}</span>
+                    <span className='text-white text-md bg-gray-600 absolute left-0 bottom-0 w-5/12 py-2 rounded-tr-lg'>{itemNo}</span>
                 </button>
             </SheetTrigger>
 
