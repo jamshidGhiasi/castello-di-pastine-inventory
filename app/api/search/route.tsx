@@ -7,7 +7,6 @@ export const GET = async (req: NextRequest) => {
   try {
     switch (true) {
       case Boolean(searchParams.get('p')):
-        console.log('Search.p', searchParams.get('p')?.split(',') as string[])
         const antiquesByItemNo = await prisma.antique.findMany({
           where: {
             itemNo: {
@@ -34,7 +33,6 @@ export const GET = async (req: NextRequest) => {
         })
         return NextResponse.json(antiquesByItemNo)
       case Boolean(searchParams.get('r')):
-        console.log('Search.r', searchParams.get('r')?.split(',') as string[])
         const antiquesByRoomId = await prisma.antique.findMany({
           where: {
             roomId: {
@@ -44,7 +42,6 @@ export const GET = async (req: NextRequest) => {
         })
         return NextResponse.json(antiquesByRoomId)
       default:
-        console.log('Search.default', searchParams.get('q'))
         const antiquesByDescOrItemNo = await prisma.antique.findMany({
           where: {
             OR: [
@@ -53,21 +50,27 @@ export const GET = async (req: NextRequest) => {
                   contains: url.searchParams.get('q') as string,
                   mode: 'insensitive'
                 },
-
               },
               {
                 itemNo: {
                   contains: url.searchParams.get('q') as string,
                   mode: 'insensitive'
                 },
-
               },
             ]
           },
           include: {
-            area: true,
+            area: {
+              include: {
+                categories: true,
+              },
+            },
             category: true,
-            room: true
+            room: {
+              include: {
+                categories: true,
+              },
+            }
           },
         })
         return NextResponse.json(antiquesByDescOrItemNo)

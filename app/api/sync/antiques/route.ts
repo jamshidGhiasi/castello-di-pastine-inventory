@@ -1,8 +1,47 @@
 import { NextRequest, NextResponse } from "next/server";
 import { mapSeries } from 'bluebird'
 import prisma from "@/lib/prisma";
-import fetchAntiquesFromGoogleSheets from "@/utils/fetchAntiquesFromGoogleSheets";
+import fetchAntiquesFromGoogleSheets from "@/utils/fetchAntiquesFromGoogleSheets"
 import type { AntiqueFromGoogleSheets } from "@/types/Antique"
+import { Area } from '@prisma/client'
+
+/**
+ * Helper function to check if a value is empty
+ * most importantly for the value === 'NULL' case from Google Sheets
+ * @param value
+ */
+const isEmpty = (value: string | undefined) => value === 'NULL' || value === undefined || value === null || value === ''
+
+/**
+ * Helper function to create an Area from an Antique
+ * @param antique
+ */
+const createAreaFromAntique = async (antique: AntiqueFromGoogleSheets): Promise<Area | undefined> => {
+  const areaCreateOptions = {
+    data: {
+      title: antique.area,
+      slug: antique.areaId,
+      categories: {
+        connectOrCreate: {
+          where: { slug: antique.categoryId },
+          create: { title: antique.category, slug: antique.categoryId },
+        },
+      },
+    }
+  }
+  try {
+    // Handle degenerate case where areaId is 'NULL' (string null)
+    if (isEmpty(antique.areaId)) return
+    // Try to find the Area
+    const onFindUnique = await prisma['area'].findUnique({ where: { slug: antique.areaId } })
+    // Create if it doesn't exist
+    if (!onFindUnique) return prisma.area.create(areaCreateOptions)
+  } catch (error) {
+    if (!antique.areaId) return
+    // Create if we crash onFindUnique
+    return prisma.area.create(areaCreateOptions);
+  }
+}
 
 /**
  * Blackbox function to sync antiques from Google Sheets to Prisma
@@ -29,92 +68,69 @@ export const GET = async (request: NextRequest) => {
       try {
         // 1. Ensure the Area exists or create it if not
         // Try to connect to the Area, or create it if it doesn't exist
-        try {
-          const onFindUnique = await prisma.area.findUnique({
-            where: {
-              slug: antique.areaId
-            }
-          });
-
-          // Create if it doesn't exist
-          if (!onFindUnique) {
-            await prisma.area.create({
-              data: {
-                title: antique.area,
-                slug: antique.areaId
-              }
-            } as any)
-          }
-        } catch (error) {
-          if (!antique.areaId) return
-
-          // Create if we crash
-          await prisma.area.create({
-            data: {
-              title: antique.area,
-              slug: antique.areaId
-            } as any
-          });
-        }
+        // Define create defaults
+        await createAreaFromAntique(antique)
 
         // 2. Now create the Antique with assurance that the Area exists
         const onCreate = await prisma.antique.create({
           data: {
-            // Properties
+            /**
+             * Properties
+             */
             itemNo: antique.itemNo,
             description: antique.description,
             lot: antique.lot,
             height: antique.height,
             width: antique.width,
             depth: antique.depth,
-            // Relations
-            area: {
-              connect: {
-                slug: antique.areaId
-              }
-            },
+            /**
+             * Relations
+             */
             // Connect or create relation for category
             category: {
               connectOrCreate: {
-                where: {
-                  slug: antique.categoryId
-                },
-                create: {
-                  title: antique.category,
-                  slug: antique.categoryId
-                }
+                where: { slug: antique.categoryId },
+                create: { title: antique.category, slug: antique.categoryId }
               }
             },
+            // Connect or create relation for area
+            ...(!isEmpty(antique.areaId) && { area: { connect: { slug: antique.areaId } } }),
             // Connect or create relation for room
-            room: {
-              connectOrCreate: {
-                where: {
-                  slug: antique.roomId
-                },
-                create: {
-                  title: antique.room,
-                  slug: antique.roomId,
-                  roomNo: antique.room,
-                  areaId: antique.areaId,
+            ...(!isEmpty(antique.areaId) && !isEmpty(antique.roomId) && {
+              room: {
+                connectOrCreate: {
+                  where: { slug: antique.roomId },
+                  create: {
+                    title: antique.room,
+                    slug: antique.roomId,
+                    roomNo: antique.room,
+                    areaId: antique.areaId,
+                    categories: {
+                      connectOrCreate: {
+                        where: { slug: antique.categoryId },
+                        create: { title: antique.category, slug: antique.categoryId },
+                      },
+                    },
+                  }
                 }
               }
-            }
+            }),
           },
           include: {
             area: true,
             category: true,
             room: true
           }
-        } as any);
+        })
         return onCreate
       } catch (err) {
-        console.error('Error caught:', { err, antique });
+        console.error('Error caught at onSeed:', { err, antique });
       }
     })
 
     return NextResponse.json(onSeed, { status: 200 })
   } catch (error) {
-    console.error('Error', error)
+    console.error('Error caught at sync route:', error)
     return NextResponse.json({ message: "Error", error }, { status: 500 })
   }
 }

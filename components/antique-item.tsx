@@ -31,6 +31,7 @@ const AntiqueItem = ({
   depth,
   area,
   room,
+  item,
 }: AntiqueItemProps) => {
     return (
         <Sheet>

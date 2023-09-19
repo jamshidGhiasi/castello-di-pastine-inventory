@@ -34,6 +34,7 @@ const SearchPage = async (props: SearchPageProps) => {
           {antiques?.map((antique: Antique) =>
             <div key={antique.id} className="bg-white flex flex-col  items-center justify-center rounded-md overflow-hidden h-[150px]">
               <AntiqueItem
+                item={antique}
                 qr=""
                 description={antique.description}
                 image={[
