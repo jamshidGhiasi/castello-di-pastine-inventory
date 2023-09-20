@@ -1,4 +1,4 @@
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 
 const FloorPlans = async () => {
     return (
@@ -16,7 +16,7 @@ const FloorPlans = async () => {
                         <span>- Global site search</span>
                         <span>- Carousel of floor plans</span>
                         <span>- Bottom Navigation</span>
-                       
+
                     </p>
                 </div>
         </Layout>

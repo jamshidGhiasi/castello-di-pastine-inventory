@@ -1,5 +1,5 @@
 'use client';
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 import { use, useEffect, useRef, useState } from "react";
 import { convertInputToAntiqueRange } from "@/lib/utils"
 import { Input } from "@/components/ui/input";
@@ -77,7 +77,7 @@ const PrintAntiques = () => {
                         <Img src={`/antiques/image${antique?.itemNo.replace('0', '')}.png`} />
                         <h3>ITEM NO</h3>
                         <p className="font-bold">{antique?.itemNo}</p>
-                        
+
                         <p className="page-description">{antique?.description}</p>
                         <p className="font-bold">DIMENSIONS:</p>
                         <p className="mb-4">H:{antique?.height} | W:{antique?.height} | D:{antique?.depth}</p>

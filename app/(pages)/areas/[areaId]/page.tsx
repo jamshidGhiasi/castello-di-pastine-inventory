@@ -1,5 +1,5 @@
 import SelectDemo from '@/components/area-change';
-import Layout from '@/components/layout.tsx/layout'
+import Layout from '@/components/layout/layout'
 import RoomItem from '@/components/room-item';
 import { ScrollArea } from "@/components/ui/scroll-area"
 

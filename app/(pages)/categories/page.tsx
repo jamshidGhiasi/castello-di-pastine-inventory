@@ -1,5 +1,5 @@
 import CategoryItem from "@/components/category-item";
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 
 export const dynamic = 'force-dynamic'
 

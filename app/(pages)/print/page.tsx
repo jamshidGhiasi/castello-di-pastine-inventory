@@ -1,6 +1,6 @@
 'use client'
 import BottomNavigation from "@/components/bottom-navigation";
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LayoutList } from "lucide-react";

@@ -1,4 +1,4 @@
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 import AntiqueItem from "@/components/antique-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -27,7 +27,6 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                                             `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
                                         ]
                                     }
-                                    qr=""
                                     itemNo={antique.itemNo}
                                     height={antique.height}
                                     width={antique.white}

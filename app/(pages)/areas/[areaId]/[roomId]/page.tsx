@@ -1,6 +1,6 @@
 import AntiqueItem from "@/components/antique-item";
 import SelectDemo from "@/components/area-change";
-import Layout from "@/components/layout.tsx/layout";
+import Layout from "@/components/layout/layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 const Room = async ({ params }: { params: { areaId: string, roomId: string } }) => {
     const { areaId, roomId } = params;
@@ -11,14 +11,14 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
     return (
         <Layout>
 
-           
+
                 <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                     {antiques &&
                         antiques.map((antique: any) =>
                         (
-                           
+
                                 <AntiqueItem
-                                key={antique.id}
+                                    key={antique.id}
                                     description={antique.description}
                                     image={
                                         [
@@ -27,7 +27,6 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                                             `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
                                         ]
                                     }
-                                    qr=""
                                     itemNo={antique.itemNo}
                                     height={antique.height}
                                     width={antique.white}
@@ -35,12 +34,12 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                                     area={areaId}
                                     room={roomId}
                                 />
-                          
+
                         )
                         )
                     }
                 </div>
-  
+
         </Layout>
     )
 }
