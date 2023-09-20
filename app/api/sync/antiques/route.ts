@@ -133,3 +133,4 @@ export const GET = async (request: NextRequest) => {
     return NextResponse.json({ message: "Error", error }, { status: 500 })
   }
 }
+
