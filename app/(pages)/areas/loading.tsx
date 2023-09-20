@@ -1,18 +1,15 @@
 import Layout from "@/components/layout/layout"
 import { Skeleton } from "@/components/ui/skeleton"
-
+import { Loader2 } from "lucide-react"
 const AreasPageLoading = () => {
   return (
     <Layout>
-          <div className="flex items-center space-x-4">
-      <Skeleton className="h-12 w-12 rounded-full" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-[250px]" />
-        <Skeleton className="h-4 w-[200px]" />
+      <div className="flex flex-col w-full items-center justify-center   h-[50vh] max-h-full">
+
+        Loading Areas...
+        <Loader2 className="mr-2 h-24 w-24 animate-spin" />
       </div>
-    </div>
     </Layout>
   )
 }
-
 export default AreasPageLoading

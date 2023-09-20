@@ -4,10 +4,10 @@ import HomeNavigation from '@/components/home-navigations'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 z-10  relative">
+    <main className="flex min-h-screen flex-col items-center justify-between p-6 z-10 relative">
 
 
-      <div className="relative flex place-items-center mt-auto mb-auto ">
+      <div className="relative flex grow">
         <Image
           className=" relative"
           src="/castello-di-pastine-logo.svg"
@@ -19,7 +19,7 @@ export default function Home() {
       </div>
 
       
-        <HomeNavigation />
+        <HomeNavigation navStyles='flex flex-col justify-between grow' />
      
     </main>
   )

@@ -14,13 +14,23 @@ export interface AdminAntiquesDataTableProps {
 export const antiquesAdminDataTableColumns: ColumnDef<AntiqueFromGoogleSheets>[] = [
   // Attributes
   { accessorKey: 'itemNo', header: 'Item No' },
-  { accessorKey: 'description', header: 'Description' },
+  {
+    accessorKey: 'description', header: 'Description',
+    cell: ({ row }) => {
+
+      return <div className='w-64'><p className=' text-xs truncate hover:text-clip'>{row.getValue('description')}</p></div>
+    }
+
+  },
   { accessorKey: 'lot', header: 'Lot' },
   { accessorKey: 'warehouseLocation', header: 'Warehouse Location' },
   // Relations
   { accessorKey: 'room', header: 'Room' },
+  { accessorKey: 'roomId', header: 'Room Id' },
   { accessorKey: 'area', header: 'Area' },
+  { accessorKey: 'areaId', header: 'Area Id' },
   { accessorKey: 'category', header: 'Category' },
+  { accessorKey: 'categoryId', header: 'Category Id' },
 ]
 
 const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) => {
@@ -43,7 +53,7 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
         toast.success(`Successfully synced ${syncedItems.length} records to database!`);
       } catch (err) {
         // Set error state
-      	console.error('Error caught at syncDatabase()', err)
+        console.error('Error caught at syncDatabase()', err)
         toast.error('Something went wrong while syncing database, please try again.');
       } finally {
         setShouldSyncDatabase(false)

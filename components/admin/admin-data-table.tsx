@@ -121,9 +121,9 @@ export default function AdminDataTable<TData, TValue>({
       </div>
 
       {/* Table */}
-      <div className="rounded-md border max-h-[50vh] overflow-y-scroll">
+      <div className="rounded-md border max-h-[50vh] overflow-y-scroll ">
         <Table>
-          <TableHeader className=" sticky top-0 bg-neutral-900">
+          <TableHeader className=" bg-neutral-900">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -141,15 +141,16 @@ export default function AdminDataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className=" bg-stone-900">
+          <TableBody className=" bg-stone-900 [&>*:nth-child(odd)]:bg-slate-700">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className=""
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell className="text-xs " key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
