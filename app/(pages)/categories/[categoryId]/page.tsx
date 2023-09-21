@@ -5,6 +5,9 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import fetchAntiques from "@/utils/fetchAntiques";
 import fetchAntiquesByCategory from "@/utils/fetchAntiquesByCategory";
+
+export const dynamic = 'force-dynamic'
+
 const Category = async ({ params }: { params: { categoryId: string } }) => {
     const { categoryId } = params;
     const antiques = await fetchAntiquesByCategory(categoryId)

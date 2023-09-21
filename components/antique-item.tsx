@@ -30,7 +30,7 @@ const AntiqueItem = ({
   room,
 }: AntiqueItemProps) => {
    
-    const side  = (window && window.innerWidth) > 768 ? "right" : "bottom" 
+    
     return (
         <Sheet>
             <SheetTrigger asChild >
@@ -44,7 +44,7 @@ const AntiqueItem = ({
                 </button>
             </SheetTrigger>
 
-            <SheetContent  side={side} className="h-[80vh] md:h-full ">
+            <SheetContent  side={"bottom"} className="h-[80vh]">
                 <div className='mt-4'>
                     <Img
                         src={image}

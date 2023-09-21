@@ -5,6 +5,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import fetchAntiques from "@/utils/fetchAntiques";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+
+export const dynamic = 'force-dynamic'
+
 const Room = async ({ params }: { params: { areaId: string, roomId: string } }) => {
     const { areaId, roomId } = params;
     const antiques = await fetchAntiques(areaId, roomId)

@@ -4,6 +4,8 @@ import RoomItem from '@/components/room-item';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import fetchRooms from '@/utils/fetchRooms';
 
+export const dynamic = 'force-dynamic'
+
 const Area = async ({ params }: { params: { areaId: string } }) => {
     const { areaId } = params;
     const area = await fetchRooms(areaId)

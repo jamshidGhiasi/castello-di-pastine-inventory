@@ -2,6 +2,8 @@ import AntiqueItem from "@/components/antique-item";
 import Layout from "@/components/layout/layout";
 import fetchAntiquesWithUnassignedArea from "@/utils/fetchAntiquesWithUnassignedArea";
 
+export const dynamic = 'force-dynamic'
+
 const UnassignedAreaPage = async () => {
     const antiques = await fetchAntiquesWithUnassignedArea()
     return (
