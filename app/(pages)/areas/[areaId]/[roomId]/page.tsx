@@ -2,17 +2,22 @@ import AntiqueItem from "@/components/antique-item";
 import SelectDemo from "@/components/area-change";
 import Layout from "@/components/layout/layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import fetchAntiques from "@/utils/fetchAntiques";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 const Room = async ({ params }: { params: { areaId: string, roomId: string } }) => {
     const { areaId, roomId } = params;
-    const res = await fetch(`${process.env.API_BASE_URL}/areas/${areaId}/${roomId}`, { cache: 'no-store' });
-    const antiques = await res.json()
+    const antiques = await fetchAntiques(areaId, roomId)
 
 
     return (
-        <Layout>
+        <Layout>    
 
-
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
+                <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto mb-8">
+                    <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
+                    Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g,' ')}</span>
+                </Link>
+                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full">
                     {antiques &&
                         antiques.map((antique: any) =>
                         (

@@ -21,7 +21,7 @@ const Areas = async () => {
             )
           else if (area.slug === 'unassigned') {
             return (
-              <AreaItem key={area.id} title={area.title} slug={'/unassigned'} count={area._count.antiques} />
+              <AreaItem key={area.id} title={area.title} slug={area.slug} count={area._count.antiques} />
             )
 
           }

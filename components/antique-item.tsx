@@ -11,7 +11,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { Antique } from "@prisma/client"
-
+import { cva, type VariantProps } from "class-variance-authority"
 export interface AntiqueItemProps extends Partial<Antique> {
   image: string[]
   itemNo: string
@@ -29,6 +29,8 @@ const AntiqueItem = ({
   area,
   room,
 }: AntiqueItemProps) => {
+   
+    const side  = (window && window.innerWidth) > 768 ? "right" : "bottom" 
     return (
         <Sheet>
             <SheetTrigger asChild >
@@ -42,7 +44,7 @@ const AntiqueItem = ({
                 </button>
             </SheetTrigger>
 
-            <SheetContent side={"bottom"} className="h-[80vh] ">
+            <SheetContent  side={side} className="h-[80vh] md:h-full ">
                 <div className='mt-4'>
                     <Img
                         src={image}

@@ -1,15 +1,17 @@
 import CategoryItem from "@/components/category-item";
 import Layout from "@/components/layout/layout";
+import fetchCategories from "@/utils/fetchCategories";
 
 export const dynamic = 'force-dynamic'
 
 const Categories = async () => {
-    const res = await fetch(`${process.env.API_BASE_URL}/categories`, { cache: 'no-store' });
-    const categories = res.status === 200 ? await res.json() : []
+
+    const categories = await fetchCategories();
+
     return (
         <Layout>
-            <div>
-                {categories.map((area: any) => (
+             <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full '>
+                {categories && categories.map((area: any) => (
                     <CategoryItem key={area.id} title={area.title} slug={area.slug} count={area._count.antiques} />
                 ))}
             </div>

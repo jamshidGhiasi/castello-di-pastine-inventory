@@ -31,6 +31,7 @@ export function SelectDemo({areaId}: {areaId: string}) {
           <SelectItem value="villa-2nd-floor">Villa 2nd Floor</SelectItem>
           <SelectItem value="colonica">Colonica</SelectItem>
           <SelectItem value="other-rooms">Other Rooms</SelectItem>
+          <SelectItem value="unassigned">Unassigned</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

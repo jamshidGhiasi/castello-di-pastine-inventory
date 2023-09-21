@@ -1,50 +1,45 @@
 import Layout from "@/components/layout/layout";
 import AntiqueItem from "@/components/antique-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import fetchAntiques from "@/utils/fetchAntiques";
+import fetchAntiquesByCategory from "@/utils/fetchAntiquesByCategory";
 const Category = async ({ params }: { params: { categoryId: string } }) => {
     const { categoryId } = params;
-    const res = await fetch(`${process.env.API_BASE_URL}/categories/${categoryId}`, { cache: 'no-store' });
-    const antiques = await res.json()
+    const antiques = await fetchAntiquesByCategory(categoryId)
     return (
         <Layout>
-
-            <h2 className='mb-2'>Change room</h2>
-
-            <h2 className=' my-4'>Select an item</h2>
-            <ScrollArea className='h-[60vh] w-[90vw]'>
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 content-stretch">
-                    {antiques &&
-                        antiques.map((antique: any) =>
-                        (
-                            <div key={antique.id} className="bg-white flex flex-col  items-center justify-center rounded-md overflow-hidden h-[150px]">
-                                <AntiqueItem
-                                    description={antique.description}
-                                    image={
-                                        [
-                                            `/antiques/image${antique.itemNo.replace('0', '')}.png`,
-                                            `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
-                                            `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
-                                        ]
-                                    }
-                                    itemNo={antique.itemNo}
-                                    height={antique.height}
-                                    width={antique.white}
-                                    depth={antique.depth}
-                                    area={antique.areaId}
-                                    room={antique.roomId}
-                                />
-                            </div>
-                        )
-                        )
-                    }
-                </div>
-            </ScrollArea>
+            <Link href={`/categories`} className="flex justify-self-start mr-auto mb-8">
+                <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
+                Back to Categories
+            </Link>
+            <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full">
+                {antiques &&
+                    antiques.map((antique: any) =>
+                    (
+                        <AntiqueItem
+                            key={antique.id}
+                            description={antique.description}
+                            image={
+                                [
+                                    `/antiques/image${antique.itemNo.replace('0', '')}.png`,
+                                    `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
+                                    `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
+                                ]
+                            }
+                            itemNo={antique.itemNo}
+                            height={antique.height}
+                            width={antique.white}
+                            depth={antique.depth}
+                            area={antique.areaId}
+                            room={antique.roomId}
+                        />
+                    )
+                    )
+                }
+            </div>
         </Layout>
-
-
-
     )
 }
-
 export default Category;
