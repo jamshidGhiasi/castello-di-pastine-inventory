@@ -19,6 +19,7 @@ const fetchGoogleSheetsData = (accessToken?: string) => async (getValuesParams: 
       headerRow.forEach((header, index) => { rowData[header] = row[index] || '' });
       return rowData;
     });
+    console.log('dataWithHeaders', dataWithHeaders)
     return { data: dataWithHeaders }
   } catch (error) {
     return { data: [] }

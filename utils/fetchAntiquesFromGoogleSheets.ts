@@ -7,7 +7,7 @@ import fetchGoogleSheetsData from "@/utils/fetchGoogleSheetsData";
 const fetchAntiquesFromGoogleSheets = async () => {
   const accessToken = await fetchAccessTokenFromServer()
   const antiques = await fetchGoogleSheetsData(accessToken)({
-    spreadsheetId: '1uFMtKL9_qbB80G3_Poq22ybtpVHbT94gOpHlhhxHlrg',
+    spreadsheetId: '1zNyWS5goKLzE__HugrFspa4pm3f77WsKpvsvdxr0wsc',
     range: 'INVENTORY',
   })
   return antiques ? JSON.parse(JSON.stringify(antiques))?.data : []
