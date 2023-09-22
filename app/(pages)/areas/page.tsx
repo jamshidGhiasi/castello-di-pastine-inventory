@@ -1,5 +1,6 @@
 import AreaItem from '@/components/area-item';
 import Layout from '@/components/layout/layout'
+import { ScrollArea } from '@/components/ui/scroll-area';
 import fetchAreas from '@/utils/fetchAreas';
 
 
@@ -11,8 +12,8 @@ const Areas = async () => {
 
   return (
     <Layout>
-
-      <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full '>
+      <ScrollArea className='h-[calc(100vh-170px)] '>
+      <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full  mb-[110px] '>
         {!areas && <div>Error while getting Areas</div>}
         {areas && areas.map((area: any) => {
           if (area.slug !== 'unassigned')
@@ -27,6 +28,7 @@ const Areas = async () => {
           }
         })}
       </div>
+        </ScrollArea>
 
     </Layout>
   )

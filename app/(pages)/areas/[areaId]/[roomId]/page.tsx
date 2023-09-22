@@ -16,11 +16,12 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
     return (
         <Layout>    
 
-                <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto mb-8">
+                <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto mb-4">
                     <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
                     Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g,' ')}</span>
                 </Link>
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full">
+                <ScrollArea className='h-[calc(100vh-200px)]'>
+                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full mb-[100px]">
                     {antiques &&
                         antiques.map((antique: any) =>
                         (
@@ -47,6 +48,7 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                         )
                     }
                 </div>
+                </ScrollArea>
 
         </Layout>
     )

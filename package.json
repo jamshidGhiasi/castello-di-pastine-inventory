@@ -25,6 +25,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "aws-cdk-lib": "^2.96.2",
     "bluebird": "^3.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

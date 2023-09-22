@@ -19,7 +19,7 @@ export const RoomItem = ({ title, areaId, slug, count, roomNumber }: { title: st
                 </div>
             }
             <div className="flex flex-col items-start justify-center mr-auto text-left">
-                <span className="text-xs sm:text-sm font-bold text-white group-hover:text-black">
+                <span className="text-sm font-bold text-white group-hover:text-black">
                     {title}
                 </span>
             </div>

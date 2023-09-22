@@ -20,7 +20,7 @@ export function SelectDemo({areaId}: {areaId: string}) {
   }
   return (
     <Select value={areaId} onValueChange={handleAreaChange}>
-      <SelectTrigger className=" w-full lg:w-4/12 p-6 mb-6 mr-auto rounded-full">
+      <SelectTrigger className=" lg:w-4/12  mb-2 mr-auto  text-md">
         <SelectValue placeholder="Select an area" />
       </SelectTrigger>
       <SelectContent  >

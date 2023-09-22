@@ -15,7 +15,7 @@ const SearchBar = () => {
     }
     return (
         <form
-            className="flex justify-center items-center w-full my-8"
+            className="flex justify-center items-center w-full mt-8 mb-4"
             onSubmit={onSearch}
         >
             <Input
