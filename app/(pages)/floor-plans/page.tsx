@@ -1,25 +1,88 @@
-import Layout from "@/components/layout/layout";
+'use client'
 
-const FloorPlans = async () => {
+import Layout from "@/components/layout/layout";
+import 'keen-slider/keen-slider.min.css'
+import KeenSlider from 'keen-slider'
+import { useKeenSlider } from 'keen-slider/react' // import from 'keen-slider/react.es' for to get an ES module
+import { Img } from "react-image";
+import { useState } from "react";
+
+const images = [
+    "https://res.cloudinary.com/ifeomaimoh/image/upload/v1652345767/demo_image2.jpg",
+    "https://res.cloudinary.com/ifeomaimoh/image/upload/v1652366604/demo_image5.jpg",
+    "https://res.cloudinary.com/ifeomaimoh/image/upload/v1652345874/demo_image1.jpg",
+];
+
+const FloorPlans = () => {
+    const [currentSlide, setCurrentSlide] = useState(0)
+    const [loaded, setLoaded] = useState(false)
+    const [sliderRef, instanceRef] = useKeenSlider({
+        initial: 0,
+        slideChanged(slider) {
+            setCurrentSlide(slider.track.details.rel)
+        },
+        created() {
+            setLoaded(true)
+        },
+    })
+
+    function Arrow(props: {
+        disabled: boolean
+        left?: boolean
+        onClick: (e: any) => void
+      }) {
+        const disabeld = props.disabled ? " arrow--disabled" : ""
+        return (
+          <svg
+            onClick={props.onClick}
+            className={`arrow ${
+              props.left ? "arrow--left" : "arrow--right"
+            } ${disabeld}`}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            {props.left && (
+              <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+            )}
+            {!props.left && (
+              <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+            )}
+          </svg>
+        )
+      }
+      
+
     return (
         <Layout>
+           
+                <div ref={sliderRef} className="keen-slider">
+                    <div className="keen-slider__slide">
+                        <Img src={'/Villa-Ground-Floor.jpg'} />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <Img src={'/Villa-Second-Floor.jpg'} />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <Img src={'/VILLA-GF-Furniture-Layout.jpg'} />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <Img src={'/Villa-First-Floor.jpg'} />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <Img src={'/VILLA-1F-Furniture-Layout.jpg'} />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <Img src={'/VILLA-2F-Furniture-Layout.jpg'} />
+                    </div>
 
-
-                <div>
-                    <h1 className=" mb-4">
-                        This is the <code className=" bg-slate-400 p-1 rounded-sm">/floor-plans</code> and is public and shows images of floor plans
-                    </h1>
-
-                    <h2 className="mb-2 text-cyan-500">Components</h2>
-                    <p className=" left-0 top-0 flex flex-col w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-                        <span>- Logo</span>
-                        <span>- Global site search</span>
-                        <span>- Carousel of floor plans</span>
-                        <span>- Bottom Navigation</span>
-
-                    </p>
                 </div>
-        </Layout>
+ 
+      
+
+
+
+
+        </Layout >
 
 
     )

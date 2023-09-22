@@ -29,7 +29,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#273731] via-[#1f2c27] to-[#111815]">
+      <body className="max-h-[100vh] overflow-auto bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#273731] via-[#1f2c27] to-[#111815]">
         <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <Toaster />

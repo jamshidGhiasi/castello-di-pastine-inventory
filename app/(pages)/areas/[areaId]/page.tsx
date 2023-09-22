@@ -18,7 +18,7 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
             <SelectDemo areaId={areaId as string} />
             {!area && <div>oops! It looks like there are not data for {areaId} yet. </div>}
 
-            <ScrollArea className='h-[calc(100vh-200px)]'>
+            <ScrollArea className='w-full h-[calc(100vh-200px)]'>
 
             <div className=' grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 mb-[110px] w-full '>
 

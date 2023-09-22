@@ -14,41 +14,41 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
 
 
     return (
-        <Layout>    
+        <Layout>
 
-                <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto mb-4">
-                    <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
-                    Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g,' ')}</span>
-                </Link>
-                <ScrollArea className='h-[calc(100vh-200px)]'>
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full mb-[100px]">
+            <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto mb-4">
+                <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
+                Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g, ' ')}</span>
+            </Link>
+            <ScrollArea className='w-full h-[calc(100vh-200px)]'>
+                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full mb-[110px] sm:mb-[180px]">
                     {antiques &&
                         antiques.map((antique: any) =>
                         (
 
-                                <AntiqueItem
-                                    key={antique.id}
-                                    description={antique.description}
-                                    image={
-                                        [
-                                            `/antiques/image${antique.itemNo.replace('0', '')}.png`,
-                                            `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
-                                            `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
-                                        ]
-                                    }
-                                    itemNo={antique.itemNo}
-                                    height={antique.height}
-                                    width={antique.white}
-                                    depth={antique.depth}
-                                    area={areaId}
-                                    room={roomId}
-                                />
+                            <AntiqueItem
+                                key={antique.id}
+                                description={antique.description}
+                                image={
+                                    [
+                                        `/antiques/image${antique.itemNo.replace('0', '')}.png`,
+                                        `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
+                                        `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
+                                    ]
+                                }
+                                itemNo={antique.itemNo}
+                                height={antique.height}
+                                width={antique.white}
+                                depth={antique.depth}
+                                area={areaId}
+                                room={roomId}
+                            />
 
                         )
                         )
                     }
                 </div>
-                </ScrollArea>
+            </ScrollArea>
 
         </Layout>
     )

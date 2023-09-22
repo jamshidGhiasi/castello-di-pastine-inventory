@@ -13,11 +13,12 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
     const antiques = await fetchAntiquesByCategory(categoryId)
     return (
         <Layout>
-            <Link href={`/categories`} className="flex justify-self-start mr-auto mb-8">
+            <Link href={`/categories`} className="flex justify-self-start mr-auto mb-4">
                 <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
                 Back to Categories
             </Link>
-            <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full">
+            <ScrollArea className='w-full h-[calc(100vh-200px)]'>
+            <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full mb-[110px] sm:mb-[180px]">
                 {antiques &&
                     antiques.map((antique: any) =>
                     (
@@ -42,6 +43,7 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                     )
                 }
             </div>
+            </ScrollArea>
         </Layout>
     )
 }
