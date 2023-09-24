@@ -18,15 +18,15 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
             <SelectDemo areaId={areaId as string} />
             {!area && <div>oops! It looks like there are not data for {areaId} yet. </div>}
 
-            <ScrollArea className='w-full h-[calc(100vh-200px)]'>
+           
 
-            <div className=' grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 mb-[110px] w-full '>
+            <div className=' grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3  w-full '>
 
                 {area && area.rooms.map((room: any) => (
                     <RoomItem key={room.id} title={room.title} slug={room.slug} count={room._count.antiques} areaId={areaId} roomNumber={room.title.match(/^(\d+).*/)[1]} />
                 ))}
             </div>
-            </ScrollArea>
+
 
         </Layout>
 

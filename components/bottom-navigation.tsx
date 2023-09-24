@@ -7,8 +7,10 @@ const BottomNavigation = () => {
     const router = useRouter();
     const pathname = usePathname()
 
+    // backdrop-blur-2xl
+
     return (
-        <div className="fixed bottom-0 sm:bottom-10 flex items-center justify-between w-full  left-1/2 -translate-x-1/2  sm:w-auto  backdrop-blur-2xl dark:border-neutral-800 dark:bg-neutral-900/30  border border-gray-50 p-0 sm:p-4 sm:rounded-lg z-10">
+        <div className="fixed shadow-lg bottom-0 sm:bottom-10 flex items-center justify-between w-full  left-1/2 -translate-x-1/2  sm:w-auto  bg-white   p-0 sm:p-4 sm:rounded-lg z-10 border-t border-t-zinc-200">
             <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24 mx-1 ml-0    hover:bg-gray-500/50   bg-transparent  ${pathname.indexOf("/areas") != -1 ? "bg-white/20" : ""}`} onClick={() => router.push('/areas')} >
                 <Blocks className=" w-6 h-9 mb-1" />
                 <span>Areas</span>

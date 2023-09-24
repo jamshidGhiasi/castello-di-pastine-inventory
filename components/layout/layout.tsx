@@ -9,12 +9,15 @@ const Layout = ({
     children: ReactNode
 }) => {
     return (
-        <main className="flex  flex-col items-center justify-between h-[100vh] p-4 sm:p-24">
+        <main className="flex  flex-col items-center justify-between min-h-screen ">
             <div className=" z-10 max-w-5xl w-full items-center justify-between border-yellow-400 lg:flex lg:flex-col ">
-                <TopLogo />
+             
                 <SearchBar />
                 
+                <div className="p-4">
+
                 {children}
+                </div>
                 
                 <BottomNavigation />
             </div>

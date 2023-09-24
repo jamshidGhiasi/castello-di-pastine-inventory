@@ -8,14 +8,13 @@ export const AreaItem = ({ title, slug, count }: { title: string, slug: string, 
         router.push(`/areas/${slug}`)
     }
     return (
-        <Button className="group w-full py-4 sm:py-4 flex justify-between  items-center rounded-full  h-auto bg-white/40" onClick={handleAreaItemClick}>
-            <div className="h-12 w-12 sm:w-12 sm:h-12 flex items-center justify-center rounded-full mr-4 bg-white group-hover:bg-[#a8c2b8]">
-            {count}
-            </div>
-            <span className="text-lg font-bold">
-                    {title.toUpperCase()}
-                </span>
-            <div className="h-12 w-12 sm:w-12 sm:h-12 flex items-center justify-center rounded-full  bg-[#111815] text-white ml-auto group-hover:text-[#a8c2b8]">
+        <Button className="group w-full bg-transparent text-black flex justify-between   items-center  py-6 px-2 bg-white shadow-sm rounded-full  " onClick={handleAreaItemClick}>
+            <div className="mr-2 p-2  rounded-full w-9 h-9 flex items-center justify-center"><span className=" text-neutral-400">{count}</span></div>
+            <div className="flex flex-col">
+                   <p className="text-md">{title}</p>
+                   
+                </div>
+            <div className="flex items-center justify-center justify-self-end   ml-auto  text-black">
                 <ChevronRight />
             </div>
         </Button>

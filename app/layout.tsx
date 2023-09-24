@@ -15,7 +15,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Castello Di Pastine',
   description: 'Castello Di Pastine Inventory management system.',
-  icons: [{ rel: 'icon', url: Favicon.src }],
 }
 
 export default function RootLayout({
@@ -29,9 +28,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="max-h-screen overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#273731] via-[#1f2c27] to-[#111815]">
+      <head>
+      <link rel="icon" href="favicon.ico" />
+      </head>
+      <body className="bg-[#f3f2f0] pb-[60px] ">
         <AuthProvider session={session}>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="default" >
             <Toaster />
           
 
