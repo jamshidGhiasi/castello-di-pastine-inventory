@@ -20,8 +20,8 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                 <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
                 Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g, ' ')}</span>
             </Link>
-            <ScrollArea className='w-full h-[calc(100vh-200px)]'>
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full mb-[110px] sm:mb-[180px]">
+           
+                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full">
                     {antiques &&
                         antiques.map((antique: any) =>
                         (
@@ -48,7 +48,7 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                         )
                     }
                 </div>
-            </ScrollArea>
+     
 
         </Layout>
     )
