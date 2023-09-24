@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import TopLogo from "./layout/top-logo";
 import Image from "next/image";
+import Link from "next/link";
 const SearchBar = () => {
     const [searchQuery, setSearchQuery] = useState('')
     const router = useRouter()
@@ -16,22 +17,24 @@ const SearchBar = () => {
         console.log(encodedSearchQuery)
     }
     return (
-        <div className="sticky top-0  border-white w-full backdrop-blur-2xl  bg-white p-4 border-b shadow-sm ">
-            
+        <div className="sticky top-0 flex  border-white w-full backdrop-blur-2xl  bg-[#2d3e38] p-4 border-b shadow-sm ">
+            <Link href="/">
+            <div className="bg-[#2d3e38] ">
+                <Image src="/castello-di-pastine-icon.svg" className="mr-4" width={40} height={40} alt="" />
+            </div>
+            </Link>
         <form
             className="flex w-full max-w-sm items-center space-x-2 "
             onSubmit={onSearch}
         >
             <Input
                 type="text"
-                className=" h-[46px] bg-neutral-200 text-black rounded-full w-full  "
+                className=" h-[46px] bg-white text-black rounded-full w-full  "
                 placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
             />
-             <Button type="submit" variant="outline" size="icon" className=" h-[46px] w-[56px] rounded-full ">
-                <Search className=" " />
-             </Button>
+           
         </form>
         </div>
     )
