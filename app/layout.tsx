@@ -30,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
       <link rel="icon" href="favicon.ico" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </head>
       <body className="bg-[#f2f2f2] pb-[90px] ">
         <AuthProvider session={session}>
