@@ -11,10 +11,10 @@ const HomeNavigation = ({ navStyles = ''}) => {
     return (
         <div className={`${navStyles}`}>
             <div className="flex flex-col  mb-auto ">
-                <Button className=" bg-[#a8c2b8]  text-[#111815] text-lg mb-6 rounded-full px-6 py-7 w-64" onClick={() => router.push('/areas')} >
+                <Button className=" bg-transparent border border-[#aaaaaa] text-[#111815] text-lg mb-6 rounded-full px-6 py-7 w-64 hover:bg-[#fff] hover:shadow-lg transition-all duration-400 ease-out   " onClick={() => router.push('/areas')} >
                     Rooms and Areas
                 </Button>
-                <Button className=" bg-[#a8c2b8] text-[#111815] text-lg rounded-full px-6 py-7 w-64" onClick={() => router.push('/categories')} >
+                <Button className=" bg-transparent border border-[#aaaaaa] text-[#111815] text-lg mb-6 rounded-full px-6 py-7 w-64 hover:bg-[#fff] hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/categories')} >
                     Categories
                 </Button>
             </div>

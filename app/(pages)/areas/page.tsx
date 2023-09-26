@@ -13,7 +13,7 @@ const Areas = async () => {
   return (
     <Layout>
      
-      <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full  '>
+      <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full'>
         {!areas && <div>Error while getting Areas</div>}
         {areas && areas.map((area: any) => {
           if (area.slug !== 'unassigned')

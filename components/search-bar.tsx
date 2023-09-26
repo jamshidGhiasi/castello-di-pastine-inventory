@@ -1,7 +1,7 @@
 'use client'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Search } from "lucide-react";
+import { Search, SearchIcon } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import TopLogo from "./layout/top-logo";
@@ -24,7 +24,7 @@ const SearchBar = () => {
             </div>
             </Link>
         <form
-            className="flex w-full max-w-sm items-center space-x-2 "
+            className="relative flex w-full max-w-lg  items-center space-x-2 ml-auto  "
             onSubmit={onSearch}
         >
             <Input
@@ -34,6 +34,7 @@ const SearchBar = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
             />
+            <SearchIcon className=" absolute right-4 w-6 h-6 text-black" />
            
         </form>
         </div>

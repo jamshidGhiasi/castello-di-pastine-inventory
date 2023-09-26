@@ -31,7 +31,7 @@ export default function RootLayout({
       <head>
       <link rel="icon" href="favicon.ico" />
       </head>
-      <body className="bg-[#f3f2f0] pb-[90px] ">
+      <body className="bg-[#f2f2f2] pb-[90px] ">
         <AuthProvider session={session}>
           <ThemeProvider attribute="class" defaultTheme="default" >
             <Toaster />
