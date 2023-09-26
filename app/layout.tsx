@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <link rel="icon" href="favicon.ico" />
+      <link rel="icon" href="/favicon.ico" />
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </head>
       <body className="bg-[#f2f2f2] pb-[90px] ">
@@ -40,6 +40,7 @@ export default function RootLayout({
 
             {children}
           
+         
            
           </ThemeProvider>
         </AuthProvider>

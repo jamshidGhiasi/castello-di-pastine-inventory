@@ -1,5 +1,4 @@
 import Layout from "@/components/layout/layout"
-import { Skeleton } from "@/components/ui/skeleton"
 import { Loader2 } from "lucide-react"
 const AreasPageLoading = () => {
   return (

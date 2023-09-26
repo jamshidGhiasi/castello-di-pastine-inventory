@@ -1,41 +1,43 @@
 import prisma from "@/lib/prisma";
 
-const fetchAntiques = async (areaId: string, roomId: string) => {
+const searchAntiques = async (q:string) => {
     try {
         try {
 
             const area = await prisma.antique.findMany({
                 where: {
-                    AND: [
-                        {
-                            roomId: {
-                                equals: roomId
-                            }
+                    OR: [
+                      {
+                        description: {
+                          contains:q,
+                          mode: 'insensitive'
                         },
-                        {
-                            areaId: {
-                                equals: areaId
-                            }
+                      },
+                      {
+                        itemNo: {
+                          contains: q,
+                          mode: 'insensitive'
                         },
+                      },
                     ]
-                },
-                include: {
+                  },
+                  include: {
+                    area: {
+                      select: {
+                        title: true,
+                      },
+                    },
                     category: {
                         select: {
                             title: true,
-                        }
-                    },
-                    area: {
-                        select: {
-                            title: true,
-                        }
+                          },
                     },
                     room: {
                         select: {
                             title: true,
-                        }
-                    },
-                }
+                          },
+                    }
+                  },
 
             })
             .catch((error) =>  null )
@@ -53,4 +55,4 @@ const fetchAntiques = async (areaId: string, roomId: string) => {
     }
 }
 
-export default fetchAntiques;
+export default searchAntiques;

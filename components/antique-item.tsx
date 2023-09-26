@@ -1,5 +1,6 @@
 'use client'
 import { Img } from 'react-image'
+
 import {
     Sheet,
     SheetClose,
@@ -17,6 +18,7 @@ export interface AntiqueItemProps extends Partial<Antique> {
   itemNo: string
   area?: string | null
   room?: string | null
+  category?: string | null
 }
 
 const AntiqueItem = ({
@@ -28,20 +30,28 @@ const AntiqueItem = ({
   depth,
   area,
   room,
+  category
 }: AntiqueItemProps) => {
    
     
     return (
         <Sheet>
             <SheetTrigger asChild >
-                <button className='relative border  h-[150px] bg-white rounded-sm overflow-hidden' >
+                
+
+                <button className='group relative h-[150px] p-4 bg-white rounded-lg overflow-hidden shadow-md  hover:border-[#c4d5ce] hover:shadow-lg transition-all duration-300 ease-out' >
                     <Img
                         src={image}
                         alt={itemNo}
                         className='m-auto w-auto h-full'
                     />
-                    <span className='text-white text-md bg-gray-600 absolute left-0 bottom-0 w-5/12 py-2 rounded-tr-lg'>{itemNo}</span>
+                    
+                    <span className=' text-sm bg-[#ececec] group-hover:bg-[#c4d5ce]  absolute left-0 bottom-0 w-4/12 py-1 rounded-tr-lg z-10'>{itemNo}</span>
+                    <div className='absolute top-0 left-0 bottom-0 right-0 border-[4px] border-[#ececec] rounded-lg group-hover:border-[#c4d5ce]'></div>
                 </button>
+    
+                  
+            
             </SheetTrigger>
 
             <SheetContent  side={"bottom"} className="h-[80vh]">

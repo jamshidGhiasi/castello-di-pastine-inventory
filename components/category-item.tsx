@@ -10,15 +10,14 @@ export const CategoryItem = ({ title, slug, count }: { title: string, slug: stri
 
     }
     return (
-        <Button className="group w-full py-4 sm:py-4 flex justify-between  items-center rounded-full  h-auto bg-white/40 " onClick={handleAreaItemClick}>
-            <div className="h-12 w-12 sm:w-12 sm:h-12 flex items-center justify-center rounded-full mr-4 bg-white group-hover:bg-[#a8c2b8]">
-            {count}
+        <Button className="group w-full  text-black flex justify-between border   items-center  py-8 px-2 bg-white shadow-sm rounded-full hover:bg-[#ebf1ef] hover:shadow-lg  transition-all duration-400 ease-out hover:border hover:border-[#c4d5ce] " onClick={handleAreaItemClick}>
+            <div className="mr-2 p-2  rounded-full w-9 h-9 flex items-center justify-center bg-[#dadada] text-black mx-2 text-xs group-hover:text-white group-hover:bg-black transition-all duration-400 ease-out "><span className="text-xs" >{count}</span></div>
+            <div className="flex flex-col">
+                <p className="text-md">{title}</p>
+
             </div>
-            <span className="text-lg font-bold">
-                {title.toUpperCase()}
-                </span>
-            <div className="h-12 w-12 sm:w-12 sm:h-12 flex items-center justify-center rounded-full  bg-[#111815] text-white ml-auto group-hover:text-[#a8c2b8]">
-                <ChevronRight />
+            <div className="flex items-center justify-center justify-self-end  rounded-full   ml-auto mr-2 text-[#aaaaaa]  ">
+                <ChevronRight className="w-8 h-8" />
             </div>
         </Button>
     )

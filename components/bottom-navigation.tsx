@@ -10,23 +10,27 @@ const BottomNavigation = () => {
     // backdrop-blur-2xl
 
     return (
-        <div className="fixed shadow-lg bottom-0 sm:bottom-10 flex items-center justify-between w-full  left-1/2 -translate-x-1/2  sm:w-auto  bg-white   p-0 sm:p-4 sm:rounded-lg z-10 border-t border-t-zinc-200">
-            <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24 sm:mx-1 sm:ml-0    hover:bg-gray-500/50   bg-transparent  ${pathname.indexOf("/areas") != -1 ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/areas')} >
-                <Blocks className=" w-6 h-9 mb-1" />
-                <span>Areas</span>
-            </Button>
-            <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1  hover:bg-gray-500/50   bg-transparent  ${pathname.indexOf("/categories") != -1 ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/categories')} >
-                <LayoutList className="w-6 h-9 mb-1" />
-                <span>Categories</span>
-            </Button>
-            <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1  hover:bg-gray-500/50   bg-transparent  ${pathname == "/floor-plans" ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/floor-plans')} >
-                <Map className="w-6 h-9 mb-1" />
-                <span>Floor Plans</span>
-            </Button>
-            <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1 sm:mr-0  hover:bg-gray-500/50   bg-transparent  ${pathname == "/print" ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/print')} >
-                <Printer className="w-6 h-9 mb-1" />
-                <span>Print</span>
-            </Button>
+        <div>
+
+            <div className="fixed shadow-lg bottom-0 sm:bottom-4 flex items-center justify-between w-full  left-1/2 -translate-x-1/2  sm:w-auto  bg-white   p-0 sm:p-4 sm:rounded-lg z-20 border-t border-t-zinc-200">
+                <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24 sm:mx-1 sm:ml-0    hover:bg-gray-500/50   bg-transparent  ${pathname.indexOf("/areas") != -1 ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/areas')} >
+                    <Blocks className=" w-6 h-9 mb-1" />
+                    <span>Areas</span>
+                </Button>
+                <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1  hover:bg-gray-500/50   bg-transparent  ${pathname.indexOf("/categories") != -1 ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/categories')} >
+                    <LayoutList className="w-6 h-9 mb-1" />
+                    <span>Categories</span>
+                </Button>
+                <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1  hover:bg-gray-500/50   bg-transparent  ${pathname == "/floor-plans" ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/floor-plans')} >
+                    <Map className="w-6 h-9 mb-1" />
+                    <span>Floor Plans</span>
+                </Button>
+                <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1 sm:mr-0  hover:bg-gray-500/50   bg-transparent  ${pathname == "/print" ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/print')} >
+                    <Printer className="w-6 h-9 mb-1" />
+                    <span>Print</span>
+                </Button>
+            </div>
+             <div className='fixed hidden sm:block bottom-0 right-0 left-0 min-h-[10vh] h-max-[150px] bg-gradient-to-t from-[#f2f2f2] via-[#f2f2f2]/80 to-[#f2f2f2]/0 z-10'></div>
         </div>
     )
 }
