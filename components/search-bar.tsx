@@ -29,7 +29,7 @@ const SearchBar = () => {
         >
             <Input
                 type="text"
-                className=" h-[46px] bg-white text-black rounded-full w-full  "
+                className=" h-[46px] bg-white text-black rounded-full w-full text-[16px]   "
                 placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
