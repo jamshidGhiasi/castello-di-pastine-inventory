@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import fetchAntiques from "@/utils/fetchAntiques";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import AntiqueFromGoogleSheets from '@/types/Antique';
+import {AntiqueFromGoogleSheets} from '@/types/Antique';
 
 export const dynamic = 'force-dynamic'
 
