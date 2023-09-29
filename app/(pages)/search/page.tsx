@@ -20,12 +20,12 @@ const SearchPage = async (props: SearchPageProps) => {
 
   return (
     <Layout>
-     
+
       {antiques?.length !== 0 && <h4 className="font-bold text-lg mb-4">Found {antiques.length} items</h4>}
         <div className=" grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-6 mb-[300px] lg:mb-[150px]  ">
-          
-          {antiques?.map((antique: Antique) =>
-          
+
+          {antiques?.map((antique: Antique, i) =>
+
             <AntiqueItem
               key={antique.id}
               description={antique.description}
@@ -35,6 +35,8 @@ const SearchPage = async (props: SearchPageProps) => {
                 `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
               ]}
               itemNo={antique.itemNo}
+              prevItemNo={antiques[i - 1]?.itemNo}
+              nextItemNo={antiques[i + 1]?.itemNo}
               height={antique.height}
               width={antique.width}
               depth={antique.depth}
@@ -42,10 +44,10 @@ const SearchPage = async (props: SearchPageProps) => {
               room={antique.roomId}
               category={antique.categoryId}
             />
-          
+
           )}
         </div>
-  
+
     </Layout>
   )
 }

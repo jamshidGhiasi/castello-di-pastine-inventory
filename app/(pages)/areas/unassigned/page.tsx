@@ -10,7 +10,7 @@ const UnassignedAreaPage = async () => {
         <Layout>
             <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                     {antiques &&
-                        antiques.map((antique: any) =>
+                        antiques.map((antique: any, i) =>
                         (
 
                                 <AntiqueItem
@@ -24,6 +24,8 @@ const UnassignedAreaPage = async () => {
                                         ]
                                     }
                                     itemNo={antique.itemNo}
+                                    prevItemNo={antiques[i - 1]?.itemNo}
+                                    nextItemNo={antiques[i + 1]?.itemNo}
                                     height={antique.height}
                                     width={antique.white}
                                     depth={antique.depth}
