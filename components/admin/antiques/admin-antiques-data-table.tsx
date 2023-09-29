@@ -69,35 +69,41 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
     setIsSyncDatabaseLoading(true)
   }
 
-  const handleUploadImage = async () => {
+  const handleUploadImages = async () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
+    input.multiple = true;
     input.onchange = async () => {
-      const file = input.files?.[0];
-      if (!file) return
+      const { files } = input;
+      if (!files?.length) return
 
-      const antiqueId = prompt("Please enter the antique ID:", "");
-      if (!antiqueId) return
-
-      const filename = `antiques/image${antiqueId}.png`;
-
-      try {
+      const uploadPromises = Array.from(files).map((file) => {
+        const filename = `antiques/${file.name}`;
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("fileName", filename)
-        const response = await fetch("/api/upload", {
+        formData.append("fileName", filename);
+        return fetch("/api/upload", {
           method: "POST",
           body: formData,
           headers: { "Access-Control-Allow-Origin": "*" },
         });
-        const data = await response.json();
+      });
 
-        if (data.success) return toast.success('Successfully uploaded image to S3!');
-      } catch (err) {
-        console.log(err);
-        toast.error('Something went wrong while uploading, please try again.');
-      }
+      return toast.promise(
+        Promise.all(uploadPromises),
+        {
+          loading: 'Uploading...',
+          // @ts-ignore
+          success: async (responses) => {
+            const dataPromises = responses.map(response => response.json());
+            const dataResults = await Promise.all(dataPromises);
+            const successfulResults = dataResults.filter(dataResult => dataResult?.success)
+            return `Successfully uploaded ${successfulResults.length} images to S3!`
+          },
+          error: 'Something went wrong while uploading, please try again.',
+        }
+      );
     };
 
     // Trigger input
@@ -113,7 +119,7 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
         <AdminAntiquesDataTableExtraActions
           isSyncDatabaseLoading={isSyncDatabaseLoading}
           handleSyncDatabase={handleSyncDatabase}
-          handleUploadImage={handleUploadImage}
+          handleUploadImages={handleUploadImages}
         />
       }
     />
