@@ -6,8 +6,13 @@ const fetchRooms = async (areaId: string) => {
                 where: {
                     slug: areaId
                 },
+                
+
                 include: {
                     rooms: {
+                        orderBy: {
+                            roomNo: 'asc'
+                        },
                         include: {
                             antiques: true,
                             _count: {

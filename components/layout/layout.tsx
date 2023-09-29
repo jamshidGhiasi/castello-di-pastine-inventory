@@ -1,7 +1,7 @@
 import { ReactNode, Suspense } from "react"
-import BottomNavigation from "../bottom-navigation"
+import BottomNavigation from "./bottom-navigation"
 import TopLogo from "./top-logo"
-import SearchBar from "../search-bar"
+import SearchBar from "./search-bar"
 
 const Layout = ({
     children
@@ -14,7 +14,7 @@ const Layout = ({
              
                 <SearchBar />
                 
-                <div className="p-4 w-full  max-w-5xl ">
+                <div className=" w-full  max-w-5xl ">
 
                 {children}
                 </div>

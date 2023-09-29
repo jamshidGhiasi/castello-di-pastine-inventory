@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Search, SearchIcon } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import TopLogo from "./layout/top-logo";
+import TopLogo from "./top-logo";
 import Image from "next/image";
 import Link from "next/link";
 const SearchBar = () => {

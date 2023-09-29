@@ -1,5 +1,5 @@
 'use client'
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Blocks, Map, Printer } from "lucide-react"
 import { LayoutList } from "lucide-react"
 import {  usePathname, useRouter } from 'next/navigation'
@@ -25,7 +25,7 @@ const BottomNavigation = () => {
                     <Map className="w-6 h-9 mb-1" />
                     <span>Floor Plans</span>
                 </Button>
-                <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1 sm:mr-0  hover:bg-gray-500/50   bg-transparent  ${pathname == "/print" ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/print')} >
+                <Button variant="outline" className={`border-none sm:text-sm text rounded-none sm:rounded-md sm:p-2 flex flex-col items-center justify-center h-24 w-1/4  sm:h-24 sm:w-24  sm:mx-1 sm:mr-0  hover:bg-gray-500/50   bg-transparent  ${pathname.indexOf("/print") != -1  ? "bg-[#9cb9ae]" : ""}`} onClick={() => router.push('/print')} >
                     <Printer className="w-6 h-9 mb-1" />
                     <span>Print</span>
                 </Button>

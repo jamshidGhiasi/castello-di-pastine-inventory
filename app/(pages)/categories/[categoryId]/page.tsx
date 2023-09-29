@@ -1,5 +1,5 @@
 import Layout from "@/components/layout/layout";
-import AntiqueItem from "@/components/antique-item";
+import AntiqueItem from "@/components/antique/antique-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";

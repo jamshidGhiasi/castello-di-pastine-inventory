@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { mapSeries } from 'bluebird'
 import prisma from "@/lib/prisma";
 import fetchAntiquesFromGoogleSheets from "@/utils/fetchAntiquesFromGoogleSheets"
-import type { AntiqueFromGoogleSheets } from "@/types/Antique"
+import { AntiqueFromGoogleSheets } from "@/types/Antique"
 import { Area } from '@prisma/client'
 
 /**
