@@ -76,6 +76,6 @@ export const GET = async (req: NextRequest) => {
         return NextResponse.json(antiquesByDescOrItemNo)
     }
   } catch (error) {
-    return NextResponse.json( error , { status: 500 })
+    return NextResponse.json(error , { status: 500 })
   }
 }

@@ -7,8 +7,6 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth/auth-options";
 import UserAccount from "@/components/admin/admin-user-account";
 
-
-
 export const dynamic = 'force-dynamic'
 
 export const metadata = {

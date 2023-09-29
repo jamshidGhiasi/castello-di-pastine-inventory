@@ -8,11 +8,12 @@ import toast from 'react-hot-toast'
 
 export interface AdminAntiquesDataTableExtraActionsProps {
   handleSyncDatabase: () => void
+  handleUploadImages: () => void
   isSyncDatabaseLoading?: boolean
 }
 
 const AdminAntiquesDataTableExtraActions: React.FC<AdminAntiquesDataTableExtraActionsProps> = (props) => {
-  const { handleSyncDatabase, isSyncDatabaseLoading } = props
+  const { handleUploadImages, handleSyncDatabase, isSyncDatabaseLoading } = props
 
   const router = useRouter()
   const handleRefresh = () => {
@@ -22,6 +23,7 @@ const AdminAntiquesDataTableExtraActions: React.FC<AdminAntiquesDataTableExtraAc
 
   return (
     <div className="flex justify-between gap-1">
+      <Button onClick={handleUploadImages}>Upload Images</Button>
       <Button onClick={handleRefresh}>Sync Google Sheets</Button>
       <Button onClick={handleSyncDatabase} disabled={isSyncDatabaseLoading}>
         {isSyncDatabaseLoading ?
