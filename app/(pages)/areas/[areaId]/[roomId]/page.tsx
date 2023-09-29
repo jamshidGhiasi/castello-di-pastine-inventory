@@ -5,23 +5,27 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import fetchAntiques from "@/utils/fetchAntiques";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import AntiqueFromGoogleSheets from '@/types/Antique';
 
 export const dynamic = 'force-dynamic'
 
 const Room = async ({ params }: { params: { areaId: string, roomId: string } }) => {
     const { areaId, roomId } = params;
-    const antiques = await fetchAntiques(areaId, roomId)
+    const antiques = await fetchAntiques(areaId, roomId) 
 
 
     return (
         <Layout>
+            <div className='sticky top-[79px] bg-[#f2f2f2] backdrop-blur-sm  border-b py-2 px-4 mb-4 w-full flex items-center justify-between z-10'>
 
-            <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto mb-4">
+            <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto ">
                 <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
                 Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g, ' ')}</span>
             </Link>
-           
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full">
+            </div>
+               
+                
+                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0">
                     {antiques &&
                         antiques.map((antique: any) =>
                         (
