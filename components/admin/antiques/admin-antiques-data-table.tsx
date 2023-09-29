@@ -69,6 +69,41 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
     setIsSyncDatabaseLoading(true)
   }
 
+  const handleUploadImage = async () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return
+
+      const antiqueId = prompt("Please enter the antique ID:", "");
+      if (!antiqueId) return
+
+      const filename = `antiques-master/image${antiqueId}.png`;
+
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("fileName", filename)
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
+        const data = await response.json();
+
+        if (data.success) return toast.success('Successfully uploaded image to S3!');
+      } catch (err) {
+        console.log(err);
+        toast.error('Something went wrong while uploading, please try again.');
+      }
+    };
+
+    // Trigger input
+    input.click();
+  };
+
   return (
     <AdminDataTable
       columns={antiquesAdminDataTableColumns}
@@ -78,6 +113,7 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
         <AdminAntiquesDataTableExtraActions
           isSyncDatabaseLoading={isSyncDatabaseLoading}
           handleSyncDatabase={handleSyncDatabase}
+          handleUploadImage={handleUploadImage}
         />
       }
     />
