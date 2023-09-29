@@ -6,7 +6,7 @@ export const GET = async (req: NextRequest) => {
     const searchParams = url.searchParams;
     let range = searchParams.get('r');
     console.log(range);
-    if (!range) return null;
+    if (!range) return NextResponse.json({ message: 'Range Not Valid!'}, { status: 500 });
     let temp = []
     range = range.replace(/ /g, '');
     temp = range.split(',');

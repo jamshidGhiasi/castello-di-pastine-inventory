@@ -9,16 +9,36 @@ import QRCode from "react-qr-code";
 import { Button } from "@/components/ui/button";
 import toast from 'react-hot-toast'
 import { Loader2 } from "lucide-react";
+
+const pageStyle = `
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media all {
+    .pagebreak {
+      display: none;
+    }
+  }
+
+  @media print {
+    .pagebreak {
+      page-break-before: always;
+    }
+  }
+`;
+
 const PrintAntiques = () => {
-  const [antiques, setAntiques] = useState(null)
+  const [antiques, setAntiques] = useState<any[]>()
   const [loading, setLoading] = useState(false)
-  const [range, setRange] = useState<string>('')
+  const [range, setRange] = useState<string>()
   const componentRef = useRef(null);
   async function onSubmit(event: React.FormEvent) {
     event.preventDefault()
     var formData = new FormData(event.target as HTMLFormElement);
     setLoading(true)
-    setAntiques(null)
+    setAntiques
     try {
       const result = await fetch(`http://localhost:3000/api/print/antiques?r=${formData.get('range')}`)
       const data = await result.json();
@@ -26,7 +46,7 @@ const PrintAntiques = () => {
       setAntiques(data);
     } catch (error) {
       setLoading(false)
-      setAntiques(null)
+      setAntiques([])
       console.error(error);
     }
   }
@@ -50,7 +70,7 @@ const PrintAntiques = () => {
       </div>
       <div className="flex flex-col items-center justify-between px-4 sm:p-0">
 
-      {(antiques && antiques.length) && <ReactToPrint trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} /> }
+      {(antiques && antiques.length) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} /> }
       
       <div ref={componentRef}>
         {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
