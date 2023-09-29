@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import HomeNavigation from '@/components/home-navigations'
+import HomeNavigation from '@/components/home/home-navigations'
 
 export default function Home() {
   return (

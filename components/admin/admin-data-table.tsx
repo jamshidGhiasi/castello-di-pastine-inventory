@@ -37,6 +37,7 @@ export interface AdminDataTableProps<TData, TValue> {
 
 export default function AdminDataTable<TData, TValue>({
   columns,
+
   data,
   searchColumnAccessorKey: injectedSearchColumnAccessorKey,
   extraActions,
@@ -52,6 +53,9 @@ export default function AdminDataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
+    
+    
+    
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -60,11 +64,16 @@ export default function AdminDataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+
+    
+
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
+
+      
     },
   })
 
@@ -121,9 +130,9 @@ export default function AdminDataTable<TData, TValue>({
       </div>
 
       {/* Table */}
-      <div className="rounded-md border max-h-[50vh] overflow-y-scroll ">
-        <Table>
-          <TableHeader className=" bg-neutral-900">
+      <div className="relative rounded-md border max-h-[50vh] overflow-auto  shadow-lg  border-white ">
+        <Table className="relative"  >
+          <TableHeader className=" sticky top-0 bg-neutral-900">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -141,13 +150,14 @@ export default function AdminDataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className=" bg-stone-900 [&>*:nth-child(odd)]:bg-slate-700">
+          <TableBody className=" bg-stone-900   [&>*:nth-child(odd)]:bg-neutral-300 [&>*:nth-child(odd):hover]:hover:bg-neutral-100 cursor-pointer">
+            
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className=""
+                  className=" bg-neutral-200 hover:bg-neutral-100 cursor-pointer  "
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell className="text-xs " key={cell.id}>

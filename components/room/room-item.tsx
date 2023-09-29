@@ -1,6 +1,6 @@
 'use client'
 import { Angry, CaseUpper, Castle, ChevronRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 export const RoomItem = ({ title, areaId, slug, count, roomNumber }: { title: string, areaId: string, slug: string, count: string, roomNumber: string }) => {
     const router = useRouter();
