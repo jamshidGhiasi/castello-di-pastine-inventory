@@ -40,7 +40,7 @@ const PrintAntiques = () => {
     setLoading(true)
     setAntiques
     try {
-      const result = await fetch(`http://localhost:3000/api/print/antiques?r=${formData.get('range')}`)
+      const result = await fetch(`${process.env.API_BASE_URL}/print/antiques?r=${formData.get('range')}`)
       const data = await result.json();
       setLoading(false)
       setAntiques(data);
