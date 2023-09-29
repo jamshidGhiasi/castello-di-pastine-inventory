@@ -38,9 +38,9 @@ const PrintAntiques = () => {
     event.preventDefault()
     var formData = new FormData(event.target as HTMLFormElement);
     setLoading(true)
-    setAntiques
+    
     try {
-      const result = await fetch(`${process.env.API_BASE_URL}/print/antiques?r=${formData.get('range')}`)
+      const result = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/print/antiques?r=${formData.get('range')}`)
       const data = await result.json();
       setLoading(false)
       setAntiques(data);
