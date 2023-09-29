@@ -56,3 +56,25 @@
 
 }
 
+@media print {
+  html, body {
+    height: 100%; /* Use 100% here to support printing more than a single page*/
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: initial !important;
+  }
+
+  .page-a4 {
+    width: 21cm;
+    height: 297mm;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .page-break {
+    display: block;
+    page-break-before: auto;
+  }
+}
