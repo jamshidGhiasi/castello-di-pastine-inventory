@@ -1,4 +1,4 @@
-import AreaItem from '@/components/area-item';
+import AreaItem from '@/components/area/area-item';
 import Layout from '@/components/layout/layout'
 import { ScrollArea } from '@/components/ui/scroll-area';
 import fetchAreas from '@/utils/fetchAreas';

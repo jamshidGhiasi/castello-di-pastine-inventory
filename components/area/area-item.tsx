@@ -1,13 +1,11 @@
 'use client'
-
 import { Angry, CaseUpper, Castle, ChevronRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-export const CategoryItem = ({ title, slug, count }: { title: string, slug: string, count: string }) => {
+export const AreaItem = ({ title, slug, count }: { title: string, slug: string, count: string }) => {
     const router = useRouter();
     function handleAreaItemClick() {
-        router.push(`/categories/${slug}`)
-
+        router.push(`/areas/${slug}`)
     }
     return (
         <Button className="group w-full  text-black flex justify-between border   items-center  py-8 px-2 bg-white shadow-sm rounded-full hover:bg-[#ebf1ef] hover:shadow-lg  transition-all duration-400 ease-out hover:border hover:border-[#c4d5ce] " onClick={handleAreaItemClick}>
@@ -21,7 +19,5 @@ export const CategoryItem = ({ title, slug, count }: { title: string, slug: stri
             </div>
         </Button>
     )
-
 }
-
-export default CategoryItem;
+export default AreaItem;

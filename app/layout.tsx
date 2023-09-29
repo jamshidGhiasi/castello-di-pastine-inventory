@@ -1,9 +1,9 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from "@/components/theme-provider"
-import BottomNavigation from '@/components/bottom-navigation'
-import Background from '@/components/background-effect'
+import { ThemeProvider } from "@/components/home/theme-provider"
+import BottomNavigation from '@/components/layout/bottom-navigation'
+import Background from '@/components/ui/background-effect'
 import AdminSessionProvider from '@/components/admin/session-provider'
 import { Toaster } from 'react-hot-toast'
 

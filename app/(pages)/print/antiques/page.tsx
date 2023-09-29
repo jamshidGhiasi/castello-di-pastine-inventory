@@ -47,6 +47,9 @@ const PrintAntiques = () => {
     }
     return (
         <Layout>
+            <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 mb-4 w-full flex items-center justify-between'>
+                <h1 className='font-bold sm:text-lg '>Select an range</h1>
+            </div>
             {range}
             <form
                 className="flex justify-center items-center w-full sm:w-1/2 mb-8"
@@ -65,11 +68,11 @@ const PrintAntiques = () => {
             <button onClick={() => getAntiques()}>New</button>
             {loading && <div>Loading...</div>}
             {error !== null && <div>{error}</div>}
-                <ReactToPrint
-                    trigger={() => <button>Print this out!</button>}
-                    content={() => componentRef.current}
-                />
-            <div  ref={componentRef}>
+            <ReactToPrint
+                trigger={() => <button>Print this out!</button>}
+                content={() => componentRef.current}
+            />
+            <div ref={componentRef}>
 
 
                 {!loading && antiques && antiques.length && antiques.map((antique, index) => (

@@ -1,7 +1,7 @@
 import { ReactNode, Suspense } from "react"
-import BottomNavigation from "../bottom-navigation"
+import BottomNavigation from "./bottom-navigation"
 import TopLogo from "./top-logo"
-import SearchBar from "../search-bar"
+import SearchBar from "./search-bar"
 
 const Layout = ({
     children

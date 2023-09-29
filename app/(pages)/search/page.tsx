@@ -1,4 +1,4 @@
-import AntiqueItem from "@/components/antique-item"
+import AntiqueItem from "@/components/antique/antique-item"
 import Layout from "@/components/layout/layout"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import searchAntiques from "@/utils/searchAntiques"

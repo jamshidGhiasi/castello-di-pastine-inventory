@@ -1,6 +1,6 @@
-import SelectDemo from '@/components/area-change';
+import SelectDemo from '@/components/area/area-change';
 import Layout from '@/components/layout/layout'
-import RoomItem from '@/components/room-item';
+import RoomItem from '@/components/room/room-item';
 import { ScrollArea } from "@/components/ui/scroll-area"
 import fetchRooms from '@/utils/fetchRooms';
 export const dynamic = 'force-dynamic'

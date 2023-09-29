@@ -1,5 +1,5 @@
-import AntiqueItem from "@/components/antique-item";
-import SelectDemo from "@/components/area-change";
+import AntiqueItem from "@/components/antique/antique-item";
+import SelectDemo from "@/components/area/area-change";
 import Layout from "@/components/layout/layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import fetchAntiques from "@/utils/fetchAntiques";
