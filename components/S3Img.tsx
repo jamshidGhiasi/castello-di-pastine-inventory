@@ -21,7 +21,7 @@ const S3Img = (props: S3ImgProps) => {
       const data = await res.json();
       if (data.url) setImgSrc(data.url);
     };
-    if (inView) fetchImage();
+    if (inView && !imgSrc) fetchImage();
   }, [inView]);
 
   return (
