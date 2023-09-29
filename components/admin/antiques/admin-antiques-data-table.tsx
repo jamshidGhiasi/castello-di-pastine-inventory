@@ -80,7 +80,7 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
       const antiqueId = prompt("Please enter the antique ID:", "");
       if (!antiqueId) return
 
-      const filename = `antiques-master/image${antiqueId}.png`;
+      const filename = `antiques/image${antiqueId}.png`;
 
       try {
         const formData = new FormData();

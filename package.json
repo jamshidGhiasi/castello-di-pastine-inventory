@@ -45,6 +45,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-image": "^4.1.0",
+    "react-intersection-observer": "^9.5.2",
     "react-qr-code": "^2.0.12",
     "react-to-print": "^2.14.13",
     "swr": "^2.2.2",

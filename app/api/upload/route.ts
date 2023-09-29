@@ -32,10 +32,10 @@ async function uploadImageToS3(
   return url;
 }
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(req: NextRequest, response: NextResponse) {
   try {
     // Extract form data
-    const formData = await request.formData();
+    const formData = await req.formData();
     const file = formData.get("file") as Blob | null;
     const fileName = formData.get("fileName") as string;
 
@@ -57,6 +57,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     return NextResponse.json({ success: true, url });
   } catch (error) {
     console.error("Error at api/upload route:", error);
-    NextResponse.json({ message: "Error uploading image" });
+    return NextResponse.json({ message: "Error uploading image" });
   }
 }

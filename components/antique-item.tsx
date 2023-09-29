@@ -12,7 +12,8 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { Antique } from "@prisma/client"
-import { cva, type VariantProps } from "class-variance-authority"
+import S3Img from '@/components/S3Img'
+
 export interface AntiqueItemProps extends Partial<Antique> {
   image: string[]
   itemNo: string
@@ -32,26 +33,20 @@ const AntiqueItem = ({
   room,
   category
 }: AntiqueItemProps) => {
-   
-    
     return (
         <Sheet>
             <SheetTrigger asChild >
-                
 
                 <button className='group relative h-[150px] p-4 bg-white rounded-lg overflow-hidden shadow-md  hover:border-[#c4d5ce] hover:shadow-lg transition-all duration-300 ease-out' >
-                    <Img
-                        src={image}
-                        alt={itemNo}
-                        className='m-auto w-auto h-full'
+                    <S3Img
+                      src={image[0]}
+                      alt={itemNo}
+                      className='m-auto w-auto h-full'
                     />
-                    
                     <span className=' text-sm bg-[#ececec] group-hover:bg-[#c4d5ce]  absolute left-0 bottom-0 w-4/12 py-1 rounded-tr-lg z-10'>{itemNo}</span>
                     <div className='absolute top-0 left-0 bottom-0 right-0 border-[4px] border-[#ececec] rounded-lg group-hover:border-[#c4d5ce]'></div>
                 </button>
-    
-                  
-            
+
             </SheetTrigger>
 
             <SheetContent  side={"bottom"} className="h-[80vh]">

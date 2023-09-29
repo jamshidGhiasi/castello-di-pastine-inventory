@@ -3,7 +3,6 @@ import AntiqueItem from "@/components/antique-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import fetchAntiques from "@/utils/fetchAntiques";
 import fetchAntiquesByCategory from "@/utils/fetchAntiquesByCategory";
 
 export const dynamic = 'force-dynamic'
