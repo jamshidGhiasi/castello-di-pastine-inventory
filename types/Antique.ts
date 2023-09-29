@@ -1,4 +1,4 @@
-export default interface AntiqueFromGoogleSheets {
+export interface AntiqueFromGoogleSheets {
   itemNo: string;
   lot: string;
   category: string;
