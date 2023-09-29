@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic'
 
 const Room = async ({ params }: { params: { areaId: string, roomId: string } }) => {
     const { areaId, roomId } = params;
-    const antiques = await fetchAntiques(areaId, roomId) 
+    const antiques = await fetchAntiques(areaId, roomId)
 
 
     return (
@@ -23,13 +23,10 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                 Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g, ' ')}</span>
             </Link>
             </div>
-               
-                
                 <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0">
                     {antiques &&
-                        antiques.map((antique: any) =>
+                        antiques.map((antique: any, i) =>
                         (
-
                             <AntiqueItem
                                 key={antique.id}
                                 description={antique.description}
@@ -41,8 +38,10 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                                     ]
                                 }
                                 itemNo={antique.itemNo}
+                                prevItemNo={antiques[i - 1]?.itemNo}
+                                nextItemNo={antiques[i + 1]?.itemNo}
                                 height={antique.height}
-                                width={antique.white}
+                                width={antique.width}
                                 depth={antique.depth}
                                 area={areaId}
                                 room={roomId}
@@ -52,7 +51,7 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                         )
                     }
                 </div>
-     
+
 
         </Layout>
     )

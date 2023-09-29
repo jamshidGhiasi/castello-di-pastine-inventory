@@ -19,7 +19,7 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
             <ScrollArea className='w-full h-[calc(100vh-200px)]'>
             <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full mb-[110px] sm:mb-[180px]">
                 {antiques &&
-                    antiques.map((antique: any) =>
+                    antiques.map((antique: any, i) =>
                     (
                         <AntiqueItem
                             key={antique.id}
@@ -32,6 +32,8 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                                 ]
                             }
                             itemNo={antique.itemNo}
+                            prevItemNo={antiques[i - 1]?.itemNo}
+                            nextItemNo={antiques[i + 1]?.itemNo}
                             height={antique.height}
                             width={antique.white}
                             depth={antique.depth}
