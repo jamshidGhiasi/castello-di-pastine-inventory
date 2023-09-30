@@ -25,18 +25,9 @@ const Areas = async () => {
      </div>
       <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3  w-full max-w-5xl mx-auto  px-4 pt-0'>
         {!areas && <div>Error while getting Areas</div>}
-        {areas && areas.map((area: any) => {
-          if (area.slug !== 'unassigned')
-            return (
-              <AreaItem key={area.id} title={area.title} slug={area.slug} count={area._count.antiques} />
-            )
-          else if (area.slug === 'unassigned') {
-            return (
-              <AreaItem key={area.id} title={area.title} slug={area.slug} count={area._count.antiques} />
-            )
-
-          }
-        })}
+        {areas && areas.map((area: any) => (
+          <AreaItem key={area.id} title={area.title} slug={area.slug} count={area._count.antiques} />
+          ))}
       </div>
   
 

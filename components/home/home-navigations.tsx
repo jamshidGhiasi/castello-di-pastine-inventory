@@ -11,18 +11,18 @@ const HomeNavigation = ({ navStyles = '' }) => {
     return (
         <div className={`${navStyles}`}>
             <div className="flex flex-col  mb-auto ">
-                <Button className=" bg-[#edf0ef] border border-[#4b665b] shadow-md text-[#111815] text-lg mb-2 mt-6 rounded-full px-6 py-7 w-[300px] hover:bg-[#4b665b] hover:text-white  hover:shadow-lg transition-all duration-400 ease-out   " onClick={() => router.push('/areas')} >
+                <Button className=" bg-[#edf0ef] border border-[#4b665b]  shadow-md text-[#4b665b] text-md mb-2 mt-6 rounded-full px-6 py-7 w-[300px] hover:bg-[#4b665b] hover:text-white  hover:shadow-lg transition-all duration-400 ease-out   " onClick={() => router.push('/areas')} >
                     Rooms and Areas
                 </Button>
-                <Button className=" bg-[#edf0ef] shadow-md border border-[#4b665b] text-[#111815] text-lg mb-4 rounded-full px-6 py-7 w-[300px] hover:bg-[#fff]  hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/categories')} >
+                <Button className=" bg-[#edf0ef] shadow-md border border-[#4b665b] text-[#4b665b] text-md mb-4 rounded-full px-6 py-7 w-[300px] hover:text-white hover:bg-[#4b665b]  hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/categories')} >
                     Categories
                 </Button>
                 <div className="flex">
 
-                    <Button className=" bg-[#edf0ef] border w-1/2 mr-2 border-[#4b665b] text-[#111815] text-lg mb-6 rounded-full px-6 py-7  hover:bg-[#fff] hover:border-white hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/print')} >
+                    <Button className=" bg-[#edf0ef] border w-1/2 mr-2 border-[#4b665b] text-[#4b665b] text-md mb-6 rounded-full px-6 py-7  hover:bg-[#4b665b] hover:text-white hover:border-white hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/print')} >
                         Print
                     </Button>
-                    <Button className=" bg-[#edf0ef] border w-1/2 border-[#4b665b] text-[#111815] text-lg mb-6 rounded-full px-6 py-7  hover:bg-[#fff] hover:border-white hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/floor-plans')} >
+                    <Button className=" bg-[#edf0ef] border w-1/2 border-[#4b665b] text-[#4b665b] text-md mb-6 rounded-full px-6 py-7  hover:bg-[#4b665b] hover:text-white hover:border-white hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/floor-plans')} >
                         Floor Plans
                     </Button>
                 </div>
