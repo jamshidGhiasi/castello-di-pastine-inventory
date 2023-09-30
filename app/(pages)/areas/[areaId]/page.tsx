@@ -11,7 +11,7 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
     const area = await fetchRooms(areaId)
     return (
         <Layout>
-            <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4 mb-2 flex items-center justify-between shadow-sm w-full  mx-auto '>
+            <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4  flex items-center justify-between shadow-sm w-full  mx-autom z-20 '>
                 <div className='text-xs w-full max-w-5xl mx-auto flex items-center'>
                     <Link href='/' className='hover:underline'>
                         <Home className='inline-block w-4' />
@@ -22,7 +22,7 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
                     <Link href='/areas' className=' capitalize pointer-events-none' >{areaId.replace(/-/g, ' ')}</Link>
                 </div>
             </div>
-            <div className='sticky top-[79px] bg-[#f2f2f2]  border-b py-2 px-4 mb-4 w-full max-w-5xl mx-auto  pt-0 flex items-center justify-between'>
+            <div className='sticky  sm:static top-[79px] bg-[#f2f2f2]  border-b py-2 pt-2 px-4 mb-4 w-full max-w-5xl mx-auto   flex items-center justify-between z-20 '>
                 <h1 className='font-bold sm:text-lg '>Select a room</h1>
                 <SelectDemo areaId={areaId as string} />
             </div>
