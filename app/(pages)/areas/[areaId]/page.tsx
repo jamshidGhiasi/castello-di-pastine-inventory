@@ -16,7 +16,7 @@ const Area = async ({ params }: { params: { areaId: string } }) => {
             {!area && <div>oops! It looks like there are not data for {areaId} yet. </div>}
             <div className=' grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3  w-full p-4 pt-0'>
                 {area && area.rooms.map((room: any) => (
-                    <RoomItem key={room.id} title={room.title} slug={room.slug} count={room._count.antiques} areaId={areaId} roomNumber={room.title.match(/^(\d+).*/)[1]} />
+                    <RoomItem key={room.id} title={room.title} slug={room.slug} count={room._count.antiques} areaId={areaId} roomNumber={room.title.match(/^(\d+).*/)?.[1]} />
                 ))}
             </div>
         </Layout>
