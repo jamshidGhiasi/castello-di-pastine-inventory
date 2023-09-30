@@ -81,32 +81,34 @@ const AntiqueItem = ({
                 </button>
             </SheetTrigger>
 
-            <SheetContent side={"bottom"} className="h-[80vh]">
-                <div className='mt-4'>
+            <SheetContent side={"bottom"} className="h-[80vh] flex flex-col justify-between">
+                <div>
+                  <div className='mt-4'>
                     <Img
-                        src={image}
-                        alt={itemNo}
-                        width={'300'}
-                        height={'300'}
-                        className='relative m-auto'
+                      src={image}
+                      alt={itemNo}
+                      width={'300'}
+                      height={'300'}
+                      className='relative m-auto'
                     />
-                </div>
-                <SheetHeader>
+                  </div>
+                  <SheetHeader>
                     <SheetTitle className=' text-white p-2 bg-gray-800 w-2/5 m-auto mt-4 rounded-full'> {itemNo} </SheetTitle>
                     <SheetDescription>
-                        <div className='mb-4'>
+                      <div className='mb-4'>
                         {description}
-                        </div>
-                        <br />
-                        width: { width} |
-                        height: { height} |
-                        depth:{ depth}
-                        <br />
-                        Area: { area}
-                        <br />
-                        Room : { room}
+                      </div>
+                      <br />
+                      width: { width} |
+                      height: { height} |
+                      depth:{ depth}
+                      <br />
+                      Area: { area}
+                      <br />
+                      Room : { room}
                     </SheetDescription>
-                </SheetHeader>
+                  </SheetHeader>
+                </div>
 
                 {/* Prev + Next buttons */}
                 <div className="flex items-center justify-between space-x-2 py-4">
