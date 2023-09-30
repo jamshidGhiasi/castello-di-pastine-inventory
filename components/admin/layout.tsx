@@ -1,7 +1,7 @@
 'use client'
 import { ReactNode } from "react";
 import Link from "next/link";
-import { Home } from "lucide-react";
+import { Home, Lamp, Bath, Grid2x2 } from "lucide-react";
 import UserAccount from "@/components/admin/admin-user-account";
 
 export interface AdminLayoutProps {
@@ -22,14 +22,14 @@ const AdminLayout = (props: AdminLayoutProps) => {
                       Back to Home
                     </Link>
                     <Link href={'/admin'} className="flex justify-start items-center mb-8">
-                      <Home className="w-6 h-6 cursor-pointer mr-2" />
+                      <Lamp className="w-6 h-6 cursor-pointer mr-2" />
                       Antiques
                     </Link><Link href={'/admin/areas'} className="flex justify-start items-center mb-8">
-                      <Home className="w-6 h-6 cursor-pointer mr-2" />
+                      <Grid2x2 className="w-6 h-6 cursor-pointer mr-2" />
                       Areas
                     </Link>
                     <Link href={'/admin/rooms'} className="flex justify-start items-center mb-8">
-                      <Home className="w-6 h-6 cursor-pointer mr-2" />
+                      <Bath className="w-6 h-6 cursor-pointer mr-2" />
                       Rooms
                     </Link>
                   </div>
