@@ -26,19 +26,27 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import exp from "constants"
+import S3Img from "@/components/S3Img";
 
 const pageStyle = `
   @page {
-    size: 57mm 32mm;
-    margin: 0;
+    size: A4;
+    margin: 1cm;
   }
+
+  @media all {
+    .pagebreak {
+      display: none;
+    }
+  }
+
   @media print {
-    .page-label {
-        width: 57mm !important;
-        height: 32mm !important;
+    .pagebreak {
+      page-break-before: always;
     }
   }
 `;
+
 const PrintRooms = () => {
     const [antiques, setAntiques] = useState<any[]>()
     const [rooms, setRooms] = useState<any[]>()
@@ -82,8 +90,8 @@ const PrintRooms = () => {
 
     return (
         <Layout>
-            <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-center justify-between'>
-                <h1 className='font-bold sm:text-lg '>Select A Room</h1>
+            <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center  justify-between'>
+                <h1 className='font-bold sm:text-lg mb-2 sm:mb-0  '>Select A Room</h1>
                 {rooms &&
 
                     <Popover open={open} onOpenChange={setOpen}>
@@ -92,7 +100,7 @@ const PrintRooms = () => {
                                 variant="outline"
                                 role="combobox"
                                 aria-expanded={open}
-                                className="w-auto justify-between"
+                                className=" w-full sm:w-1/3 justify-between text-[16px]"
                             >
                                 {value
                                     ? rooms.find((framework) => framework.slug === value)?.title
@@ -110,6 +118,7 @@ const PrintRooms = () => {
                                             key={item.id}
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue)
+                                                setAntiques([])
                                                 getItems(currentValue)
                                                 setOpen(false)
                                             }}
@@ -133,19 +142,24 @@ const PrintRooms = () => {
             </div>
 
             <div className="flex flex-col items-center justify-between px-4 sm:p-0">
-                {(antiques && antiques.length) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
+                {(antiques && antiques.length > 0) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
                 <div ref={componentRef} className="w-full">
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mx-auto  print:block">
-                        {antiques && antiques.length && antiques.map((antique, index) => (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto  print:grid-cols-4">
+                        {(antiques && antiques.length > 0) && antiques.map((antique, index) => (
                             <div key={index} >
-                                <div className="page-label bg-white rounded-lg shadow-md print:shadow-none print:rounded-none p-4  flex items-center justify-between   ">
-                                    <QRCode className="print:w-[2cm] w-[100px] h-auto mr-2" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
-                                    <div className="flex flex-col justify-between items-center grow mr-auto">
-                                        <p className="font-bold"> {antique?.itemNo}</p>
-                                        <Img className="mx-auto print:h-[1cm] h-[80px] print:w-auto " src={`/antiques/image${antique?.itemNo.replace('0', '')}.png`} />
-                                    </div>
+                                <div className="page-label bg-white border-[2px] shadow-md print:shadow-none print:rounded-none p-4  flex flex-col items-center justify-between   ">
+                                        
+
+                                        <S3Img
+                                            src={`/antiques/image${antique.itemNo.replace('0', '')}.png`}
+                                            alt={antique.itemNo}
+                                            className='mx-auto print:h-[1cm] h-[150px] print:w-auto '
+
+                                        />
+                                        
                                 </div>
+                                <p className="font-bold"> {antique?.itemNo}</p>
                                 <div className="page-break"></div>
                             </div>
                         ))}

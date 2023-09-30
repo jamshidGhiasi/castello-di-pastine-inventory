@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Img, ImgProps } from 'react-image'
 import { useInView } from 'react-intersection-observer'
-
+import { cn } from "@/lib/utils"
 export interface S3ImgProps extends Omit<ImgProps, 'src'> {
   src: string
 }
@@ -26,7 +26,7 @@ const S3Img = (props: S3ImgProps) => {
 
   return (
     <div ref={ref}>
-      <Img src={imgSrc} loader={<div>Loading...</div>} unloader={<div>No image</div>} />
+      <Img src={imgSrc} className={cn(props.className)} loader={<div>Loading...</div>} unloader={<div className='h-[150px]'>No image</div>} />
     </div>
   )
 }

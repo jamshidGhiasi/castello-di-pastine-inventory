@@ -9,6 +9,7 @@ import QRCode from "react-qr-code";
 import { Button } from "@/components/ui/button";
 import toast from 'react-hot-toast'
 import { Loader2 } from "lucide-react";
+import S3Img from "@/components/S3Img";
 const pageStyle = `
   @page {
     size: 57mm 32mm;
@@ -44,13 +45,13 @@ const PrintLabels = () => {
     }
     return (
         <Layout>
-            <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-center justify-between'>
-                <h1 className='font-bold sm:text-lg '>Enter an range</h1>
-                <form onSubmit={onSubmit} className="flex justify-between items-center">
+            <div className='sticky top-[79px] bg-[#f2f2f2] border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between'>
+                <h1 className='font-bold sm:text-lg  mb-2 sm:mb-0'>Enter an range</h1>
+                <form onSubmit={onSubmit} className="flex w-full sm:w-1/3 justify-between items-center">
                     <Input
                         name="range"
                         type="text"
-                        className="  rounded-full mr-2"
+                        className="rounded-md mr-2 text-[16px]"
                         placeholder="1,2,5-6"
                         value={range}
                         onChange={(e) => setRange(e.target.value)}
@@ -71,7 +72,13 @@ const PrintLabels = () => {
                                     <QRCode className="print:w-[2cm] w-[100px] h-auto mr-2" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
                                     <div className="flex flex-col justify-between items-center grow mr-auto">
                                         <p className="font-bold"> {antique?.itemNo}</p>
-                                        <Img className="mx-auto print:h-[1cm] h-[80px] print:w-auto " src={`/antiques/image${antique?.itemNo.replace('0', '')}.png`} />
+                                       
+                                        <S3Img
+                      src={`/antiques/image${antique.itemNo.replace('0', '')}.png`}
+                      alt={antique.itemNo}
+                      className='mx-auto print:h-[1cm] h-[80px] print:w-auto '
+                     
+                    />
                                     </div>
                                 </div>
                                 <div className="page-break"></div>

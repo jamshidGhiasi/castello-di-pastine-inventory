@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import toast from 'react-hot-toast'
 import {ChevronLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
+import S3Img from "@/components/S3Img";
 
 const pageStyle = `
   @page {
@@ -54,15 +55,15 @@ const PrintAntiques = () => {
   }
   return (
     <Layout>
-      <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-center justify-between'>
+      <div className='sticky top-[79px] bg-[#f2f2f2]  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between'>
         
 
-        <h1 className='font-bold sm:text-lg '>Enter an range</h1>
-        <form onSubmit={onSubmit} className="flex justify-between items-center">
+        <h1 className='font-bold sm:text-lg  mb-2 sm:mb-0 '>Enter an range</h1>
+        <form onSubmit={onSubmit} className="flex w-full sm:w-1/3 justify-between items-center">
         <Input
           name="range"
           type="text"
-          className="  rounded-full mr-2"
+          className="rounded-md mr-2 text-[16px]"
           placeholder="1,2,5-6"
           value={range}
           onChange={(e) => {
@@ -84,8 +85,13 @@ const PrintAntiques = () => {
         <div className="grid grid-col-2 sm:grid-cols-3 gap-3 mx-auto  print:block">
         {(antiques && antiques.length > 0) && antiques.map((antique, index) => (
           <div key={index} >
-          <div  className="page-a4 bg-white rounded-lg shadow-md print:shadow-none print:rounded-none p-4 h-full flex flex-col  ">
-            <Img className="h-[150px] print:h-[10cm] mx-auto " src={`/antiques/image${antique?.itemNo.replace('0', '')}.png`}  />
+          <div  className="page-a4 bg-white rounded-lg shadow-md print:shadow-none print:rounded-none p-4 h-full flex flex-col justify-start ">
+            <S3Img
+                      src={`/antiques/image${antique.itemNo.replace('0', '')}.png`}
+                      alt={antique.itemNo}
+                      className='m-auto h-[100px] print:h-[8cm]'
+                     
+                    />
 
             <p className="font-bold mb-2">ITEM NO: {antique?.itemNo}</p>
             <p className="page-description text-xs print:text-md mb-2 print:w-[17cm] print:text-center">{antique?.description}</p>
