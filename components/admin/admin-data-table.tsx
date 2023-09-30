@@ -53,9 +53,9 @@ export default function AdminDataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
-    
-    
-    
+
+
+
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -65,7 +65,7 @@ export default function AdminDataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
 
-    
+
 
     state: {
       sorting,
@@ -73,7 +73,7 @@ export default function AdminDataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
 
-      
+
     },
   })
 
@@ -151,7 +151,7 @@ export default function AdminDataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody className=" bg-stone-900   [&>*:nth-child(odd)]:bg-neutral-300 [&>*:nth-child(odd):hover]:hover:bg-neutral-100 cursor-pointer">
-            
+
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
@@ -185,10 +185,12 @@ export default function AdminDataTable<TData, TValue>({
 
       {/* Footer */}
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
+        {Boolean(table.getFilteredSelectedRowModel().rows.length) && (
+          <div className="flex-1 text-sm text-muted-foreground">
+            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredRowModel().rows.length} row(s) selected.
+          </div>
+        )}
         <div className="space-x-2">
           <Button
             variant="outline"
