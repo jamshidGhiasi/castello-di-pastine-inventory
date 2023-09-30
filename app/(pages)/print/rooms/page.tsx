@@ -63,9 +63,9 @@ const PrintRooms = () => {
         fetchRooms()
     }, [])
 
-    function getItems() {
+    function getItems(currentValue: string) {
         try {
-            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/print/rooms/${value}`)
+            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/print/rooms/${currentValue}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
@@ -74,6 +74,7 @@ const PrintRooms = () => {
 
         } catch (error) {
             console.error(error);
+            setAntiques([])
         }
 
 
@@ -109,7 +110,7 @@ const PrintRooms = () => {
                                             key={item.id}
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue)
-                                                getItems()
+                                                getItems(currentValue)
                                                 setOpen(false)
                                             }}
                                         >
@@ -133,7 +134,7 @@ const PrintRooms = () => {
 
             <div className="flex flex-col items-center justify-between px-4 sm:p-0">
                 {(antiques && antiques.length) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
-                <div ref={componentRef}>
+                <div ref={componentRef} className="w-full">
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mx-auto  print:block">
                         {antiques && antiques.length && antiques.map((antique, index) => (

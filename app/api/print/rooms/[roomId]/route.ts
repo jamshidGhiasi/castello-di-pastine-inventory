@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 
 export const GET = async (req: NextRequest, { params }: { params: { roomId: string}}) => {
-
+        console.log(params.roomId);
     try {
 
         const antiques = await prisma.antique.findMany({
