@@ -1,29 +1,8 @@
 export interface RoomFromGoogleSheets {
-  itemNo: string;
-  lot: string;
-  category: string;
-  description: string;
-  image: string;
-  height: string;
-  width: string;
-  depth: string;
-  warehouseLocation: string;
-  room: string;
-  area: string;
+  order: string;
+  title: string;
+  slug: string;
+  'area-id': string;
   areaId: string;
-  categoryId: string;
   roomId: string;
-  floor: string;
-  building: string;
-  qrCodeUrl: string;
-  roomLocation: string;
-  otherNotes: string;
-  vladamirNotes: string;
-  wipeFrame: string;
-  wipePicture: string;
-  cleanPicture: string;
-  varnishPicture: string;
-  varnishFrame: string;
-  restoreFrame: string;
-  restorePicture: string;
 }

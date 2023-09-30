@@ -62,7 +62,7 @@ const AdminRoomsDataTable: React.FC<AdminRoomsDataTableProps> = (props) => {
     <AdminDataTable
       columns={roomsAdminDataTableColumns}
       data={data}
-      searchColumnAccessorKey="description"
+      searchColumnAccessorKey="title"
       extraActions={
         <AdminRoomsDataTableExtraActions
           isSyncDatabaseLoading={isSyncDatabaseLoading}
