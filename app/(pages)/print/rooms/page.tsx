@@ -69,6 +69,7 @@ const PrintRooms = () => {
                 <h1 className='font-bold sm:text-lg '>Select A Room</h1>
 
             </div>
+            hi
 
             <div className="flex flex-col items-center justify-between px-4 sm:p-0">
                 {rooms &&
