@@ -13,25 +13,23 @@ export const GET = async (request: NextRequest) => {
   try {
     const roomsFromGoogleSheets = await fetchRoomsFromGoogleSheets()
 
-    // Delete all rooms from prisma then insert all rooms from Google Sheets
-    await prisma.room.deleteMany()
-
     // Seed all rooms and relations from Google Sheets
     const onSeed = await mapSeries(roomsFromGoogleSheets, async (room: RoomFromGoogleSheets) => {
       try {
-        const onCreate = await prisma.room.create({
-          data: {
-            /**
-             * Properties
-             */
+        const upsertRoom = await prisma.room.upsert({
+          where: { slug: room.slug },
+          update: {
+            order: Number(room.order),
+          },
+          create: {
             order: Number(room.order),
             title: room.title,
             slug: room.slug,
             roomNo: room.roomId,
             areaId: room.areaId,
           },
-        })
-        return onCreate
+        });
+        return upsertRoom;
       } catch (err) {
         console.error('Error caught at room.onSeed:', { err, room });
       }
