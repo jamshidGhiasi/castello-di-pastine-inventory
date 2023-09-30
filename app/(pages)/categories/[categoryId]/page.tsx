@@ -24,7 +24,7 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                 </div>
             </div>
            
-            <div className="grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0">
+            <div className="grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0  max-w-5xl mx-auto">
                 {antiques &&
                     antiques.map((antique: any, i) =>
                     (
