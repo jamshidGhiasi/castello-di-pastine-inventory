@@ -44,7 +44,7 @@ const PrintLabels = () => {
     }
     return (
         <Layout>
-            <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 mb-4 w-full flex flex-col sm:flex-row items-center justify-between'>
+            <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-center justify-between'>
                 <h1 className='font-bold sm:text-lg '>Enter an range</h1>
                 <form onSubmit={onSubmit} className="flex justify-between items-center">
                     <Input
@@ -60,11 +60,11 @@ const PrintLabels = () => {
                     </Button>
                 </form>
             </div>
-            <div className="flex flex-col items-center justify-between px-4 sm:p-0">
+            <div className="flex flex-col items-center justify-between px-4 sm:p-0 w-full">
                 {(antiques && antiques.length) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
-                <div ref={componentRef}>
+                <div ref={componentRef} className="w-full">
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mx-auto  print:block">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full mx-auto  print:block">
                         {antiques && antiques.length && antiques.map((antique, index) => (
                             <div key={index} >
                                 <div className="page-label bg-white rounded-lg shadow-md print:shadow-none print:rounded-none p-4  flex items-center justify-between   ">
