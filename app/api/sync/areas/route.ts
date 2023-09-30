@@ -13,23 +13,21 @@ export const GET = async (request: NextRequest) => {
   try {
     const areasFromGoogleSheets = await fetchAreasFromGoogleSheets()
 
-    // Delete all areas from prisma then insert all areas from Google Sheets
-    await prisma.area.deleteMany()
-
     // Seed all areas and relations from Google Sheets
     const onSeed = await mapSeries(areasFromGoogleSheets, async (area: AreaFromGoogleSheets) => {
       try {
-        const onCreate = await prisma.area.create({
-          data: {
-            /**
-             * Properties
-             */
+        const upsertArea = await prisma.area.upsert({
+          where: { slug: area.slug },
+          update: {
+            order: Number(area.order),
+          },
+          create: {
             order: Number(area.order),
             title: area.title,
             slug: area.slug,
           },
-        })
-        return onCreate
+        });
+        return upsertArea;
       } catch (err) {
         console.error('Error caught at area.onSeed:', { err, area });
       }
