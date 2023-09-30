@@ -6,7 +6,7 @@ const fetchAntiques = async (areaId: string, roomId: string) => {
 
             const area = await prisma.antique.findMany({
                 where: {
-                    AND: [
+                    OR: [
                         {
                             roomId: {
                                 equals: roomId

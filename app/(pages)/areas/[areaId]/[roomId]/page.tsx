@@ -26,7 +26,7 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                     <ChevronRight className='inline-block w-4' />
                     <Link href={`/areas/${areaId}`} className=' capitalize ' >{areaId.replace(/-/g, ' ')}</Link>
                     <ChevronRight className='inline-block w-4' />
-                    <Link href='/areas' className=' capitalize pointer-events-none' >{roomId.replace(/-/g, ' ')}</Link>
+                    <Link href='/areas' className=' capitalize pointer-events-none' >{roomId.replace(/-/g, ' ').replace('%26', '&')}</Link>
                 </div>
             </div>
  

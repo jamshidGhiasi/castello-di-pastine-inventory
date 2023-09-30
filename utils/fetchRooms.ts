@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma"
 const fetchRooms = async (areaId: string) => {
     try {
-        if (areaId !== 'unassigned' && areaId !== 'other-rooms') {
+        if (areaId !== 'unassigned') {
             const area = await prisma.area.findUniqueOrThrow({
                 where: {
                     slug: areaId
@@ -11,7 +11,7 @@ const fetchRooms = async (areaId: string) => {
                 include: {
                     rooms: {
                         orderBy: {
-                            roomNo: 'asc'
+                            order: 'asc'
                         },
                         include: {
                             antiques: true,
