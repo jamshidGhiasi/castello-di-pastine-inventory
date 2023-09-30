@@ -63,6 +63,22 @@ const PrintRooms = () => {
         fetchRooms()
     }, [])
 
+    function getItems () {
+        try {
+            fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/print/rooms/${value}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                     setAntiques(data)
+                })
+            
+        }catch (error) {
+            console.error(error);
+        }
+
+
+    }
+
     return (
         <Layout>
             <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 mb-4 w-full flex flex-col sm:flex-row items-center justify-between'>
@@ -98,7 +114,7 @@ const PrintRooms = () => {
                                             key={item.id}
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue)
-                                                console.log(currentValue)
+                                                getItems()
                                                 setOpen(false)
                                             }}
                                         >
@@ -118,6 +134,26 @@ const PrintRooms = () => {
 
                 }
 
+            </div>
+            <div className="flex flex-col items-center justify-between px-4 sm:p-0">
+                {(antiques && antiques.length) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
+                <div ref={componentRef}>
+                    {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mx-auto  print:block">
+                        {antiques && antiques.length && antiques.map((antique, index) => (
+                            <div key={index} >
+                                <div className="page-label bg-white rounded-lg shadow-md print:shadow-none print:rounded-none p-4  flex items-center justify-between   ">
+                                    <QRCode className="print:w-[2cm] w-[100px] h-auto mr-2" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
+                                    <div className="flex flex-col justify-between items-center grow mr-auto">
+                                        <p className="font-bold"> {antique?.itemNo}</p>
+                                        <Img className="mx-auto print:h-[1cm] h-[80px] print:w-auto " src={`/antiques/image${antique?.itemNo.replace('0', '')}.png`} />
+                                    </div>
+                                </div>
+                                <div className="page-break"></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </Layout>
     );

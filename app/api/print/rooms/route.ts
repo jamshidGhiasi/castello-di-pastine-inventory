@@ -8,7 +8,7 @@ export const GET = async (req: NextRequest) => {
     try {
 
         const rooms = await prisma.room.findMany()
-        console.log(rooms);
+        // console.log(rooms);
         return NextResponse.json(rooms)
 
     } catch (error) {
