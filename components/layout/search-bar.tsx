@@ -17,9 +17,9 @@ const SearchBar = () => {
         console.log(encodedSearchQuery)
     }
     return (
-        <div className="sticky top-0 flex z-[20]  border-white w-full backdrop-blur-2xl  bg-[#2d3e38] p-4 border-b shadow-sm ">
+        <div className="sticky top-0 flex z-[20]  border-white w-full backdrop-blur-2xl  bg-[#4b665b] p-4 border-b  ">
             <Link href="/">
-            <div className="bg-[#2d3e38] ">
+            <div className="bg-[#4b665b] ">
                 <Image src="/castello-di-pastine-icon.svg" className="mr-4" width={40} height={40} alt="" />
             </div>
             </Link>

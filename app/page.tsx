@@ -7,19 +7,19 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-6 z-10 relative">
 
 
-      <div className="relative flex grow">
+      <div className="relative grow flex flex-col items-center justify-center ">
         <Image
           className=" relative"
-          src="/castello-di-pastine-logo-black.svg"
-          alt="Next.js Logo"
-          width={244}
-          height={266.55}
+          src="/cdp-logo.png"
+          alt="Castello Di Pastine logo"
+          width={283}
+          height={309}
           priority
         />
       </div>
 
       
-        <HomeNavigation navStyles='flex flex-col justify-between grow' />
+        <HomeNavigation navStyles='flex flex-col justify-between grow mb-auto' />
      
     </main>
   )
