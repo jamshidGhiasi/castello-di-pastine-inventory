@@ -1,7 +1,7 @@
 import Layout from "@/components/layout/layout";
 import AntiqueItem from "@/components/antique/antique-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
 import fetchAntiquesByCategory from "@/utils/fetchAntiquesByCategory";
 
@@ -12,11 +12,17 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
     const antiques = await fetchAntiquesByCategory(categoryId)
     return (
         <Layout>
-             <div className='sticky top-[79px] bg-[#f2f2f2] backdrop-blur-sm  border-b py-2 px-4 mb-4 w-full flex items-center justify-between z-20'>
-            <Link href={`/categories`} className="flex justify-self-start mr-auto ">
-                <ChevronLeft className="w-6 h-6 cursor-pointer" />
-                Back to Categories
-            </Link></div>
+            <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4 mb-4 flex items-center justify-between shadow-sm w-full  mx-auto '>
+                <div className='text-xs w-full max-w-5xl mx-auto flex items-center'>
+                    <Link href='/' className='hover:underline'>
+                        <Home className='inline-block w-4' />
+                    </Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href='/categories'  className='hover:underline' >Categories</Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href='/categories' className=' capitalize pointer-events-none' >{categoryId.replace('-', ' ')}</Link>
+                </div>
+            </div>
            
             <div className="grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0">
                 {antiques &&

@@ -2,6 +2,8 @@ import AreaItem from '@/components/area/area-item';
 import Layout from '@/components/layout/layout'
 import { ScrollArea } from '@/components/ui/scroll-area';
 import fetchAreas from '@/utils/fetchAreas';
+import { ChevronRight, Home } from 'lucide-react';
+import Link from 'next/link';
 
 
 export const dynamic = 'force-dynamic'
@@ -12,10 +14,16 @@ const Areas = async () => {
 
   return (
     <Layout>
-     <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 mb-4 w-full flex items-center justify-between'>
-        <h1 className='font-bold sm:text-lg '>Select an area</h1>
+     <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4 mb-4 flex items-center justify-between shadow-sm w-full  mx-auto '>
+       <div className='text-xs w-full max-w-5xl mx-auto flex items-center'>
+          <Link href='/' className='hover:underline'>
+            <Home className='inline-block w-4' />
+          </Link>
+          <ChevronRight className='inline-block w-4' />
+          <Link href='/areas' className=' pointer-events-none' >Areas</Link>
+       </div>
      </div>
-      <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full  p-4 pt-0'>
+      <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3  w-full max-w-5xl mx-auto  px-4 pt-0'>
         {!areas && <div>Error while getting Areas</div>}
         {areas && areas.map((area: any) => {
           if (area.slug !== 'unassigned')

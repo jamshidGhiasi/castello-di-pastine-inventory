@@ -12,7 +12,7 @@ export default function Home() {
           className=" relative"
           src="/cdp-logo.png"
           alt="Castello Di Pastine logo"
-          width={283}
+          width={183}
           height={309}
           priority
         />

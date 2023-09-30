@@ -3,9 +3,9 @@ import SelectDemo from "@/components/area/area-change";
 import Layout from "@/components/layout/layout";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import fetchAntiques from "@/utils/fetchAntiques";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
-import {AntiqueFromGoogleSheets} from '@/types/Antique';
+import { AntiqueFromGoogleSheets } from '@/types/Antique';
 
 export const dynamic = 'force-dynamic'
 
@@ -16,41 +16,48 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
 
     return (
         <Layout>
-            <div className='sticky top-[79px] bg-[#f2f2f2] backdrop-blur-sm  border-b py-2 px-4 mb-4 w-full flex items-center justify-between z-10'>
-
-            <Link href={`/areas/${areaId}`} className="flex justify-self-start mr-auto ">
-                <ChevronLeft className="w-6 h-6 cursor-pointer mr-2" />
-                Back to &nbsp;<span className="capitalize underline">{areaId.replace(/-/g, ' ')}</span>
-            </Link>
-            </div>
-                <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0">
-                    {antiques &&
-                        antiques.map((antique: any, i) =>
-                        (
-                            <AntiqueItem
-                                key={antique.id}
-                                description={antique.description}
-                                image={
-                                    [
-                                        `/antiques/image${antique.itemNo.replace('0', '')}.png`,
-                                        `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
-                                        `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
-                                    ]
-                                }
-                                itemNo={antique.itemNo}
-                                prevItemNo={antiques[i - 1]?.itemNo}
-                                nextItemNo={antiques[i + 1]?.itemNo}
-                                height={antique.height}
-                                width={antique.width}
-                                depth={antique.depth}
-                                area={areaId}
-                                room={roomId}
-                            />
-
-                        )
-                        )
-                    }
+            <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 mb-4 px-4 flex items-center justify-between shadow-sm w-full  mx-auto z-20 '>
+                <div className='text-xs w-full max-w-5xl mx-auto flex items-center'>
+                    <Link href='/' className='hover:underline'>
+                        <Home className='inline-block w-4' />
+                    </Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href='/areas' className='hover:underline' >Areas</Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href={`/areas/${areaId}`} className=' capitalize ' >{areaId.replace(/-/g, ' ')}</Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href='/areas' className=' capitalize pointer-events-none' >{roomId.replace(/-/g, ' ')}</Link>
                 </div>
+            </div>
+ 
+            <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0">
+                {antiques &&
+                    antiques.map((antique: any, i) =>
+                    (
+                        <AntiqueItem
+                            key={antique.id}
+                            description={antique.description}
+                            image={
+                                [
+                                    `/antiques/image${antique.itemNo.replace('0', '')}.png`,
+                                    `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
+                                    `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
+                                ]
+                            }
+                            itemNo={antique.itemNo}
+                            prevItemNo={antiques[i - 1]?.itemNo}
+                            nextItemNo={antiques[i + 1]?.itemNo}
+                            height={antique.height}
+                            width={antique.width}
+                            depth={antique.depth}
+                            area={areaId}
+                            room={roomId}
+                        />
+
+                    )
+                    )
+                }
+            </div>
 
 
         </Layout>

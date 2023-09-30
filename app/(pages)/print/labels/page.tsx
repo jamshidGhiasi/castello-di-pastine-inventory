@@ -8,8 +8,9 @@ import ReactToPrint from 'react-to-print';
 import QRCode from "react-qr-code";
 import { Button } from "@/components/ui/button";
 import toast from 'react-hot-toast'
-import { Loader2 } from "lucide-react";
+import { ChevronRight, Home, Loader2 } from "lucide-react";
 import S3Img from "@/components/S3Img";
+import Link from "next/link";
 const pageStyle = `
   @page {
     size: 57mm 32mm;
@@ -31,7 +32,7 @@ const PrintLabels = () => {
         event.preventDefault()
         var formData = new FormData(event.target as HTMLFormElement);
         setLoading(true)
-       
+
         try {
             const result = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/print/antiques?r=${formData.get('range')}`)
             const data = await result.json();
@@ -45,6 +46,17 @@ const PrintLabels = () => {
     }
     return (
         <Layout>
+            <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4 flex items-center justify-between shadow-sm w-full  mx-auto '>
+                <div className='text-xs w-full max-w-5xl mx-auto flex items-center'>
+                    <Link href='/' className='hover:underline'>
+                        <Home className='inline-block w-4' />
+                    </Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href='/print' className=' hover:underline' >Print</Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href='/floor-plans' className=' pointer-events-none' >Labels</Link>
+                </div>
+            </div>
             <div className='sticky top-[79px] bg-[#f2f2f2] border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between'>
                 <h1 className='font-bold sm:text-lg  mb-2 sm:mb-0'>Enter an range</h1>
                 <form onSubmit={onSubmit} className="flex w-full sm:w-1/3 justify-between items-center">
@@ -72,13 +84,13 @@ const PrintLabels = () => {
                                     <QRCode className="print:w-[2cm] w-[100px] h-auto mr-2" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
                                     <div className="flex flex-col justify-between items-center grow mr-auto">
                                         <p className="font-bold"> {antique?.itemNo}</p>
-                                       
+
                                         <S3Img
-                      src={`/antiques/image${antique.itemNo.replace('0', '')}.png`}
-                      alt={antique.itemNo}
-                      className='mx-auto print:h-[1cm] h-[80px] print:w-auto '
-                     
-                    />
+                                            src={`/antiques/image${antique.itemNo.replace('0', '')}.png`}
+                                            alt={antique.itemNo}
+                                            className='mx-auto print:h-[1cm] h-[80px] print:w-auto '
+
+                                        />
                                     </div>
                                 </div>
                                 <div className="page-break"></div>

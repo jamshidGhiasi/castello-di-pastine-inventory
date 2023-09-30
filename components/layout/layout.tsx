@@ -14,9 +14,11 @@ const Layout = ({
              
                 <SearchBar />
                 
-                <div className=" w-full  max-w-5xl ">
+                <div className=" w-full   ">
+               
 
                 {children}
+               
                 </div>
                 
                 <BottomNavigation />
