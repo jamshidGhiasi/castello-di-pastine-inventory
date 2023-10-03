@@ -25,7 +25,9 @@ const pageStyle = `
     .pagebreak {
       page-break-before: always;
     }
+    
   }
+
 `;
 const PrintAntiques = () => {
   const [antiques, setAntiques] = useState<any[]>()
@@ -99,7 +101,7 @@ const PrintAntiques = () => {
                     <span className="font-bold">Item No:</span> {antique?.itemNo}
                   </div>
                   <p className="font-bold mb-2"></p>
-                  <p className="page-description text-xs print:text-md mb-2 print:w-[17cm] print:text-center">{antique?.description}</p>
+                  <p className="page-description text-xs print:text-md mb-2 print:w-[10cm] print:text-center">{antique?.description}</p>
                   <div>
                     <span className="font-bold">Room Number: &nbsp; </span>
                     <span className="mb-2">{antique?.room?.title || 'TBC'}</span>
@@ -113,7 +115,7 @@ const PrintAntiques = () => {
                   <p className="font-bold mb-3">QR Code</p>
                   <QRCode className="w-8 h-8 print:w-[2cm] print:h-[2cm]" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
                 </div>
-
+            
                 <div className="page-break"></div>
               </div>
             ))}

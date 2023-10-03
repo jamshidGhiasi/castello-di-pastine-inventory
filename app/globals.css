@@ -67,7 +67,7 @@
   .page-a4 {
     width: 21cm;
     height: 297mm;
-
+    margin-top: 2cm;
     display: flex;
     flex-direction: column;
     align-items: center;
