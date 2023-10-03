@@ -53,6 +53,8 @@ export const GET = async (req: NextRequest) => {
                         title: true
                     }
                 },
+                
+                
             }
         })
         return NextResponse.json(antiques)

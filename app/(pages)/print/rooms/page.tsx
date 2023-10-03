@@ -103,6 +103,8 @@ const PrintRooms = () => {
                 </div>
             </div>
             <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center  justify-between'>
+                <div className="w-full max-w-5xl mx-auto flex justify-between items-center">
+
                 <h1 className='font-bold sm:text-lg mb-2 sm:mb-0  '>Select A Room</h1>
                 {rooms &&
 
@@ -150,10 +152,11 @@ const PrintRooms = () => {
                     </Popover>
 
                 }
+                </div>
 
             </div>
 
-            <div className="flex flex-col items-center justify-between px-4 sm:p-0">
+            <div className="flex flex-col items-center justify-between px-4 sm:p-0 w-full max-w-5xl mx-auto">
                 {(antiques && antiques.length > 0) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
                 <div ref={componentRef} className="w-full">
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}

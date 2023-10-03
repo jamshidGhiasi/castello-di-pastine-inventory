@@ -19,7 +19,7 @@ const Print = () => {
                     <Link href='/floor-plans' className=' pointer-events-none' >Print</Link>
                 </div>
             </div>
-            <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full px-4 sm:px-0   pt-0'>
+            <div className='grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3 w-full px-4 sm:px-0   pt-0  w-full max-w-5xl mx-auto'>
                 <Button className="  w-full  text-black flex justify-center border   items-center  py-8 px-2 bg-white text-center shadow-sm rounded-sm hover:bg-[#ebf1ef] hover:shadow-lg  transition-all duration-400 ease-out hover:border hover:border-[#c4d5ce]" onClick={() => router.push('/print/antiques')} >
                     Items
                 </Button>

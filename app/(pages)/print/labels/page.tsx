@@ -57,7 +57,8 @@ const PrintLabels = () => {
                     <Link href='/floor-plans' className=' pointer-events-none' >Labels</Link>
                 </div>
             </div>
-            <div className='sticky top-[79px] bg-[#f2f2f2] border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between'>
+            <div className='sticky top-[80px] bg-[#f2f2f2] border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between'>
+            <div className=" w-full max-w-5xl mx-auto flex justify-between items-center">   
                 <h1 className='font-bold sm:text-lg  mb-2 sm:mb-0'>Enter an range</h1>
                 <form onSubmit={onSubmit} className="flex w-full sm:w-1/3 justify-between items-center">
                     <Input
@@ -73,7 +74,8 @@ const PrintLabels = () => {
                     </Button>
                 </form>
             </div>
-            <div className="flex flex-col items-center justify-between px-4 sm:p-0 w-full">
+            </div>
+            <div className="flex flex-col items-center justify-between px-4 sm:p-0  w-full max-w-5xl mx-auto">
                 {(antiques && antiques.length) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
                 <div ref={componentRef} className="w-full">
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
