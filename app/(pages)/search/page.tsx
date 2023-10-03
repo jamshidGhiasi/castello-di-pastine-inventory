@@ -21,32 +21,33 @@ const SearchPage = async (props: SearchPageProps) => {
   return (
     <Layout>
 
-      {antiques?.length !== 0 && <h4 className="font-bold text-lg mb-4">Found {antiques.length} items</h4>}
-        <div className=" grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-6 mb-[300px] lg:mb-[150px]  ">
+      {antiques?.length !== 0 && <div className="w-full p-4 max-w-5xl mx-auto"><h4 className="font-bold text-lg">Found {antiques.length} items</h4></div>}
+      <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0  max-w-5xl mx-auto">
+                {antiques &&
+                    antiques.map((antique: any, i) =>
+                    (
+                        <AntiqueItem
+                            key={antique.id}
+                            description={antique.description}
+                            image={
+                                [
+                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('a','').replace('b','')}.png`,
+                                ]
+                            }
+                            itemNo={antique.itemNo}
+                            prevItemNo={antiques[i - 1]?.itemNo}
+                            nextItemNo={antiques[i + 1]?.itemNo}
+                            height={antique.height}
+                            width={antique.width}
+                            depth={antique.depth}
+                            area={antique.areaId}
+                            room={antique.roomId}
+                        />
 
-          {antiques?.map((antique: Antique, i) =>
-
-            <AntiqueItem
-              key={antique.id}
-              description={antique.description}
-              image={[
-                `/antiques/image${antique.itemNo.replace('0', '')}.png`,
-                `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
-                `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
-              ]}
-              itemNo={antique.itemNo}
-              prevItemNo={antiques[i - 1]?.itemNo}
-              nextItemNo={antiques[i + 1]?.itemNo}
-              height={antique.height}
-              width={antique.width}
-              depth={antique.depth}
-              area={antique.areaId}
-              room={antique.roomId}
-              category={antique.categoryId}
-            />
-
-          )}
-        </div>
+                    )
+                    )
+                }
+            </div>
 
     </Layout>
   )

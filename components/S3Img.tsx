@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Img, ImgProps } from 'react-image'
 import { useInView } from 'react-intersection-observer'
 import { cn } from "@/lib/utils"
+import Image from 'next/image';
 export interface S3ImgProps extends Omit<ImgProps, 'src'> {
   src: string
 }
@@ -26,7 +27,7 @@ const S3Img = (props: S3ImgProps) => {
 
   return (
     <div ref={ref}>
-      <Img src={imgSrc} className={cn(props.className)} loader={<div>Loading...</div>} unloader={<div className='h-[150px]'>No image</div>} />
+      <Img src={imgSrc} className={cn(props.className)} loader={<div>Loading...</div>} unloader={<div className=' flex flex-col items-center justify-center'><Image src={'/cdp-logo.png'} width={50} height={50} alt='No Image'/></div>} />
     </div>
   )
 }

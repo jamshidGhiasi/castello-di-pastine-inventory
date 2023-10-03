@@ -33,9 +33,8 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                             description={antique.description}
                             image={
                                 [
-                                    `/antiques/image${antique.itemNo.replace('0', '')}.png`,
-                                    `/antiques/image${antique.itemNo.replace('0', '')}-1.png`,
-                                    `/antiques/image${antique.itemNo.replace('0', '')}-2.png`,
+                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('a','').replace('b','')}.png`,
+                                  
                                 ]
                             }
                             itemNo={antique.itemNo}
@@ -46,6 +45,7 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                             depth={antique.depth}
                             area={antique.areaId}
                             room={antique.roomId}
+                            warehouseLocation = {antique.warehouseLocation}
                         />
                     )
                     )
