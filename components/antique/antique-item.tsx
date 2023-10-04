@@ -79,8 +79,8 @@ const AntiqueItem = ({
       <SheetContent side={"bottom"} className="h-[80vh] flex flex-col justify-between ">
         <div>
           <div className='mt-4'>
-            <Img
-              src={image}
+            <S3Img
+              src={image[0]}
               alt={itemNo}
               width={'300'}
               height={'300'}

@@ -16,7 +16,7 @@ const SearchPage = async (props: SearchPageProps) => {
   const { searchParams } = props
   const antiques = await searchAntiques(searchParams?.q as string)
 
-  if (!antiques?.length) return <Layout><p>No data found!</p></Layout>
+  if (!antiques?.length) return <Layout><div className="w-full p-4 max-w-5xl mx-auto"><h4 className="font-bold text-lg">No Items Found</h4></div></Layout>
 
   return (
     <Layout>
@@ -31,7 +31,7 @@ const SearchPage = async (props: SearchPageProps) => {
                             description={antique.description}
                             image={
                                 [
-                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('a','').replace('b','')}.png`,
+                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('a','').replace('b','')}.jpg`,
                                 ]
                             }
                             itemNo={antique.itemNo}

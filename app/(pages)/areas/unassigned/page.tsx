@@ -29,7 +29,7 @@ const UnassignedAreaPage = async () => {
                             description={antique.description}
                             image={
                                 [
-                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('a','').replace('b','')}.png`,
+                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('a','').replace('b','')}.jpg`,
                                 ]
                             }
                             itemNo={antique.itemNo}
