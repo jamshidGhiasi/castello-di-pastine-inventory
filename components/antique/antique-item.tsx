@@ -15,6 +15,7 @@ import { ChevronRight, ChevronLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import S3Img from '@/components/S3Img'
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
+import { useSwipeable } from "react-swipeable"
 export interface AntiqueItemProps extends Partial<Antique> {
   image: string[]
   itemNo: string
@@ -63,6 +64,20 @@ const AntiqueItem = ({
   }
   const handlePrev = () => handleReplaceOpenId(prevItemNo)
   const handleNext = () => handleReplaceOpenId(nextItemNo)
+  // Swipe action
+  const swipeable = useSwipeable({
+    onSwiped: (eventData: any) => {
+      const { dir } = eventData
+      switch (dir) {
+        case 'Left':
+          return handlePrev()
+        case 'Right':
+          return handleNext()
+        default:
+          break
+      }
+    },
+  })
   return (
     <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
@@ -76,7 +91,7 @@ const AntiqueItem = ({
           <div className='absolute top-0 left-0 bottom-0 right-0 border-[4px] border-[#ececec] rounded-lg group-hover:border-[#c4d5ce]'></div>
         </button>
       </SheetTrigger>
-      <SheetContent side={"bottom"} className="h-[80vh] flex flex-col justify-between ">
+      <SheetContent {...swipeable} side={"bottom"} className="h-[80vh] flex flex-col justify-between">
         <div>
           <div className='mt-4'>
             <S3Img
@@ -95,7 +110,7 @@ const AntiqueItem = ({
               <p className='text-center text-sm'>{description}</p>
             </div>
             <div className='flex flex-col justify-center items-center mt-4  bg-neutral-100 p-2 rounded-sm'>
-             
+
               <span><span className='font-bold'> Width:</span> {width || "--"} | <span className='font-bold'> Height:</span> {height || "--"} | <span className='font-bold'> Depth:</span> {depth || "--"}</span>
             </div>
             <div className='flex flex-col justify-center items-center mt-4'>
@@ -106,7 +121,7 @@ const AntiqueItem = ({
             </div>
             <div className='flex flex-col justify-center items-center mt-4'>
               <span className=' font-bold mb-2'>Warehouse Location: <span> {warehouseLocation || "--"}</span></span>
-              
+
             </div>
           </SheetDescription>
         </div>
