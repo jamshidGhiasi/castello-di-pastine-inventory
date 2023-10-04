@@ -24,6 +24,7 @@ export const antiquesAdminDataTableColumns: ColumnDef<AntiqueFromGoogleSheets>[]
   },
   { accessorKey: 'lot', header: 'Lot' },
   { accessorKey: 'warehouseLocation', header: 'Warehouse Location' },
+  { accessorKey: 'roomTitle', header: 'Room Title' },
   // Relations
   { accessorKey: 'room', header: 'Room' },
   { accessorKey: 'roomId', header: 'Room Id' },

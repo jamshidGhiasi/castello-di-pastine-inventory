@@ -53,10 +53,12 @@ export const GET = async (req: NextRequest) => {
                         title: true
                     }
                 },
+             
                 
                 
             }
         })
+        console.log(antiques);
         return NextResponse.json(antiques)
 
     } catch (error) {

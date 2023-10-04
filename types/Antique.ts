@@ -9,6 +9,7 @@ export interface AntiqueFromGoogleSheets {
   depth: string;
   warehouseLocation: string;
   room: string;
+  roomTitle: string;
   area: string;
   areaId: string;
   categoryId: string;

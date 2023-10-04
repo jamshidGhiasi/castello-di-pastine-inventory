@@ -82,6 +82,21 @@ export const GET = async (request: NextRequest) => {
             height: antique.height,
             width: antique.width,
             depth: antique.depth,
+            warehouseLocation: antique.warehouseLocation,
+            roomLocation: antique.roomLocation,
+            otherNotes: antique.otherNotes,
+            vladamirNotes: antique.vladamirNotes,
+            wipeFrame: antique.wipeFrame,
+            wipePicture: antique.wipePicture,
+            cleanPicture: antique.cleanPicture,
+            varnishPicture: antique.varnishPicture,
+            varnishFrame: antique.varnishFrame,
+            restoreFrame: antique.restoreFrame,
+            restorePicture: antique.restorePicture,
+
+            
+
+
             /**
              * Relations
              */
@@ -100,9 +115,9 @@ export const GET = async (request: NextRequest) => {
                 connectOrCreate: {
                   where: { slug: antique.roomId },
                   create: {
-                    title: antique.room,
+                    title: antique.roomTitle,
                     slug: antique.roomId,
-                    roomNo: antique.room,
+                    // roomNo: antique.room,
                     areaId: antique.areaId,
                     categories: {
                       connectOrCreate: {

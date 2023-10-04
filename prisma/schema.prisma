@@ -12,19 +12,30 @@ datasource db {
 }
 
 model Antique {
-  id          Int       @id @default(autoincrement())
-  itemNo      String    @unique
-  lot         String?
-  height      String?
-  width       String?
-  depth       String?
-  description String?
-  area        Area?     @relation(fields: [areaId], references: [slug])
-  room        Room?     @relation(fields: [roomId], references: [slug])
-  category    Category? @relation(fields: [categoryId], references: [slug])
-  areaId      String?
-  roomId      String?
-  categoryId  String?
+  id                Int       @id @default(autoincrement())
+  itemNo            String    @unique
+  lot               String?
+  height            String?
+  width             String?
+  depth             String?
+  description       String?
+  warehouseLocation String?
+  roomLocation      String?
+  otherNotes        String?
+  vladamirNotes     String?
+  wipeFrame         String?
+  wipePicture       String?
+  cleanPicture      String?
+  varnishPicture    String?
+  varnishFrame      String?
+  restoreFrame      String?
+  restorePicture    String?
+  area              Area?     @relation(fields: [areaId], references: [slug])
+  room              Room?     @relation(fields: [roomId], references: [slug])
+  category          Category? @relation(fields: [categoryId], references: [slug])
+  areaId            String?
+  roomId            String?
+  categoryId        String?
 
   @@index([itemNo])
 }
