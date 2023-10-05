@@ -12,10 +12,19 @@ import { ChevronLeft, ChevronRight, Home, Loader2 } from "lucide-react";
 import Link from "next/link";
 import S3Img from "@/components/S3Img";
 const pageStyle = `
+
+
   @page {
     size: A4;
-    margin: 0;
+    margin: 0 !important;
+
+   
+
   }
+
+
+
+
   @media all {
     .pagebreak {
       display: none;
@@ -25,7 +34,28 @@ const pageStyle = `
     .pagebreak {
       page-break-before: always;
     }
-    
+  
+    .page-number{
+      position: fixed;
+      background: #333 !important;
+      font-size: 10pt;
+      text-align: center;
+      width: 100%;
+      height: 30px;
+      display: block !important;
+
+
+    }
+    .page-a4 {
+     
+      height: 265mm !important;
+      width: 210mm !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+   
   }
 
 `;
@@ -91,11 +121,11 @@ const PrintAntiques = () => {
           <div className="grid grid-col-2 sm:grid-cols-3 gap-3 mx-auto  print:block">
             {(antiques && antiques.length > 0) && antiques.map((antique, index) => (
               <div key={index} >
-                <div className="page-a4 bg-white rounded-lg shadow-md print:shadow-none print:rounded-none p-4 h-full flex flex-col justify-start items-center ">
+                <div className="page-a4 bg-white p-4 h-full rounded-lg shadow-md print:shadow-none  print:rounded-none  flex flex-col justify-start items-center ">
                   <S3Img
                     src={`/antiques/image${antique.itemNo.replace('0', '').replace('a','').replace('b','')}.jpg`}
                     alt={antique.itemNo}
-                    className='m-auto h-[100px] print:h-[8cm]'
+                    className='m-auto h-[100px] print:h-[8cm] print:w-[auto]'
                   />
                   <div className="flex flex-col items-center">
                     <span className="font-bold">Item No:</span> {antique?.itemNo}
@@ -115,7 +145,7 @@ const PrintAntiques = () => {
                   <p className="font-bold mb-3">QR Code</p>
                   <QRCode className="w-8 h-8 print:w-[2cm] print:h-[2cm]" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
                 </div>
-            
+                <div className="page-number hidden"> Page | {index +  1} </div>
                 <div className="page-break"></div>
               </div>
             ))}

@@ -40,8 +40,8 @@ const SearchPage = async (props: SearchPageProps) => {
                             height={antique.height}
                             width={antique.width}
                             depth={antique.depth}
-                            area={antique.areaId}
-                            room={antique.roomId}
+                            area={antique.area.title}
+                            room={antique.room.title}
                         />
 
                     )

@@ -12,7 +12,7 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
     const antiques = await fetchAntiquesByCategory(categoryId)
     return (
         <Layout>
-            <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4 mb-4 flex items-center justify-between shadow-sm w-full  mx-auto '>
+            <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4 mb-4 flex items-center justify-between shadow-sm w-full  mx-auto z-20 '>
                 <div className='text-xs w-full max-w-5xl mx-auto flex items-center'>
                     <Link href='/' className='hover:underline'>
                         <Home className='inline-block w-4' />
@@ -44,7 +44,7 @@ const Category = async ({ params }: { params: { categoryId: string } }) => {
                             width={antique.white}
                             depth={antique.depth}
                             area={antique.areaId}
-                            room={antique.roomId}
+                            room={antique.room.title}
                             warehouseLocation = {antique.warehouseLocation}
                         />
                     )

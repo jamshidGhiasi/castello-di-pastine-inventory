@@ -97,9 +97,9 @@ const AntiqueItem = ({
             <S3Img
               src={image[0]}
               alt={itemNo}
-              width={'300'}
-              height={'300'}
-              className='relative m-auto w-[auto] h-[auto]'
+              width={'150'}
+              height={'150'}
+              className='relative m-auto w-[150px] h-[150px]'
             />
           </div>
           <SheetHeader>

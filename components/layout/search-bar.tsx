@@ -20,7 +20,7 @@ const SearchBar = () => {
         <div className="sticky top-0 flex z-[20]  border-white w-full backdrop-blur-2xl  bg-[#4b665b] p-4 border-b  ">
             <Link href="/">
             <div className="bg-[#4b665b] ">
-                <Image src="/castello-di-pastine-icon.svg" className="mr-4" width={40} height={40} alt="" />
+                <Image src="/castello-di-pastine-icon.svg" className="mr-4" width={50} height={50} alt="" />
             </div>
             </Link>
         <form

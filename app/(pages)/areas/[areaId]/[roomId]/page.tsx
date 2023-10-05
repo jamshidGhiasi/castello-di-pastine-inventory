@@ -48,8 +48,8 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                             height={antique.height}
                             width={antique.width}
                             depth={antique.depth}
-                            area={areaId}
-                            room={roomId}
+                            area={antique.area.title}
+                            room={antique.room.title}
                         />
 
                     )
