@@ -110,20 +110,20 @@ const AntiqueItem = ({
               <p className='text-center text-xs sm:text-sm'>{description}</p>
             </div>
             {(width || height || depth) &&
-            <div className='flex flex-col justify-center items-center mt-3  '>
+            <div className='flex flex-col justify-center items-center mt-3 text-black '>
               <span className='font-bold mb-1'> Dimensions</span>
               <span className='font-bold'> w: <span className=' font-normal'>{width ? width + " cm" : ""}</span></span>
               <span className='font-bold'> h: <span className=' font-normal'>{height ? height + " cm" : ""}</span></span>
               <span className='font-bold'> d: <span className=' font-normal'>{depth ? depth +" cm" : ""}</span></span>
             </div>
             }
-            <div className='flex flex-col justify-center items-center mt-3'>
+            <div className='flex flex-col justify-center items-center mt-3 text-black'>
               <span className=' font-bold mb-1 capitalize'>Area:</span> <span className=' capitalize'> {area}</span>
             </div>
-            <div className='flex flex-col justify-center items-center mt-3'>
+            <div className='flex flex-col justify-center items-center mt-3 text-black'>
               <span className=' font-bold mb-1'>Room:</span> <span>{room}</span>
             </div>
-            <div className='flex flex-col justify-center items-center mt-3'>
+            <div className='flex flex-col justify-center items-center mt-3 text-black'>
               <span className=' font-bold mb-1'>Warehouse Location: </span><span> {warehouseLocation || "--"}</span>
             </div>
           </SheetDescription>
