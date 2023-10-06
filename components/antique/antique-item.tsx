@@ -91,7 +91,7 @@ const AntiqueItem = ({
           <div className='absolute top-0 left-0 bottom-0 right-0 border-[4px] border-[#ececec] rounded-lg group-hover:border-[#c4d5ce]'></div>
         </button>
       </SheetTrigger>
-      <SheetContent {...swipeable} side={"bottom"} className="h-[80vh] flex flex-col justify-between">
+      <SheetContent {...swipeable} side={"bottom"} className="h-[90vh] flex flex-col justify-between rounded-tl-xl rounded-tr-xl">
         <div>
           <div className='mt-4'>
             <S3Img
@@ -99,7 +99,7 @@ const AntiqueItem = ({
               alt={itemNo}
               width={'150'}
               height={'150'}
-              className='relative m-auto w-[150px] h-[150px]'
+              className='relative m-auto w-[auto] h-[150px] sm:h-[350px]'
             />
           </div>
           <SheetHeader>
@@ -107,21 +107,24 @@ const AntiqueItem = ({
           </SheetHeader>
           <SheetDescription className='flex flex-col justify-between items-center '>
             <div className='mb-1 text-sm mt-4 text-black max-w-md'>
-              <p className='text-center text-sm'>{description}</p>
+              <p className='text-center text-xs sm:text-sm'>{description}</p>
             </div>
-            <div className='flex flex-col justify-center items-center mt-4  bg-neutral-100 p-2 rounded-sm'>
-
-              <span><span className='font-bold'> Width:</span> {width || "--"} | <span className='font-bold'> Height:</span> {height || "--"} | <span className='font-bold'> Depth:</span> {depth || "--"}</span>
+            {(width || height || depth) &&
+            <div className='flex flex-col justify-center items-center mt-3  '>
+              <span className='font-bold mb-1'> Dimensions</span>
+              <span className='font-bold'> Width: <span className=' font-normal'>{width + "cm"|| "--"}</span></span>
+              <span className='font-bold'> Height: <span className=' font-normal'>{height + "cm" || "--"}</span></span>
+              <span className='font-bold'> Depth: <span className=' font-normal'>{depth +"cm"|| "--"}</span></span>
             </div>
-            <div className='flex flex-col justify-center items-center mt-4'>
-              <span><span className=' font-bold mb-2'>Area:</span> <span> {area}</span></span>
+            }
+            <div className='flex flex-col justify-center items-center mt-3'>
+              <span className=' font-bold mb-1 capitalize'>Area:</span> <span className=' capitalize'> {area}</span>
             </div>
-            <div className='flex flex-col justify-center items-center mt-4'>
-              <span> <span className=' font-bold mb-2'>Room:</span> {room}</span>
+            <div className='flex flex-col justify-center items-center mt-3'>
+              <span className=' font-bold mb-1'>Room:</span> <span>{room}</span>
             </div>
-            <div className='flex flex-col justify-center items-center mt-4'>
-              <span className=' font-bold mb-2'>Warehouse Location: <span> {warehouseLocation || "--"}</span></span>
-
+            <div className='flex flex-col justify-center items-center mt-3'>
+              <span className=' font-bold mb-1'>Warehouse Location: </span><span> {warehouseLocation || "--"}</span>
             </div>
           </SheetDescription>
         </div>

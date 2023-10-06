@@ -102,7 +102,7 @@ const PrintRooms = () => {
                     <Link href='/floor-plans' className=' pointer-events-none' >Room</Link>
                 </div>
             </div>
-            <div className='sticky top-[79px] bg-[#f2f2f2/80] backdrop-blur-sm  border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center  justify-between'>
+            <div className='sticky top-[79px] bg-[#f2f2f2]   border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center  justify-between'>
                 <div className="w-full max-w-5xl mx-auto flex justify-between items-center">
 
                 <h1 className='font-bold sm:text-lg mb-2 sm:mb-0  '>Select A Room</h1>
@@ -130,6 +130,7 @@ const PrintRooms = () => {
                                     {rooms.map((item) => (
                                         <CommandItem
                                             key={item.id}
+                                        
                                             onSelect={(currentValue) => {
                                                 setValue(currentValue === value ? "" : currentValue)
                                                 setAntiques([])
@@ -140,7 +141,7 @@ const PrintRooms = () => {
                                             <Check
                                                 className={cn(
                                                     "mr-2 h-4 w-4",
-                                                    value === item.title ? "opacity-100" : "opacity-0"
+                                                    value === item.slug ? "opacity-100" : "opacity-0"
                                                 )}
                                             />
                                             {item.slug}
@@ -159,6 +160,7 @@ const PrintRooms = () => {
             <div className="flex flex-col items-center justify-between px-4 sm:p-0 w-full max-w-5xl mx-auto">
                 {(antiques && antiques.length > 0) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
                 <div ref={componentRef} className="w-full">
+                    {value}
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto  print:grid-cols-4">
                         {(antiques && antiques.length > 0) && antiques.map((antique, index) => (
@@ -169,7 +171,7 @@ const PrintRooms = () => {
                                     <S3Img
                                         src={`/antiques/image${antique.itemNo.replace('0', '').replace('a','').replace('b','')}.jpg`}
                                         alt={antique.itemNo}
-                                        className='mx-auto print:h-[1cm] h-[150px] print:w-auto '
+                                        className='mx-auto print:h-[2cm] h-[150px] print:w-auto '
 
                                     />
 
