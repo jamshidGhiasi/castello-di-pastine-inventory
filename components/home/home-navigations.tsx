@@ -14,7 +14,7 @@ const HomeNavigation = ({ navStyles = '' }) => {
                 <Button className=" bg-[#edf0ef] border border-[#4b665b]  shadow-md text-[#4b665b] text-md mb-2 mt-6 rounded-full px-6 py-7 w-[300px] hover:bg-[#4b665b] hover:text-white  hover:shadow-lg transition-all duration-400 ease-out   " onClick={() => router.push('/areas')} >
                     Rooms and Areas
                 </Button>
-                <Button className=" bg-[#edf0ef] shadow-md border border-[#4b665b] text-[#4b665b] text-md mb-4 rounded-full px-6 py-7 w-[300px] hover:text-white hover:bg-[#4b665b]  hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/categories')} >
+                <Button className=" bg-[#edf0ef] shadow-md border border-[#4b665b] text-[#4b665b] text-md mb-2 rounded-full px-6 py-7 w-[300px] hover:text-white hover:bg-[#4b665b]  hover:shadow-lg transition-all duration-400 ease-out  " onClick={() => router.push('/categories')} >
                     Categories
                 </Button>
                 <div className="flex">
@@ -27,7 +27,7 @@ const HomeNavigation = ({ navStyles = '' }) => {
                     </Button>
                 </div>
             </div>
-            <Button variant={'link'} className="text-lg underline" onClick={() => router.push('/admin')} >
+            <Button variant={'link'} className="text-lg underline text-[#4b665b]" onClick={() => router.push('/admin')} >
                 Admin
             </Button>
 

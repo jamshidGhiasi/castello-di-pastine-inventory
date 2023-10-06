@@ -160,7 +160,7 @@ const PrintRooms = () => {
             <div className="flex flex-col items-center justify-between px-4 sm:p-0 w-full max-w-5xl mx-auto">
                 {(antiques && antiques.length > 0) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
                 <div ref={componentRef} className="w-full">
-                    {value}
+                    <h2 className="text-lg font-bold border-b mb-4">{value}</h2>
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto  print:grid-cols-4">
                         {(antiques && antiques.length > 0) && antiques.map((antique, index) => (

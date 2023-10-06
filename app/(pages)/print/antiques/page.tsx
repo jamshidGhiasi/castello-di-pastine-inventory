@@ -123,7 +123,7 @@ const PrintAntiques = () => {
               <div key={index} >
                 <div className="page-a4 bg-white p-4 h-full rounded-lg shadow-md print:shadow-none  print:rounded-none  flex flex-col justify-start items-center ">
                   <S3Img
-                    src={`/antiques/image${antique.itemNo.replace('0', '').replace('a','').replace('b','')}.jpg`}
+                    src={`/antiques/image${antique.itemNo.replace('0', '').replace('a', '').replace('b', '')}.jpg`}
                     alt={antique.itemNo}
                     className='m-auto h-[100px] print:h-[8cm] print:w-[auto]'
                   />
@@ -132,20 +132,22 @@ const PrintAntiques = () => {
                   </div>
                   <p className="font-bold mb-2"></p>
                   <p className="page-description text-xs print:text-md mb-2 print:w-[10cm] print:text-center">{antique?.description}</p>
-                  <div>
+                  <div className=" flex flex-col items-center">
                     <span className="font-bold">Room Number: &nbsp; </span>
                     <span className="mb-2">{antique?.room?.title || 'TBC'}</span>
                   </div>
-                  <div className="mt-3">
+                  <div className="mt-3 flex flex-col items-center">
                     <p className="font-bold">Dimension (cm):</p>
-                    <span className="mb-2"><span className="font-bold">H:</span>{antique?.height} | <span className="font-bold">W:</span>{antique?.height} | <span className="font-bold">D:</span>{antique?.depth}</span>
+                    <span className='font-bold'> w: <span className=' font-normal'>{antique?.width ? antique?.width + "&nbsp;cm" : ""}</span></span>
+                    <span className='font-bold'> h: <span className=' font-normal'>{antique?.height ? antique?.height +"&nbsp;cm" : ""}</span></span>
+                    <span className='font-bold'> d: <span className=' font-normal'>{antique?.depth ? antique?.depth+ "&nbsp;cm" : ""}</span></span>
                   </div>
                   <p className="font-bold mt-3">Warehouse location:</p>
                   <p>{antique?.warehouseLocation || 'TBC'}</p>
-                  <p className="font-bold mb-3">QR Code</p>
+                  <p className="font-bold mb-3 mt-3">QR Code</p>
                   <QRCode className="w-8 h-8 print:w-[2cm] print:h-[2cm]" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
                 </div>
-                <div className="page-number hidden"> Page | {index +  1} </div>
+                <div className="page-number hidden"> Page | {index + 1} </div>
                 <div className="page-break"></div>
               </div>
             ))}
