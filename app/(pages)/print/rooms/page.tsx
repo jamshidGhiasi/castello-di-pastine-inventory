@@ -103,7 +103,7 @@ const PrintRooms = () => {
                 </div>
             </div>
             <div className='sticky top-[79px] bg-[#f2f2f2]   border-b py-2 px-4 sm:px-0 mb-4 w-full flex flex-col sm:flex-row items-start sm:items-center  justify-between'>
-                <div className="w-full max-w-5xl mx-auto flex justify-between items-center">
+                <div className="w-full max-w-5xl mx-auto flex  flex-col sm:flex-row justify-between sm:items-center">
 
                 <h1 className='font-bold sm:text-lg mb-2 sm:mb-0  '>Select A Room</h1>
                 {rooms &&
