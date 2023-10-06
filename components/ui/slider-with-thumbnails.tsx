@@ -6,6 +6,13 @@ import {
   KeenSliderPlugin,
   KeenSliderInstance,
 } from "keen-slider/react"
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui/dialog"
+
 import "keen-slider/keen-slider.min.css"
 
 function ThumbnailPlugin(
@@ -50,52 +57,111 @@ export interface SliderWithThumbnailsProps {
 export default function SliderWithThumbnails(props: SliderWithThumbnailsProps) {
   const { items } = props
 
+  const [open, setOpen] = React.useState(false);
+
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
   })
-  const [thumbnailRef] = useKeenSlider<HTMLDivElement>(
-    {
-      initial: 0,
-      slides: {
-        perView: 5,
-        spacing: 5,
-      },
-      vertical: true,
+  const thumbnailProps = {
+    initial: 0,
+    slides: {
+      perView: 5,
+      spacing: 5,
     },
+  }
+  const [verticalThumbnailRef] = useKeenSlider<HTMLDivElement>(
+    { ...thumbnailProps, vertical: true },
+    [ThumbnailPlugin(instanceRef)]
+  )
+  const [horizontalThumbnailRef] = useKeenSlider<HTMLDivElement>(
+    { ...thumbnailProps },
     [ThumbnailPlugin(instanceRef)]
   )
 
+  const handleThumbnailClick = () => {
+    setOpen(true)
+  }
+
   if (!items?.length) return null
 
-  return (
-    <div className="flex gap-4 flex-row-reverse h-[100%]">
-      {/* Slider */}
-      <div className="grid grid-col-10">
-        <div ref={sliderRef} className="keen-slider">
-          {items.map((item: React.ReactNode, i: number) => {
-            return (
-              <div key={`number-slide${i}`} className={`keen-slider__slide number-slide${i}`}>
-                <div className="min-w-[50vw] w-full h-full">
-                  {item}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      </div>
+  const sliderJsx = (
+    <div ref={sliderRef} className="keen-slider">
+      {items.map((item: React.ReactNode, i: number) => {
+        return (
+          <div key={`number-slide${i}`} className={`keen-slider__slide number-slide${i}`}>
+            <div className="min-w-[50vw] max-md:w-[100vw]">
+              {item}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+  const verticalThumbnailsJsx = (
+    <div ref={verticalThumbnailRef} className="keen-slider thumbnail">
+      {items.map((item: React.ReactNode, i: number) => {
+        return (
+          <div key={`thumbnail-slide${i}`} className={`keen-slider__slide number-slide${i}`}>
+            <div className="md:w-[120px] md:h-[86px]">
+              {item}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+  const verticalThumbnailsJsxWithDialog = (
+    <div ref={verticalThumbnailRef} className="keen-slider thumbnail">
+      {items.map((item: React.ReactNode, i: number) => {
+        return (
+          <div key={`thumbnail-slide${i}`} className={`keen-slider__slide number-slide${i}`} onClick={handleThumbnailClick}>
+            <div className="md:w-[120px] md:h-[86px]">
+              {item}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+  const horizontalThumbnailsJsx = (
+    <div ref={horizontalThumbnailRef} className="keen-slider thumbnail">
+      {items.map((item: React.ReactNode, i: number) => {
+        return (
+          <div key={`thumbnail-slide${i}`} className={`keen-slider__slide number-slide${i} !min-w-[120px] !w-[120px] h-[86px]`}>
+            <div className="w-[120px] h-[86px]">
+              {item}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
 
-      {/* Thumbnails */}
-      <div className="grid grid-col-2 max-h-[640px]">
-        <div ref={thumbnailRef} className="keen-slider thumbnail">
-        {items.map((item: React.ReactNode, i: number) => {
-            return (
-              <div key={`thumbnail-slide${i}`} className={`keen-slider__slide number-slide${i}`}>
-                <div className="w-[120px] h-[86px]">
-                  {item}
-                </div>
-              </div>
-            )
-          })}
+  return (
+    <div>
+      {/* Dialog */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-[100vw] max-h-[100vh] max-md:h-full px-0 overflow-hidden">
+          <DialogHeader />
+          {sliderJsx}
+          <DialogFooter>
+            {horizontalThumbnailsJsx}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <div className="grid grid-cols-12 gap-4 h-[100%]">
+        {/* Slider */}
+        <div className="col-span-10 order-2 max-md:hidden">
+          {sliderJsx}
+        </div>
+
+        {/* Thumbnails */}
+        <div className="max-md:col-span-12 md:max-h-[640px] max-md:hidden">
+          {verticalThumbnailsJsx}
+        </div>
+        <div className="max-md:col-span-12 md:max-h-[640px] md:hidden">
+          {verticalThumbnailsJsxWithDialog}
         </div>
       </div>
     </div>
