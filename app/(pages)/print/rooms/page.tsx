@@ -1,4 +1,5 @@
 'use client';
+
 import Layout from "@/components/layout/layout";
 import { use, useEffect, useRef, useState } from "react";
 import { convertInputToAntiqueRange } from "@/lib/utils"
@@ -85,8 +86,6 @@ const PrintRooms = () => {
             console.error(error);
             setAntiques([])
         }
-
-
     }
 
     return (
@@ -107,18 +106,17 @@ const PrintRooms = () => {
 
                 <h1 className='font-bold sm:text-lg mb-2 sm:mb-0  '>Select A Room</h1>
                 {rooms &&
-
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
                             <Button
-                                variant="outline"
-                                role="combobox"
-                                aria-expanded={open}
-                                className=" w-full sm:w-1/3 justify-between text-[16px]"
+                              variant="outline"
+                              role="combobox"
+                              aria-expanded={open}
+                              className=" w-full sm:w-1/3 justify-between text-[16px]"
                             >
                                 {value
-                                    ? rooms.find((framework) => framework.slug === value)?.title
-                                    : "Select a room..."}
+                                  ? rooms.find((room) => room.slug === value)?.title
+                                  : "Select a room..."}
                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
                         </PopoverTrigger>
@@ -127,24 +125,23 @@ const PrintRooms = () => {
                                 <CommandInput placeholder="Search rooms..." />
                                 <CommandEmpty>No room found.</CommandEmpty>
                                 <CommandGroup>
-                                    {rooms.map((item) => (
+                                    {rooms.map((room) => (
                                         <CommandItem
-                                            key={item.id}
-                                        
-                                            onSelect={(currentValue) => {
-                                                setValue(currentValue === value ? "" : currentValue)
-                                                setAntiques([])
-                                                getItems(currentValue)
-                                                setOpen(false)
-                                            }}
+                                          key={room.id}
+                                          onSelect={(currentValue) => {
+                                            setValue(currentValue === value ? "" : room.slug)
+                                            setAntiques([])
+                                            getItems(room.slug)
+                                            setOpen(false)
+                                          }}
                                         >
                                             <Check
-                                                className={cn(
-                                                    "mr-2 h-4 w-4",
-                                                    value === item.slug ? "opacity-100" : "opacity-0"
-                                                )}
+                                              className={cn(
+                                                "mr-2 h-4 w-4",
+                                                value === room.slug ? "opacity-100" : "opacity-0"
+                                              )}
                                             />
-                                            {item.slug}
+                                            {room.title}
                                         </CommandItem>
                                     ))}
                                 </CommandGroup>
@@ -154,7 +151,6 @@ const PrintRooms = () => {
 
                 }
                 </div>
-
             </div>
 
             <div className="flex flex-col items-center justify-between px-4 sm:p-0 w-full max-w-5xl mx-auto">
