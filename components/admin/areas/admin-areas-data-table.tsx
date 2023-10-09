@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import AdminDataTable from "@/components/admin/admin-data-table";
 import { ColumnDef } from "@tanstack/react-table"
-import AdminAreasDataTableExtraActions from "@/components/admin/areas/admin-areas-data-table-extra-actions";
+import AdminDataTableExtraActions from "@/components/admin/admin-data-table-extra-actions"
 import { AreaFromGoogleSheets } from "@/types/Area";
 import toast from 'react-hot-toast'
 
@@ -24,6 +24,7 @@ const AdminAreasDataTable: React.FC<AdminAreasDataTableProps> = (props) => {
   const { data } = props
 
   const [shouldSyncDatabase, setShouldSyncDatabase] = useState(false)
+  const [selectedItems, setSelectedItems] = useState([])
   const [isSyncDatabaseLoading, setIsSyncDatabaseLoading] = useState(false)
 
   // Sync areas table from prisma
@@ -31,13 +32,16 @@ const AdminAreasDataTable: React.FC<AdminAreasDataTableProps> = (props) => {
     const syncDatabase = async () => {
       try {
         // Run sync
-        const fetchResults = await fetch('/api/sync/areas')
-        const syncedItems = await fetchResults.json()
-
-        if (!syncedItems?.length) throw new Error('No items synced to database!')
+        const hasSelectedItems = Boolean(selectedItems?.length)
+        const fetchResults = await fetch(
+          '/api/sync/areas',
+          hasSelectedItems ? { method: 'POST', body: JSON.stringify({ selectedItems }) } : {}
+        )
+        const syncedResults = await fetchResults.json()
+        if (!syncedResults?.length) throw new Error('No items synced to database!')
 
         // Set success state
-        toast.success(`Successfully synced ${syncedItems.length} records to database!`);
+        toast.success(`Successfully synced ${syncedResults.length} records to database!`);
       } catch (err) {
         // Set error state
         console.error('Error caught at syncDatabase()', err)
@@ -51,8 +55,10 @@ const AdminAreasDataTable: React.FC<AdminAreasDataTableProps> = (props) => {
   }, [shouldSyncDatabase])
 
   // Methods
-  const handleSyncDatabase = () => {
+  const handleSyncDatabase = (options: { selectedItems?: any | [] }) => {
+    const { selectedItems = [] } = options
     setShouldSyncDatabase(true)
+    setSelectedItems(selectedItems)
     setIsSyncDatabaseLoading(true)
   }
 
@@ -62,7 +68,7 @@ const AdminAreasDataTable: React.FC<AdminAreasDataTableProps> = (props) => {
       data={data}
       searchColumnAccessorKey="title"
       extraActions={
-        <AdminAreasDataTableExtraActions
+        <AdminDataTableExtraActions
           isSyncDatabaseLoading={isSyncDatabaseLoading}
           handleSyncDatabase={handleSyncDatabase}
         />

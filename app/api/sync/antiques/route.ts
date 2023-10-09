@@ -3,7 +3,7 @@ import { mapSeries } from 'bluebird'
 import prisma from "@/lib/prisma";
 import fetchAntiquesFromGoogleSheets from "@/utils/fetchAntiquesFromGoogleSheets"
 import { AntiqueFromGoogleSheets } from "@/types/Antique"
-import { Area } from '@prisma/client'
+import {Antique, Area} from '@prisma/client'
 
 /**
  * Helper function to check if a value is empty
@@ -43,6 +43,26 @@ const createAreaFromAntique = async (antique: AntiqueFromGoogleSheets): Promise<
   }
 }
 
+const getAntiqueDatabaseProperties = (antique: AntiqueFromGoogleSheets) => ({
+  itemNo: antique.itemNo,
+  description: antique.description,
+  lot: antique.lot,
+  height: antique.height,
+  width: antique.width,
+  depth: antique.depth,
+  warehouseLocation: antique.warehouseLocation,
+  roomLocation: antique.roomLocation,
+  otherNotes: antique.otherNotes,
+  vladamirNotes: antique.vladamirNotes,
+  wipeFrame: antique.wipeFrame,
+  wipePicture: antique.wipePicture,
+  cleanPicture: antique.cleanPicture,
+  varnishPicture: antique.varnishPicture,
+  varnishFrame: antique.varnishFrame,
+  restoreFrame: antique.restoreFrame,
+  restorePicture: antique.restorePicture,
+})
+
 /**
  * Blackbox function to sync antiques from Google Sheets to Prisma
  * @param request
@@ -76,26 +96,7 @@ export const GET = async (request: NextRequest) => {
             /**
              * Properties
              */
-            itemNo: antique.itemNo,
-            description: antique.description,
-            lot: antique.lot,
-            height: antique.height,
-            width: antique.width,
-            depth: antique.depth,
-            warehouseLocation: antique.warehouseLocation,
-            roomLocation: antique.roomLocation,
-            otherNotes: antique.otherNotes,
-            vladamirNotes: antique.vladamirNotes,
-            wipeFrame: antique.wipeFrame,
-            wipePicture: antique.wipePicture,
-            cleanPicture: antique.cleanPicture,
-            varnishPicture: antique.varnishPicture,
-            varnishFrame: antique.varnishFrame,
-            restoreFrame: antique.restoreFrame,
-            restorePicture: antique.restorePicture,
-
-            
-
+            ...getAntiqueDatabaseProperties(antique),
 
             /**
              * Relations
@@ -137,6 +138,39 @@ export const GET = async (request: NextRequest) => {
           }
         })
         return onCreate
+      } catch (err) {
+        console.error('Error caught at onSeed:', { err, antique });
+      }
+    })
+
+    return NextResponse.json(onSeed, { status: 200 })
+  } catch (error) {
+    console.error('Error caught at sync route:', error)
+    return NextResponse.json({ message: "Error", error }, { status: 500 })
+  }
+}
+
+/**
+ * Function to sync selected antiques from Google Sheets to Prisma
+ * @param request
+ * @constructor
+ */
+export const POST = async (request: NextRequest) => {
+  try {
+    const { selectedItems = [] } = await request.json()
+    if (!selectedItems.length) return NextResponse.json({ message: "No items selected" }, { status: 200 })
+    const selectedItemNos = selectedItems.map(({ itemNo }: Antique) => itemNo)
+    const antiquesFromGoogleSheets = await fetchAntiquesFromGoogleSheets()
+    const selectedAntiquesFromGoogleSheets = antiquesFromGoogleSheets.filter((antique: AntiqueFromGoogleSheets) => selectedItemNos.includes(antique.itemNo))
+
+    const onSeed = await mapSeries(selectedAntiquesFromGoogleSheets, async (antique: AntiqueFromGoogleSheets) => {
+      try {
+        const upsertAntique = await prisma.antique.upsert({
+          where: { itemNo: antique.itemNo },
+          update: getAntiqueDatabaseProperties(antique),
+          create: getAntiqueDatabaseProperties(antique),
+        });
+        return upsertAntique;
       } catch (err) {
         console.error('Error caught at onSeed:', { err, antique });
       }

@@ -15,6 +15,7 @@ import {
 } from "@tanstack/react-table"
 import {ChevronDown} from "lucide-react"
 import {Button} from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {Input} from "@/components/ui/input"
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
+import AdminDataTablePagination from "@/components/admin/admin-data-table-pagination"
 
 export interface AdminDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -32,12 +34,11 @@ export interface AdminDataTableProps<TData, TValue> {
    * @default The first column's accessor key
    */
   searchColumnAccessorKey?: string
-  extraActions?: React.ReactNode
+  extraActions?: React.ReactElement<any, string | React.JSXElementConstructor<any>>
 }
 
 export default function AdminDataTable<TData, TValue>({
-  columns,
-
+  columns: injectedColumns,
   data,
   searchColumnAccessorKey: injectedSearchColumnAccessorKey,
   extraActions,
@@ -50,12 +51,32 @@ export default function AdminDataTable<TData, TValue>({
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
+  const columns = [
+    {
+      id: "select",
+      header: ({ table }: any) => (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value: any) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }: any) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value: any) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+    ...injectedColumns
+  ]
+
   const table = useReactTable({
     data,
     columns,
-
-
-
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -64,16 +85,12 @@ export default function AdminDataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-
-
-
+    initialState: { pagination: { pageSize: 50, pageIndex: 0, }, },
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
-
-
     },
   })
 
@@ -98,7 +115,7 @@ export default function AdminDataTable<TData, TValue>({
 
         {/* Right */}
         <div className="flex justify-between gap-1">
-          {extraActions}
+          {extraActions && React.cloneElement(extraActions, { table })}
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -184,31 +201,8 @@ export default function AdminDataTable<TData, TValue>({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-end space-x-2 py-4">
-        {Boolean(table.getFilteredSelectedRowModel().rows.length) && (
-          <div className="flex-1 text-sm text-muted-foreground">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
-          </div>
-        )}
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
+      <div className="mt-4">
+        <AdminDataTablePagination table={table} />
       </div>
     </div>
   )
