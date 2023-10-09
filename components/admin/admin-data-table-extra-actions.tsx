@@ -5,15 +5,21 @@ import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
 import toast from 'react-hot-toast'
+import { Table } from "@tanstack/react-table";
 
 export interface AdminAntiquesDataTableExtraActionsProps {
-  handleSyncDatabase: () => void
-  handleUploadImages: () => void
+  handleSyncDatabase: ({ selectedItems }: { selectedItems?: any }) => void
+  handleUploadImages?: () => void
   isSyncDatabaseLoading?: boolean
+  table?: Table<any>
 }
 
 const AdminAntiquesDataTableExtraActions: React.FC<AdminAntiquesDataTableExtraActionsProps> = (props) => {
-  const { handleUploadImages, handleSyncDatabase, isSyncDatabaseLoading } = props
+  const { handleUploadImages, handleSyncDatabase, isSyncDatabaseLoading, table } = props
+
+  const selectedRows = table?.getFilteredSelectedRowModel?.()?.rows
+  const selectedItems = selectedRows?.map(({ original }) => original) || []
+  const hasSelectedItems = Boolean(selectedItems?.length)
 
   const router = useRouter()
   const handleRefresh = () => {
@@ -23,15 +29,17 @@ const AdminAntiquesDataTableExtraActions: React.FC<AdminAntiquesDataTableExtraAc
 
   return (
     <div className="flex justify-between gap-1">
-      <Button onClick={handleUploadImages}>Upload Images</Button>
+      {handleUploadImages && <Button onClick={handleUploadImages}>Upload Images</Button>}
       <Button onClick={handleRefresh}>Sync Google Sheets</Button>
-      <Button onClick={handleSyncDatabase} disabled={isSyncDatabaseLoading}>
+      <Button onClick={() => handleSyncDatabase({ selectedItems })} disabled={isSyncDatabaseLoading}>
         {isSyncDatabaseLoading ?
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             Syncing...
           </>
-          : 'Sync Database'
+          : (
+            hasSelectedItems ? `Sync ${selectedItems.length} item(s) to Database` : 'Sync Database'
+          )
         }
       </Button>
     </div>
