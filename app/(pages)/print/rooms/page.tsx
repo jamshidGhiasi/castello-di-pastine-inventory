@@ -1,32 +1,15 @@
 'use client';
 
 import Layout from "@/components/layout/layout";
-import { use, useEffect, useRef, useState } from "react";
-import { convertInputToAntiqueRange } from "@/lib/utils"
-import { Input } from "@/components/ui/input";
-import { Img } from "react-image";
+import {useEffect, useRef, useState} from "react";
+import {ScrollArea} from "@/components/ui/scroll-area";
+import {cn} from "@/lib/utils"
 import ReactToPrint from 'react-to-print';
-import QRCode from "react-qr-code";
-import { Button } from "@/components/ui/button";
-import toast from 'react-hot-toast'
-import { ChevronRight, Home, Loader2 } from "lucide-react";
-import RoomSelector from "@/components/print/room-selector";
-import { Check, ChevronsUpDown } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-} from "@/components/ui/command"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
-import exp from "constants"
+import {Button} from "@/components/ui/button";
+import {Check, ChevronRight, ChevronsUpDown, Home, Loader2} from "lucide-react";
+import orderBy from 'lodash.orderby'
+import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem,} from "@/components/ui/command"
+import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/popover"
 import S3Img from "@/components/S3Img";
 import Link from "next/link";
 
@@ -120,35 +103,43 @@ const PrintRooms = () => {
                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
                         </PopoverTrigger>
-                        <PopoverContent className="w-[200px] p-0">
+                      
+                        <PopoverContent className="w-full h-96 p-0">
                             <Command>
                                 <CommandInput placeholder="Search rooms..." />
-                                <CommandEmpty>No room found.</CommandEmpty>
-                                <CommandGroup>
-                                    {rooms.map((room) => (
-                                        <CommandItem
-                                          key={room.id}
-                                          onSelect={(currentValue) => {
-                                            setValue(currentValue === value ? "" : room.slug)
-                                            setAntiques([])
-                                            getItems(room.slug)
-                                            setOpen(false)
-                                          }}
-                                        >
-                                            <Check
-                                              className={cn(
-                                                "mr-2 h-4 w-4",
-                                                value === room.slug ? "opacity-100" : "opacity-0"
-                                              )}
-                                            />
-                                            {room.title}
-                                        </CommandItem>
-                                    ))}
-                                </CommandGroup>
+                                <ScrollArea>
+                                    <CommandEmpty>No room found.</CommandEmpty>
+                                    <CommandGroup>
+                                        {orderBy(rooms, 'order').map((room) => {
+                                            const hasAntiques = Boolean(room.antiques?.length)
+                                            const disabled = !hasAntiques
+                                            return (
+                                              <CommandItem
+                                                className={cn(disabled ? 'text-slate-300' : '')}
+                                                disabled={disabled}
+                                                key={room.id}
+                                                onSelect={(currentValue) => {
+                                                  setValue(currentValue === value ? "" : room.slug)
+                                                  setAntiques([])
+                                                  getItems(room.slug)
+                                                  setOpen(false)
+                                                }}
+                                              >
+                                                <Check
+                                                  className={cn(
+                                                    "mr-2 h-4 w-4",
+                                                    value === room.slug ? "opacity-100" : "opacity-0"
+                                                  )}
+                                                />
+                                                {room.title}
+                                              </CommandItem>
+                                            )
+                                          })}
+                                    </CommandGroup>
+                                </ScrollArea>
                             </Command>
                         </PopoverContent>
                     </Popover>
-
                 }
                 </div>
             </div>
