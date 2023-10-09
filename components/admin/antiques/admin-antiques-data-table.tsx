@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import AdminDataTable from "@/components/admin/admin-data-table";
 import { ColumnDef } from "@tanstack/react-table"
-import AdminAntiquesDataTableExtraActions from "@/components/admin/antiques/admin-antiques-data-table-extra-actions";
+import AdminDataTableExtraActions from "@/components/admin/admin-data-table-extra-actions"
 import { AntiqueFromGoogleSheets } from "@/types/Antique";
 import toast from 'react-hot-toast'
 
@@ -17,7 +17,6 @@ export const antiquesAdminDataTableColumns: ColumnDef<AntiqueFromGoogleSheets>[]
   {
     accessorKey: 'description', header: 'Description',
     cell: ({ row }) => {
-
       return <div className='w-64'><p className=' text-xs truncate hover:text-clip'>{row.getValue('description')}</p></div>
     }
 
@@ -38,6 +37,7 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
   const { data } = props
 
   const [shouldSyncDatabase, setShouldSyncDatabase] = useState(false)
+  const [selectedItems, setSelectedItems] = useState([])
   const [isSyncDatabaseLoading, setIsSyncDatabaseLoading] = useState(false)
 
   // Sync antiques table from prisma
@@ -45,13 +45,16 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
     const syncDatabase = async () => {
       try {
         // Run sync
-        const fetchResults = await fetch('/api/sync/antiques')
-        const syncedItems = await fetchResults.json()
-
-        if (!syncedItems?.length) throw new Error('No items synced to database!')
+        const hasSelectedItems = Boolean(selectedItems?.length)
+        const fetchResults = await fetch(
+          '/api/sync/antiques',
+          hasSelectedItems ? { method: 'POST', body: JSON.stringify({ selectedItems }) } : {}
+        )
+        const syncedResults = await fetchResults.json()
+        if (!syncedResults?.length) throw new Error('No items synced to database!')
 
         // Set success state
-        toast.success(`Successfully synced ${syncedItems.length} records to database!`);
+        toast.success(`Successfully synced ${syncedResults.length} records to database!`);
       } catch (err) {
         // Set error state
         console.error('Error caught at syncDatabase()', err)
@@ -65,8 +68,10 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
   }, [shouldSyncDatabase])
 
   // Methods
-  const handleSyncDatabase = () => {
+  const handleSyncDatabase = (options: { selectedItems?: any | [] }) => {
+    const { selectedItems = [] } = options
     setShouldSyncDatabase(true)
+    setSelectedItems(selectedItems)
     setIsSyncDatabaseLoading(true)
   }
 
@@ -117,7 +122,7 @@ const AdminAntiquesDataTable: React.FC<AdminAntiquesDataTableProps> = (props) =>
       data={data}
       searchColumnAccessorKey="description"
       extraActions={
-        <AdminAntiquesDataTableExtraActions
+        <AdminDataTableExtraActions
           isSyncDatabaseLoading={isSyncDatabaseLoading}
           handleSyncDatabase={handleSyncDatabase}
           handleUploadImages={handleUploadImages}
