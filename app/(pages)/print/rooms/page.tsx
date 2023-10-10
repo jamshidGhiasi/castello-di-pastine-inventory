@@ -39,6 +39,7 @@ const PrintRooms = () => {
     const [range, setRange] = useState<string>()
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState("")
+    const [room, setRoom] = useState("")
 
     const componentRef = useRef(null);
 
@@ -104,7 +105,7 @@ const PrintRooms = () => {
                             </Button>
                         </PopoverTrigger>
                       
-                        <PopoverContent className="w-full h-96 p-0">
+                        <PopoverContent className="w-full h-64 sm:h-96 ">
                             <Command>
                                 <CommandInput placeholder="Search rooms..." />
                                 <ScrollArea>
@@ -122,6 +123,7 @@ const PrintRooms = () => {
                                                   setValue(currentValue === value ? "" : room.slug)
                                                   setAntiques([])
                                                   getItems(room.slug)
+                                                  setRoom(room.title)
                                                   setOpen(false)
                                                 }}
                                               >
@@ -147,9 +149,9 @@ const PrintRooms = () => {
             <div className="flex flex-col items-center justify-between px-4 sm:p-0 w-full max-w-5xl mx-auto">
                 {(antiques && antiques.length > 0) && <ReactToPrint pageStyle={pageStyle} trigger={() => <Button className="mb-4 w-full sm:w-auto ml-auto ">Print</Button>} content={() => componentRef.current} />}
                 <div ref={componentRef} className="w-full">
-                    <h2 className="text-lg font-bold border-b mb-4">{value}</h2>
+                    <h2 className="text-lg font-bold  mb-4">{room}</h2>
                     {loading && <Loader2 className="mr-2 h-24 w-24 animate-spin" />}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto  print:grid-cols-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mx-auto  print:grid-cols-4 pb-4">
                         {(antiques && antiques.length > 0) && antiques.map((antique, index) => (
                             <div key={index} >
                                 <div className="page-label bg-white border-[2px] shadow-md print:shadow-none print:rounded-none p-4  flex flex-col items-center justify-between   ">
