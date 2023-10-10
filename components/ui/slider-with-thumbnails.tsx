@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dialog"
 
 import "keen-slider/keen-slider.min.css"
+import Zoom from 'react-medium-image-zoom'
+import "react-medium-image-zoom/dist/styles.css";
 
 function ThumbnailPlugin(
   mainRef: React.MutableRefObject<KeenSliderInstance | null>
@@ -90,7 +92,7 @@ export default function SliderWithThumbnails(props: SliderWithThumbnailsProps) {
         return (
           <div key={`number-slide${i}`} className={`keen-slider__slide number-slide${i}`}>
             <div className="min-w-[50vw] max-md:w-[100vw]">
-              {item}
+             <Zoom>{item}</Zoom>
             </div>
           </div>
         )
@@ -103,7 +105,7 @@ export default function SliderWithThumbnails(props: SliderWithThumbnailsProps) {
         return (
           <div key={`thumbnail-slide${i}`} className={`keen-slider__slide number-slide${i}`}>
             <div className="md:w-[120px] md:h-[86px]">
-              {item}
+            {item}
             </div>
           </div>
         )
@@ -116,7 +118,9 @@ export default function SliderWithThumbnails(props: SliderWithThumbnailsProps) {
         return (
           <div key={`thumbnail-slide${i}`} className={`keen-slider__slide number-slide${i}`} onClick={handleThumbnailClick}>
             <div className="md:w-[120px] md:h-[86px]">
+              
               {item}
+              
             </div>
           </div>
         )
@@ -141,7 +145,7 @@ export default function SliderWithThumbnails(props: SliderWithThumbnailsProps) {
     <div>
       {/* Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-[100vw] max-h-[100vh] max-md:h-full px-0 overflow-hidden">
+        <DialogContent className="max-w-[100vw] max-h-[100vh] max-md:h-full px-0 overflow-hidden ">
           <DialogHeader />
           {sliderJsx}
           <DialogFooter>
