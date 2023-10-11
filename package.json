@@ -39,6 +39,7 @@
     "eslint-config-next": "13.4.19",
     "googleapis": "^126.0.1",
     "keen-slider": "^6.8.6",
+    "lightbox.js-react": "^0.9.4",
     "lodash.orderby": "^4.6.0",
     "lucide-react": "^0.274.0",
     "next": "^13.4.20-canary.28",
