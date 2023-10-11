@@ -7,8 +7,8 @@ import { ChevronRight, Home } from "lucide-react";
 import 'lightbox.js-react/dist/index.css'
 import { SlideshowLightbox, initLightboxJS } from 'lightbox.js-react'
 import { useEffect } from "react";
-import { Img } from "react-image";
-import Image from 'next/image'
+import Image from "next/image";
+
 
 const images = [
     {
@@ -54,13 +54,14 @@ const FloorPlans = () => {
             </div>
 
             <div className="px-4">
-                <SlideshowLightbox theme="night" lightboxIdentifier="lightbox1" framework="next" images={images}>
+                <SlideshowLightbox theme="night" lightboxIdentifier="lightbox1" framework="next" images={images} showThumbnails={true}  captionStyle={{color: "silver"}}>
                     <div className="grid grid-cols-1 lg:grid lg:grid-cols-3 place-items-center place-content-center gap-3  w-full max-w-5xl mx-auto px-4 sm:px-0 pt-0 pb-4 sm:pb-0">
 
                     {images.map((image) => (
                         <Image
                             key={image.src}
                             src={image.src}
+                            
                             alt={image.alt}
                             height={500}
                             width={500}
@@ -68,6 +69,7 @@ const FloorPlans = () => {
                             quality={80}
                             className="w-full rounded shadow-lg"
                         />
+                      
                     ))}
                     </div>
                 </SlideshowLightbox>
