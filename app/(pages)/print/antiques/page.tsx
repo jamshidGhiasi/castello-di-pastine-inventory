@@ -145,7 +145,7 @@ const PrintAntiques = () => {
                   <p className="font-bold mt-3">Warehouse location:</p>
                   <p>{antique?.warehouseLocation || 'TBC'}</p>
                   <p className="font-bold mb-3 mt-3">QR Code</p>
-                  <QRCode className="w-8 h-8 print:w-[2cm] print:h-[2cm]" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
+                  <QRCode className="w-8 h-8 print:w-[2cm] print:h-[2cm]" value={`https://inventory.castello-di-pastine.com/items/${antique.itemNo}`} />
                 </div>
                 <div className="page-number hidden"> Page | {index + 1} </div>
                 <div className="page-break"></div>

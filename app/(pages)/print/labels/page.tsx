@@ -83,7 +83,7 @@ const PrintLabels = () => {
                         {antiques && antiques.length && antiques.map((antique, index) => (
                             <div key={index} >
                                 <div className="page-label bg-white rounded-lg shadow-md print:shadow-none print:rounded-none p-4  flex items-center justify-between   ">
-                                    <QRCode className="print:w-[2cm] w-[100px] h-auto mr-2" value={`https://castello-di-pastine.com/${antique.itemNo}-2`} />
+                                    <QRCode className="print:w-[2cm] w-[100px] h-auto mr-2" value={`https://inventory.castello-di-pastine.com/items/${antique.itemNo}`} />
                                     <div className="flex flex-col justify-between items-center grow mr-auto">
                                         <p className="font-bold"> {antique?.itemNo}</p>
 
