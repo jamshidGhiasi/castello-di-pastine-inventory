@@ -60,6 +60,8 @@ model Room {
   areaId     String?
   antiques   Antique[]
   categories Category[]
+  moodBoard  String?
+
 }
 
 model Category {

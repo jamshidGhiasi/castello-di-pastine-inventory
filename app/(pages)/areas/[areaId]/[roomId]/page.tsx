@@ -6,6 +6,8 @@ import fetchAntiques from "@/utils/fetchAntiques";
 import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
 import { AntiqueFromGoogleSheets } from '@/types/Antique';
+import Image from 'next/image'
+import S3Img from "@/components/S3Img";
 
 export const dynamic = 'force-dynamic'
 
@@ -29,8 +31,15 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                     <Link href='/areas' className=' capitalize pointer-events-none' >{roomId.replace(/-/g, ' ').replace('%26', '&')}</Link>
                 </div>
             </div>
- 
+     
+  
             <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0  max-w-5xl mx-auto">
+            {antiques && antiques.length > 0 && 
+                <div className="group relative h-[150px] p-4 bg-white rounded-lg overflow-hidden shadow-md  hover:border-[#c4d5ce] hover:shadow-lg transition-all duration-300 ease-out">
+                    <S3Img src={`/schemas/${antiques[0].room?.slug}.jpeg`} alt="" />  
+                    <span className=' text-sm bg-[#4b665b] text-white group-hover:bg-[#c4d5ce]  absolute left-0 text-center bottom-0 w-4/12 py-1 rounded-tr-lg z-10'>SCHEMA</span>
+                </div>
+            }
                 {antiques &&
                     antiques.map((antique: any, i) =>
                     (

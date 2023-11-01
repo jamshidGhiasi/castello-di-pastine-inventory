@@ -33,6 +33,8 @@ const fetchAntiques = async (areaId: string, roomId: string) => {
                     room: {
                         select: {
                             title: true,
+                            moodBoard: true,
+                            slug: true,
                         }
                     },
                 }
