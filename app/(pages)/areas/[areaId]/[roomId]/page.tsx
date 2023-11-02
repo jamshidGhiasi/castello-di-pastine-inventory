@@ -37,9 +37,11 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
             {antiques && antiques.length > 0 && 
                 <div className="group relative h-[150px] p-4 bg-white rounded-lg overflow-hidden shadow-md  hover:border-[#c4d5ce] hover:shadow-lg transition-all duration-300 ease-out">
                     <S3Img src={`/schemas/${antiques[0].room?.slug}.jpeg`} alt="" />  
-                    <span className=' text-sm bg-[#4b665b] text-white group-hover:bg-[#c4d5ce]  absolute left-0 text-center bottom-0 w-4/12 py-1 rounded-tr-lg z-10'>SCHEMA</span>
+                    <span className=' text-sm bg-[#4b665b] text-white group-hover:bg-[#c4d5ce]  absolute left-0 text-center bottom-0 w-4/12 py-1 rounded-tr-lg z-10'>SCHEME</span>
                 </div>
             }
+
+
                 {antiques &&
                     antiques.map((antique: any, i) =>
                     (
