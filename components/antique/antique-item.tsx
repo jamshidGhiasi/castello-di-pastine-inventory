@@ -85,7 +85,7 @@ const AntiqueItem = ({
           <S3Img
             src={image[0]}
             alt={itemNo}
-            className='m-auto w-auto'
+            className='m-auto '
           />
           <span className=' text-sm bg-[#ececec] group-hover:bg-[#c4d5ce]  absolute left-0 bottom-0 w-4/12 py-1 rounded-tr-lg z-10'>{itemNo}</span>
           <div className='absolute top-0 left-0 bottom-0 right-0 border-[4px] border-[#ececec] rounded-lg group-hover:border-[#c4d5ce]'></div>
