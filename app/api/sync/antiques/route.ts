@@ -5,7 +5,7 @@ import fetchAntiquesFromGoogleSheets from "@/utils/fetchAntiquesFromGoogleSheets
 import { AntiqueFromGoogleSheets } from "@/types/Antique"
 import {Antique, Area} from '@prisma/client'
 
-export const maxDuration = 300
+export const maxDuration = 600
 
 /**
  * Helper function to check if a value is empty

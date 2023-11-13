@@ -5,7 +5,7 @@ import fetchRoomsFromGoogleSheets from "@/utils/fetchRoomsFromGoogleSheets"
 import {RoomFromGoogleSheets} from "@/types/Room"
 import {Room} from "@prisma/client";
 
-export const maxDuration = 300
+export const maxDuration = 600
 
 const getRoomDatabaseProperties = (room: RoomFromGoogleSheets) => ({
   order: Number(room.order),
