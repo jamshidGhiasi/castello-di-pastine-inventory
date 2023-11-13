@@ -5,6 +5,8 @@ import fetchAreasFromGoogleSheets from "@/utils/fetchAreasFromGoogleSheets"
 import { AreaFromGoogleSheets } from "@/types/Area"
 import {Area} from "@prisma/client";
 
+export const maxDuration = 300
+
 const getAreaDatabaseProperties = (area: AreaFromGoogleSheets) => ({
   order: Number(area.order),
   title: area.title,
