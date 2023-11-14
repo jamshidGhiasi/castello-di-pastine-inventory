@@ -88,8 +88,6 @@ export const GET = async (request: NextRequest) => {
        * Antique was being created, but race conditions can occur.
        */
       try {
-        console.log('jjj: mapSeries iteration', i)
-
         // 1. Ensure the Area exists or create it if not
         // Try to connect to the Area, or create it if it doesn't exist
         await createAreaFromAntique(antique)
@@ -143,15 +141,13 @@ export const GET = async (request: NextRequest) => {
         })
         return onCreate
       } catch (err) {
-        console.error('jjj: Error caught at onSeed:', { err, antique });
+        console.error('Error caught at onSeed:', { err, antique });
       }
     })
 
-    console.log('jjj: onSeed complete')
-
     return NextResponse.json(onSeed, { status: 200 })
   } catch (error) {
-    console.error('jjj: Error caught at sync route:', error)
+    console.error('Error caught at sync route:', error)
     return NextResponse.json({ message: "Error", error }, { status: 500 })
   }
 }
