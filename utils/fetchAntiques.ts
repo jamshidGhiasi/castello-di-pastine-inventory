@@ -3,7 +3,6 @@ import prisma from "@/lib/prisma";
 const fetchAntiques = async (areaId: string, roomId: string) => {
     try {
         try {
-
             const area = await prisma.antique.findMany({
                 where: {
                     AND: [
@@ -41,7 +40,7 @@ const fetchAntiques = async (areaId: string, roomId: string) => {
 
             })
             .catch((error) =>  null )
-            
+
             if (!area) {
                 return null
             }
