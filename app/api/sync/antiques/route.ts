@@ -72,8 +72,6 @@ const getAntiqueDatabaseProperties = (antique: AntiqueFromGoogleSheets) => ({
  */
 export const GET = async (request: NextRequest) => {
   try {
-    console.log('jjj: Sync start')
-
     const antiquesFromGoogleSheets = await fetchAntiquesFromGoogleSheets()
 
     // Delete all antiques from prisma then insert all antiques from Google Sheets
@@ -83,9 +81,7 @@ export const GET = async (request: NextRequest) => {
     await prisma.room.deleteMany()
 
     // Seed all antiques and relations from Google Sheets
-    const onSeed = await mapSeries(antiquesFromGoogleSheets, async (antique: AntiqueFromGoogleSheets, i) => {
-      console.log('jjj: Sync loop', { i, antique })
-
+    const onSeed = await mapSeries(antiquesFromGoogleSheets, async (antique: AntiqueFromGoogleSheets) => {
       /**
        * Ensure the Area Exists: Before creating the Room, make sure that the Area with the slug antique.areaId exists.
        * Given the nature of connectOrCreate, you might assume that the Area should have been created when the
@@ -148,8 +144,6 @@ export const GET = async (request: NextRequest) => {
         console.error('Error caught at onSeed:', { err, antique });
       }
     })
-
-    console.log('jjj: onSeed complete')
 
     return NextResponse.json(onSeed, { status: 200 })
   } catch (error) {
