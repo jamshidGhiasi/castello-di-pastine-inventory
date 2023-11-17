@@ -12,10 +12,11 @@ export interface AdminAntiquesDataTableExtraActionsProps {
   handleUploadImages?: () => void
   isSyncDatabaseLoading?: boolean
   table?: Table<any>
+  uploadLabel?: string
 }
 
 const AdminAntiquesDataTableExtraActions: React.FC<AdminAntiquesDataTableExtraActionsProps> = (props) => {
-  const { handleUploadImages, handleSyncDatabase, isSyncDatabaseLoading, table } = props
+  const { handleUploadImages, handleSyncDatabase, isSyncDatabaseLoading, table, uploadLabel = 'Upload Images' } = props
 
   const selectedRows = table?.getFilteredSelectedRowModel?.()?.rows
   const selectedItems = selectedRows?.map(({ original }) => original) || []
@@ -29,7 +30,7 @@ const AdminAntiquesDataTableExtraActions: React.FC<AdminAntiquesDataTableExtraAc
 
   return (
     <div className="flex justify-between gap-1">
-      {handleUploadImages && <Button onClick={handleUploadImages}>Upload Images</Button>}
+      {handleUploadImages && <Button onClick={handleUploadImages}>{uploadLabel}</Button>}
       <Button onClick={handleRefresh}>Sync Google Sheets</Button>
       <Button onClick={() => handleSyncDatabase({ selectedItems })} disabled={isSyncDatabaseLoading}>
         {isSyncDatabaseLoading ?
