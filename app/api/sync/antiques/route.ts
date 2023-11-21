@@ -23,7 +23,7 @@ const createAreaFromAntique = async (antique: AntiqueFromGoogleSheets): Promise<
     data: {
       title: antique.area,
       slug: antique.areaId,
-      order: antique.areaOrder,
+      order: Number(antique.areaOrder),
       categories: {
         connectOrCreate: {
           where: { slug: antique.categoryId },
@@ -64,8 +64,8 @@ const getAntiqueDatabaseProperties = (antique: AntiqueFromGoogleSheets) => ({
   varnishFrame: antique.varnishFrame,
   restoreFrame: antique.restoreFrame,
   restorePicture: antique.restorePicture,
-  roomOrder: antique.roomOrder,
-  areaOrder: antique.areaOrder,
+  roomOrder: Number(antique.roomOrder),
+  areaOrder: Number(antique.areaOrder),
 })
 
 /**
@@ -123,7 +123,7 @@ export const GET = async (request: NextRequest) => {
                   create: {
                     title: antique.roomTitle,
                     slug: antique.roomId,
-                    order: antique.roomOrder,
+                    order: Number(antique.roomOrder),
                     // roomNo: antique.room,
                     areaId: antique.areaId,
                     categories: {

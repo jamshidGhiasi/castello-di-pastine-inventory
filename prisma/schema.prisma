@@ -30,8 +30,8 @@ model Antique {
   varnishFrame      String?
   restoreFrame      String?
   restorePicture    String?
-  areaOrder         String?
-  roomOrder         String?
+  areaOrder         Int?
+  roomOrder         Int?
   area              Area?     @relation(fields: [areaId], references: [slug])
   room              Room?     @relation(fields: [roomId], references: [slug])
   category          Category? @relation(fields: [categoryId], references: [slug])
@@ -46,7 +46,7 @@ model Area {
   id         Int        @id @default(autoincrement())
   title      String     @unique
   slug       String     @unique
-  order      String?
+  order      Int?
   antiques   Antique[]
   rooms      Room[]
   categories Category[]
@@ -56,7 +56,7 @@ model Room {
   id         Int        @id @default(autoincrement())
   title      String     @unique
   slug       String     @unique
-  order      String?
+  order      Int?
   roomNo     String?
   area       Area?      @relation(fields: [areaId], references: [slug])
   areaId     String?
