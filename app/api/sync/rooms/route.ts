@@ -8,7 +8,7 @@ import {Room} from "@prisma/client";
 export const maxDuration = 300
 
 const getRoomDatabaseProperties = (room: RoomFromGoogleSheets) => ({
-  order: Number(room.order),
+  order: room.order,
   title: room.title,
   slug: room.slug,
   roomNo: room.roomId,
@@ -30,7 +30,7 @@ export const GET = async (request: NextRequest) => {
         const upsertRoom = await prisma.room.upsert({
           where: { slug: room.slug },
           update: {
-            order: Number(room.order),
+            order:room.order,
           },
           create: getRoomDatabaseProperties(room),
         });

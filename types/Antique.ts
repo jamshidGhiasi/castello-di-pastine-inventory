@@ -27,4 +27,6 @@ export interface AntiqueFromGoogleSheets {
   varnishFrame: string;
   restoreFrame: string;
   restorePicture: string;
+  roomOrder: string;
+  areaOrder: string;
 }

@@ -8,7 +8,7 @@ import {Area} from "@prisma/client";
 export const maxDuration = 300
 
 const getAreaDatabaseProperties = (area: AreaFromGoogleSheets) => ({
-  order: Number(area.order),
+  order: area.order,
   title: area.title,
   slug: area.slug,
 })
@@ -28,7 +28,7 @@ export const GET = async (request: NextRequest) => {
         const upsertArea = await prisma.area.upsert({
           where: { slug: area.slug },
           update: {
-            order: Number(area.order),
+            order: area.order,
           },
           create: getAreaDatabaseProperties(area),
         })

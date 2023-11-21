@@ -1,5 +1,5 @@
 export interface AreaFromGoogleSheets {
-  order: string;
+  order: number;
   title: string;
   slug: string;
   'area-id': string;
