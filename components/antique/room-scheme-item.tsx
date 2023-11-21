@@ -11,7 +11,7 @@ export interface RoomSchemeItemProps {
 const RoomSchemeItem: React.FC<RoomSchemeItemProps> = (props) => {
   const { room } = props
 
-  const { imgSrc, ref } = useS3Img({ src: `/schemas/${room?.slug}`, disableLazy: true })
+  const { imgSrc, ref } = useS3Img({ src: `/schemas/${room?.slug}.jpeg`, disableLazy: true })
 
   if (!imgSrc) return null
 

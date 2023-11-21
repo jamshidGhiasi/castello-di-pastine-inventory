@@ -32,7 +32,8 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
 
             <div className=" grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full p-4 pt-0  max-w-5xl mx-auto">
                 {/* Room.scheme? */}
-                <RoomSchemeItem room={room} />
+            
+                {room && room?.moodBoard && <RoomSchemeItem room={room} />}
 
                 {/* Room.antiques */}
                 {antiques &&

@@ -13,6 +13,7 @@ const getRoomDatabaseProperties = (room: RoomFromGoogleSheets) => ({
   slug: room.slug,
   roomNo: room.roomId,
   areaId: room.areaId,
+  moodBoard: room.moodBoard,
 })
 
 /**
@@ -31,6 +32,7 @@ export const GET = async (request: NextRequest) => {
           where: { slug: room.slug },
           update: {
             order:Number(room.order),
+            moodBoard: room.moodBoard,
           },
           create: getRoomDatabaseProperties(room),
         });

@@ -5,4 +5,5 @@ export interface RoomFromGoogleSheets {
   'area-id': string;
   areaId: string;
   roomId: string;
+  moodBoard: string;
 }
