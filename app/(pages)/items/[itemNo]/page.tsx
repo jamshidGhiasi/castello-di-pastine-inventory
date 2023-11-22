@@ -23,7 +23,7 @@ const ItemPage = async ({ params }: { params: { itemNo: string } }) => {
             {antique && (
                 <div className="page-a4 bg-white p-4 h-full rounded-lg shadow-md print:shadow-none  print:rounded-none  flex flex-col justify-start items-center ">
                   <S3Img
-                    src={`/antiques/image${antique.itemNo.replace('0', '').replace('a', '').replace('b', '')}.jpg`}
+                    src={`/antiques/image${antique.itemNo.replace('0', '').replace('/([a-z])/g', '')}.jpg`}
                     alt={antique.itemNo}
                     className='m-auto h-[200px] w-auto '
                   />
