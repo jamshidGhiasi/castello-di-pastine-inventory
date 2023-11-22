@@ -15,6 +15,7 @@ const fetchRooms = async (areaId: string) => {
                         },
                         include: {
                             antiques: true,
+                            
                             _count: {
                                 select: { antiques: true },
                             },
