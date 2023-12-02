@@ -44,7 +44,7 @@ const Room = async ({ params }: { params: { areaId: string, roomId: string } }) 
                             description={antique.description}
                             image={
                                 [
-                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('a','').replace('b','')}.jpg`,
+                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('/([a-z])/g', '')}.jpg`,
                                 ]
                             }
                             itemNo={antique.itemNo}

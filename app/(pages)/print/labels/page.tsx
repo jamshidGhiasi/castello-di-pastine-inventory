@@ -88,7 +88,7 @@ const PrintLabels = () => {
                                         <p className="font-bold"> {antique?.itemNo}</p>
 
                                         <S3Img
-                                            src={`/antiques/image${antique.itemNo.replace('0', '').replace('a','').replace('b','')}.jpg`}
+                                            src={`/antiques/image${antique.itemNo.replace('0', '').replace('/([a-z])/g', '')}.jpg`}
                                             alt={antique.itemNo}
                                             className='mx-auto print:h-[1cm] h-[80px] print:w-auto '
 

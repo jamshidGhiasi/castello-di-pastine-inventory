@@ -112,8 +112,8 @@ const AntiqueItem = ({
             {(width || height || depth) &&
             <div className='flex flex-col justify-center items-center mt-3 text-black '>
               <span className='font-bold mb-1'> Dimensions</span>
-              <span className='font-bold'> w: <span className=' font-normal'>{width ? width + " cm" : ""}</span></span>
               <span className='font-bold'> h: <span className=' font-normal'>{height ? height + " cm" : ""}</span></span>
+              <span className='font-bold'> w: <span className=' font-normal'>{width ? width + " cm" : ""}</span></span>
               <span className='font-bold'> d: <span className=' font-normal'>{depth ? depth +" cm" : ""}</span></span>
             </div>
             }
