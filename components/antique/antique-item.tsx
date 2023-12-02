@@ -70,9 +70,9 @@ const AntiqueItem = ({
       const { dir } = eventData
       switch (dir) {
         case 'Left':
-          return handlePrev()
-        case 'Right':
           return handleNext()
+        case 'Right':
+          return handlePrev()
         default:
           break
       }
