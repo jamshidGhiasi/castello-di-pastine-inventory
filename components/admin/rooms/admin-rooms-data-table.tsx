@@ -116,7 +116,7 @@ const AdminRoomsDataTable: React.FC<AdminRoomsDataTableProps> = (props) => {
           isSyncDatabaseLoading={isSyncDatabaseLoading}
           handleSyncDatabase={handleSyncDatabase}
           handleUploadImages={handleUploadImages}
-          uploadLabel="Upload Schemas"
+          uploadLabel="Upload Schemes"
         />
       }
     />
