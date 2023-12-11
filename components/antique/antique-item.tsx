@@ -91,7 +91,7 @@ const AntiqueItem = ({
           <div className='absolute top-0 left-0 bottom-0 right-0 border-[4px] border-[#ececec] rounded-lg group-hover:border-[#c4d5ce]'></div>
         </button>
       </SheetTrigger>
-      <SheetContent {...swipeable} side={"bottom"} className="h-[90vh] flex flex-col justify-between rounded-tl-xl rounded-tr-xl">
+      <SheetContent {...swipeable} side={"bottom"} className="h-[90vh] flex flex-col justify-between rounded-tl-xl rounded-tr-xl" onCloseAutoFocus={event => event.preventDefault()}>
         <div>
           <div className='mt-4'>
             <S3Img
