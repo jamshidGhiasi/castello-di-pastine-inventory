@@ -9,15 +9,13 @@ function BasicAuthMiddleware(req: NextRequest) {
   if (basicAuth) {
     const authValue = basicAuth.split(' ')[1]
     const [user, pwd] = atob(authValue).split(':')
-
     if (user === process.env.BASIC_AUTH_USERNAME && pwd === process.env.BASIC_AUTH_PASSWORD) {
       return NextResponse.next()
-    }
-  } else {
-    // Redirect user to set the basic auth header via api route
-    url.pathname = '/api/basic-auth'
-    return NextResponse.rewrite(url)
+    } 
   }
+
+  url.pathname = '/api/basic-auth'
+  return NextResponse.rewrite(url)
 }
 
 /**
