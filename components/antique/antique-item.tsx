@@ -79,7 +79,7 @@ const AntiqueItem = ({
     },
   })
   return (
-    <Sheet open={open} onOpenChange={handleOpenChange}>
+    <Sheet open={open} onOpenChange={handleOpenChange} >
       <SheetTrigger asChild>
         <button className='group relative h-[150px] p-4 bg-white rounded-lg overflow-hidden shadow-md  hover:border-[#c4d5ce] hover:shadow-lg transition-all duration-300 ease-out'>
           <S3Img

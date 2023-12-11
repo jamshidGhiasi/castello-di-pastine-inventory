@@ -13,7 +13,7 @@ const AdminAntiquesListPage = async () => {
   const antiques = await fetchAntiquesFromGoogleSheets()
 
   return (
-    <AdminLayout title="Antiques">
+    <AdminLayout title="Items">
       <AdminAntiquesDataTable data={antiques} />
     </AdminLayout>
   )

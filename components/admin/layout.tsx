@@ -23,7 +23,7 @@ const AdminLayout = (props: AdminLayoutProps) => {
                     </Link>
                     <Link href={'/admin'} className="flex justify-start items-center mb-8">
                       <Lamp className="w-6 h-6 cursor-pointer mr-2" />
-                      Antiques
+                      Items
                     </Link><Link href={'/admin/areas'} className="flex justify-start items-center mb-8">
                       <Grid2x2 className="w-6 h-6 cursor-pointer mr-2" />
                       Areas
