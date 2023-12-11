@@ -2,6 +2,9 @@ import prisma from "@/lib/prisma";
 const fetchAntiquesByCategory = async (category: string) => {
     try {
         const antiques = await prisma.antique.findMany({
+            orderBy: {
+                itemNo: 'asc'
+            },
             where: {
                 categoryId: {
                     equals: category
