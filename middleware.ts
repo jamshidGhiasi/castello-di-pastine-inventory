@@ -9,7 +9,7 @@ function BasicAuthMiddleware(req: NextRequest) {
   if (basicAuth) {
     const authValue = basicAuth.split(' ')[1]
     const [user, pwd] = atob(authValue).split(':')
-    if (user === process.env.BASIC_AUTH_USERNAME && pwd === process.env.BASIC_AUTH_PASSWORD) {
+    if (user === process.env.BASIC_AUTH_USERNAME && (pwd === process.env.BASIC_AUTH_PASSWORD_1 || pwd === process.env.BASIC_AUTH_PASSWORD_2)) {
       return NextResponse.next()
     } 
   }
