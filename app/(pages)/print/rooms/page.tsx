@@ -158,7 +158,7 @@ const PrintRooms = () => {
 
 
                                     <S3Img
-                                        src={`/antiques/image${antique.itemNo.replace('0', '').replace('a','').replace('b','')}.jpg`}
+                                        src={`/antiques/image${antique.itemNo.replace(/^0/, '').replace(/\D/g, "")}.jpg`}
                                         alt={antique.itemNo}
                                         className='mx-auto print:h-[2cm] h-[150px] print:w-auto '
 

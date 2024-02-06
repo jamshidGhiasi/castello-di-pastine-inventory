@@ -123,7 +123,7 @@ const PrintAntiques = () => {
               <div key={index} >
                 <div className="page-a4 bg-white p-4 h-full rounded-lg shadow-md print:shadow-none  print:rounded-none  flex flex-col justify-start items-center ">
                   <S3Img
-                    src={`/antiques/image${antique.itemNo.replace('0', '').replace('a', '').replace('b', '')}.jpg`}
+                    src={`/antiques/image${antique.itemNo.replace(/^0/, '').replace(/\D/g, "")}.jpg`}
                     alt={antique.itemNo}
                     className='m-auto h-[100px] print:h-[8cm] print:w-[auto]'
                   />

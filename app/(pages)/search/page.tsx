@@ -31,7 +31,7 @@ const SearchPage = async (props: SearchPageProps) => {
                             description={antique.description}
                             image={
                                 [
-                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace('/([a-z])/g', '')}.jpg`,
+                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace(/\D/g, "")}.jpg`,
                                 ]
                             }
                             itemNo={antique.itemNo}
