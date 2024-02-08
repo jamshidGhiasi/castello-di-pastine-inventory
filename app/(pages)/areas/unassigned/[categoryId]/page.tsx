@@ -1,18 +1,17 @@
 import AntiqueItem from "@/components/antique/antique-item";
 import Layout from "@/components/layout/layout";
-import fetchAntiquesWithUnassignedArea from "@/utils/fetchAntiquesWithUnassignedArea";
+import fetchUnassignedByCategory from "@/utils/fetchUnassignedByCategory";
 import fetchUnassignedWithCategories from "@/utils/fetchUnassignedWithCategories";
 import { ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
 
-export const dynamic = 'force-dynamic'
-
-const UnassignedAreaPage = async () => {
-    const antiques = await fetchAntiquesWithUnassignedArea()
+const UnassignedAntiqueCategory = async({ params }: { params: { categoryId: string } }) => {
+    const { categoryId } = params;
+    const antiques = await fetchUnassignedByCategory(categoryId);
     const antiquesByCategory = await fetchUnassignedWithCategories()
+
     return (
         <Layout>
-
             <div className='sticky top-[79px] bg-[#fff] min-h-[46px]  border-b py-2 px-4 mb-4 flex items-center justify-between shadow-sm w-full  mx-auto z-20 '>
                 <div className='text-xs w-full max-w-5xl mx-auto flex items-center'>
                     <Link href='/' className='hover:underline'>
@@ -22,9 +21,10 @@ const UnassignedAreaPage = async () => {
                     <Link href='/areas' className='hover:underline'>
                         Areas
                     </Link>
-
                     <ChevronRight className='inline-block w-4' />
-                    <Link href='/areas' className=' pointer-events-none' >Unassigned</Link>
+                    <Link href='/areas/unassigned'  className='hover:underline' >Unassigned</Link>
+                    <ChevronRight className='inline-block w-4' />
+                    <Link href='/unassigned' className=' capitalize pointer-events-none' >{categoryId.replace(/-/g, ' ')}</Link>
                 </div>
             </div>
             <div>
@@ -36,7 +36,7 @@ const UnassignedAreaPage = async () => {
                         {antiquesByCategory &&
                             antiquesByCategory.map((antique: any, i) => (
                                 <div key={i}>
-                                    <Link className=" inline-block bg-white px-4 py-2 rounded-full capitalize hover:bg-slate-500 hover:text-white grow whitespace-nowrap justify-self-stretch" href={`unassigned/${antique.categoryId}`}> {antique.categoryId.replace(/-/g, ' ')} </Link>
+                                    <Link className=" inline-block bg-white px-4 py-2 rounded-full capitalize hover:bg-slate-500 hover:text-white grow whitespace-nowrap justify-self-stretch" href={`/areas/unassigned/${antique.categoryId}`}> {antique.categoryId.replace(/-/g, ' ')} </Link>
                                 </div>
                             ))
                         }
@@ -44,36 +44,35 @@ const UnassignedAreaPage = async () => {
                 </div>
             </div>
             <div className=" grid  grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 w-full max-w-5xl mx-auto  px-4 pt-0">
+            
+            {antiques &&
+                antiques.map((antique: any, i) =>
+                (
 
-                {antiques &&
-                    antiques.map((antique: any, i) =>
-                    (
+                    <AntiqueItem
+                        key={antique.id}
+                        description={antique.description}
+                        image={
+                            [
+                                `/antiques/image${antique.itemNo.replace(/^0/, '').replace(/\D/g, "")}.jpg`,
+                            ]
+                        }
+                        itemNo={antique.itemNo}
+                        prevItemNo={antiques[i - 1]?.itemNo}
+                        nextItemNo={antiques[i + 1]?.itemNo}
+                        height={antique.height}
+                        width={antique.white}
+                        depth={antique.depth}
+                        area={'unassigned'}
+                        room={'unassigned'}
+                    />
 
-                        <AntiqueItem
-                            key={antique.id}
-                            description={antique.description}
-                            image={
-                                [
-                                    `/antiques/image${antique.itemNo.replace(/^0/, '').replace(/\D/g, "")}.jpg`,
-                                ]
-                            }
-                            itemNo={antique.itemNo}
-                            prevItemNo={antiques[i - 1]?.itemNo}
-                            nextItemNo={antiques[i + 1]?.itemNo}
-                            height={antique.height}
-                            width={antique.white}
-                            depth={antique.depth}
-                            area={'unassigned'}
-                            room={'unassigned'}
-                        />
-
-                    )
-                    )
-                }
-            </div>
+                )
+                )
+            }
+        </div>
         </Layout>
+    )
+}
 
-    );
-};
-
-export default UnassignedAreaPage;
+export default UnassignedAntiqueCategory

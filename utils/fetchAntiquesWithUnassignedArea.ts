@@ -8,6 +8,11 @@ const fetchAntiquesWithUnassignedArea = async () => {
                      equals: 'unassigned'
                }
             },
+            orderBy: [
+                {
+                    itemNo: 'asc'
+                }
+            ],
             include: {
                 room: true,
                 area: true,
